@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.BuildMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Build" id="BuildResult">
+        <result property="Id"    column="Id"    />
+        <result property="BuildName"    column="BuildName"    />
+        <result property="BuildType"    column="BuildType"    />
+        <result property="Province"    column="Province"    />
+        <result property="City"    column="City"    />
+        <result property="Area"    column="Area"    />
+        <result property="Addr"    column="Addr"    />
+        <result property="Contacts1"    column="Contacts1"    />
+        <result property="Phone1"    column="Phone1"    />
+        <result property="Contacts2"    column="Contacts2"    />
+        <result property="Phone2"    column="Phone2"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="IsDelete"    column="IsDelete"    />
+    </resultMap>
+	
+	<sql id="selectBuildVo">
+        select Id, BuildName, BuildType, Province, City, Area, Addr, Contacts1, Phone1, Contacts2, Phone2, GroupId, CreateId, CreateTime, UpdateId, UpdateTime, IsDelete from Build
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Build" resultMap="BuildResult">
+        <include refid="selectBuildVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="BuildName != null  and BuildName != '' "> and BuildName = #{BuildName}</if>
+             <if test="BuildType != null  and BuildType != '' "> and BuildType = #{BuildType}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Addr != null  and Addr != '' "> and Addr = #{Addr}</if>
+             <if test="Contacts1 != null  and Contacts1 != '' "> and Contacts1 = #{Contacts1}</if>
+             <if test="Phone1 != null  and Phone1 != '' "> and Phone1 = #{Phone1}</if>
+             <if test="Contacts2 != null  and Contacts2 != '' "> and Contacts2 = #{Contacts2}</if>
+             <if test="Phone2 != null  and Phone2 != '' "> and Phone2 = #{Phone2}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Build" resultType="Integer">
+        select count(*)  from Build
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="BuildName != null  and BuildName != '' "> and BuildName = #{BuildName}</if>
+             <if test="BuildType != null  and BuildType != '' "> and BuildType = #{BuildType}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Addr != null  and Addr != '' "> and Addr = #{Addr}</if>
+             <if test="Contacts1 != null  and Contacts1 != '' "> and Contacts1 = #{Contacts1}</if>
+             <if test="Phone1 != null  and Phone1 != '' "> and Phone1 = #{Phone1}</if>
+             <if test="Contacts2 != null  and Contacts2 != '' "> and Contacts2 = #{Contacts2}</if>
+             <if test="Phone2 != null  and Phone2 != '' "> and Phone2 = #{Phone2}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BuildResult">
+        <include refid="selectBuildVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Build">
+        insert into Build
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="BuildName != null  and BuildName != ''  ">BuildName,</if>
+			<if test="BuildType != null  and BuildType != ''  ">BuildType,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Addr != null  and Addr != ''  ">Addr,</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1,</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">Phone1,</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2,</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">Phone2,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="BuildName != null  and BuildName != ''  ">#{BuildName},</if>
+			<if test="BuildType != null  and BuildType != ''  ">#{BuildType},</if>
+			<if test="Province != null  and Province != ''  ">#{Province},</if>
+			<if test="City != null  and City != ''  ">#{City},</if>
+			<if test="Area != null  and Area != ''  ">#{Area},</if>
+			<if test="Addr != null  and Addr != ''  ">#{Addr},</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">#{Contacts1},</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">#{Phone1},</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">#{Contacts2},</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">#{Phone2},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="IsDelete != null  ">#{IsDelete},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Build">
+        update Build
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="BuildName != null  and BuildName != ''  ">BuildName = #{BuildName},</if>
+            <if test="BuildType != null  and BuildType != ''  ">BuildType = #{BuildType},</if>
+            <if test="Province != null  and Province != ''  ">Province = #{Province},</if>
+            <if test="City != null  and City != ''  ">City = #{City},</if>
+            <if test="Area != null  and Area != ''  ">Area = #{Area},</if>
+            <if test="Addr != null  and Addr != ''  ">Addr = #{Addr},</if>
+            <if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1 = #{Contacts1},</if>
+            <if test="Phone1 != null  and Phone1 != ''  ">Phone1 = #{Phone1},</if>
+            <if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2 = #{Contacts2},</if>
+            <if test="Phone2 != null  and Phone2 != ''  ">Phone2 = #{Phone2},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="IsDelete != null  ">IsDelete = #{IsDelete},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Build where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Build where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Build">
+        insert into Build
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="BuildName != null  and BuildName != ''  ">BuildName,</if>
+			<if test="BuildType != null  and BuildType != ''  ">BuildType,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Addr != null  and Addr != ''  ">Addr,</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1,</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">Phone1,</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2,</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">Phone2,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="BuildName != null  and BuildName != ''  ">#{t.BuildName},</if>
+			<if test="BuildType != null  and BuildType != ''  ">#{t.BuildType},</if>
+			<if test="Province != null  and Province != ''  ">#{t.Province},</if>
+			<if test="City != null  and City != ''  ">#{t.City},</if>
+			<if test="Area != null  and Area != ''  ">#{t.Area},</if>
+			<if test="Addr != null  and Addr != ''  ">#{t.Addr},</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">#{t.Contacts1},</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">#{t.Phone1},</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">#{t.Contacts2},</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">#{t.Phone2},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="IsDelete != null  ">#{t.IsDelete},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.ParameterMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Parameter" id="ParameterResult">
+        <result property="Pmst"    column="pmst"    />
+        <result property="Pmky"    column="pmky"    />
+        <result property="Pmco"    column="pmco"    />
+        <result property="Pmnm"    column="pmnm"    />
+        <result property="Pmv1"    column="pmv1"    />
+        <result property="Pmv2"    column="pmv2"    />
+        <result property="Pmv3"    column="pmv3"    />
+        <result property="Pmv4"    column="pmv4"    />
+    </resultMap>
+	
+	<sql id="selectParameterVo">
+        select pmst, pmky, pmco, pmnm, pmv1, pmv2, pmv3, pmv4 from Parameter
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Parameter" resultMap="ParameterResult">
+        <include refid="selectParameterVo"/>
+        <where>  
+            <if test="Pmst != null  and Pmst != '' "> and pmst = #{Pmst}</if>
+             <if test="Pmky != null  and Pmky != '' "> and pmky = #{Pmky}</if>
+             <if test="Pmco != null  and Pmco != '' "> and pmco = #{Pmco}</if>
+             <if test="Pmnm != null  and Pmnm != '' "> and pmnm = #{Pmnm}</if>
+             <if test="Pmv1 != null  and Pmv1 != '' "> and pmv1 = #{Pmv1}</if>
+             <if test="Pmv2 != null  and Pmv2 != '' "> and pmv2 = #{Pmv2}</if>
+             <if test="Pmv3 != null  and Pmv3 != '' "> and pmv3 = #{Pmv3}</if>
+             <if test="Pmv4 != null  and Pmv4 != '' "> and pmv4 = #{Pmv4}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Parameter" resultType="Integer">
+        select count(*)  from Parameter
+        <where>  
+            <if test="Pmst != null  and Pmst != '' "> and pmst = #{Pmst}</if>
+             <if test="Pmky != null  and Pmky != '' "> and pmky = #{Pmky}</if>
+             <if test="Pmco != null  and Pmco != '' "> and pmco = #{Pmco}</if>
+             <if test="Pmnm != null  and Pmnm != '' "> and pmnm = #{Pmnm}</if>
+             <if test="Pmv1 != null  and Pmv1 != '' "> and pmv1 = #{Pmv1}</if>
+             <if test="Pmv2 != null  and Pmv2 != '' "> and pmv2 = #{Pmv2}</if>
+             <if test="Pmv3 != null  and Pmv3 != '' "> and pmv3 = #{Pmv3}</if>
+             <if test="Pmv4 != null  and Pmv4 != '' "> and pmv4 = #{Pmv4}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="ParameterResult">
+        <include refid="selectParameterVo"/>
+        where pmst = #{Pmst}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Parameter">
+        insert into Parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Pmst != null  and Pmst != ''  ">pmst,</if>
+			<if test="Pmky != null  and Pmky != ''  ">pmky,</if>
+			<if test="Pmco != null  and Pmco != ''  ">pmco,</if>
+			<if test="Pmnm != null  and Pmnm != ''  ">pmnm,</if>
+			<if test="Pmv1 != null  and Pmv1 != ''  ">pmv1,</if>
+			<if test="Pmv2 != null  and Pmv2 != ''  ">pmv2,</if>
+			<if test="Pmv3 != null  and Pmv3 != ''  ">pmv3,</if>
+			<if test="Pmv4 != null  and Pmv4 != ''  ">pmv4,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Pmst != null  and Pmst != ''  ">#{Pmst},</if>
+			<if test="Pmky != null  and Pmky != ''  ">#{Pmky},</if>
+			<if test="Pmco != null  and Pmco != ''  ">#{Pmco},</if>
+			<if test="Pmnm != null  and Pmnm != ''  ">#{Pmnm},</if>
+			<if test="Pmv1 != null  and Pmv1 != ''  ">#{Pmv1},</if>
+			<if test="Pmv2 != null  and Pmv2 != ''  ">#{Pmv2},</if>
+			<if test="Pmv3 != null  and Pmv3 != ''  ">#{Pmv3},</if>
+			<if test="Pmv4 != null  and Pmv4 != ''  ">#{Pmv4},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Parameter">
+        update Parameter
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Pmky != null  and Pmky != ''  ">pmky = #{Pmky},</if>
+            <if test="Pmco != null  and Pmco != ''  ">pmco = #{Pmco},</if>
+            <if test="Pmnm != null  and Pmnm != ''  ">pmnm = #{Pmnm},</if>
+            <if test="Pmv1 != null  and Pmv1 != ''  ">pmv1 = #{Pmv1},</if>
+            <if test="Pmv2 != null  and Pmv2 != ''  ">pmv2 = #{Pmv2},</if>
+            <if test="Pmv3 != null  and Pmv3 != ''  ">pmv3 = #{Pmv3},</if>
+            <if test="Pmv4 != null  and Pmv4 != ''  ">pmv4 = #{Pmv4},</if>
+        </trim>
+        where pmst = #{Pmst}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from Parameter where pmst = #{Pmst}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Parameter where pmst in 
+        <foreach item="Pmst" collection="array" open="(" separator="," close=")">
+            #{Pmst}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Parameter">
+        insert into Parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Pmst != null  and Pmst != ''  ">pmst,</if>
+			<if test="Pmky != null  and Pmky != ''  ">pmky,</if>
+			<if test="Pmco != null  and Pmco != ''  ">pmco,</if>
+			<if test="Pmnm != null  and Pmnm != ''  ">pmnm,</if>
+			<if test="Pmv1 != null  and Pmv1 != ''  ">pmv1,</if>
+			<if test="Pmv2 != null  and Pmv2 != ''  ">pmv2,</if>
+			<if test="Pmv3 != null  and Pmv3 != ''  ">pmv3,</if>
+			<if test="Pmv4 != null  and Pmv4 != ''  ">pmv4,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Pmst != null  and Pmst != ''  ">#{t.Pmst},</if>
+			<if test="Pmky != null  and Pmky != ''  ">#{t.Pmky},</if>
+			<if test="Pmco != null  and Pmco != ''  ">#{t.Pmco},</if>
+			<if test="Pmnm != null  and Pmnm != ''  ">#{t.Pmnm},</if>
+			<if test="Pmv1 != null  and Pmv1 != ''  ">#{t.Pmv1},</if>
+			<if test="Pmv2 != null  and Pmv2 != ''  ">#{t.Pmv2},</if>
+			<if test="Pmv3 != null  and Pmv3 != ''  ">#{t.Pmv3},</if>
+			<if test="Pmv4 != null  and Pmv4 != ''  ">#{t.Pmv4},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

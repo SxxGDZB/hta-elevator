@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MeCustomerMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MeCustomer" id="MeCustomerResult">
+        <result property="CustomerID"    column="CustomerID"    />
+        <result property="CustomerName"    column="CustomerName"    />
+        <result property="CreateDate"    column="CreateDate"    />
+        <result property="UpdateDate"    column="UpdateDate"    />
+    </resultMap>
+	
+	<sql id="selectMeCustomerVo">
+        select CustomerID, CustomerName, CreateDate, UpdateDate from ME_Customer
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MeCustomer" resultMap="MeCustomerResult">
+        <include refid="selectMeCustomerVo"/>
+        <where>  
+            <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="CustomerName != null  and CustomerName != '' "> and CustomerName = #{CustomerName}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MeCustomer" resultType="Integer">
+        select count(*)  from ME_Customer
+        <where>  
+            <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="CustomerName != null  and CustomerName != '' "> and CustomerName = #{CustomerName}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="MeCustomerResult">
+        <include refid="selectMeCustomerVo"/>
+        where CustomerID = #{CustomerID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MeCustomer">
+        insert into ME_Customer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="CustomerName != null  and CustomerName != ''  ">CustomerName,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="CustomerID != null  and CustomerID != ''  ">#{CustomerID},</if>
+			<if test="CustomerName != null  and CustomerName != ''  ">#{CustomerName},</if>
+			<if test="CreateDate != null  ">#{CreateDate},</if>
+			<if test="UpdateDate != null  ">#{UpdateDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MeCustomer">
+        update ME_Customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CustomerName != null  and CustomerName != ''  ">CustomerName = #{CustomerName},</if>
+            <if test="CreateDate != null  ">CreateDate = #{CreateDate},</if>
+            <if test="UpdateDate != null  ">UpdateDate = #{UpdateDate},</if>
+        </trim>
+        where CustomerID = #{CustomerID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from ME_Customer where CustomerID = #{CustomerID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from ME_Customer where CustomerID in 
+        <foreach item="CustomerID" collection="array" open="(" separator="," close=")">
+            #{CustomerID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MeCustomer">
+        insert into ME_Customer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="CustomerName != null  and CustomerName != ''  ">CustomerName,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="CustomerID != null  and CustomerID != ''  ">#{t.CustomerID},</if>
+			<if test="CustomerName != null  and CustomerName != ''  ">#{t.CustomerName},</if>
+			<if test="CreateDate != null  ">#{t.CreateDate},</if>
+			<if test="UpdateDate != null  ">#{t.UpdateDate},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

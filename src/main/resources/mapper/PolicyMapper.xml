@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.PolicyMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Policy" id="PolicyResult">
+        <result property="Id"    column="Id"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="PolicyNum"    column="PolicyNum"    />
+        <result property="StartTime"    column="StartTime"    />
+        <result property="EndTime"    column="EndTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="Attachment"    column="Attachment"    />
+        <result property="PolicyType"    column="PolicyType"    />
+    </resultMap>
+	
+	<sql id="selectPolicyVo">
+        select Id, GroupId, PolicyNum, StartTime, EndTime, UpdateTime, UpdateId, CreateId, CreateTime, Attachment, PolicyType from Policy
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Policy" resultMap="PolicyResult">
+        <include refid="selectPolicyVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="PolicyNum != null  and PolicyNum != '' "> and PolicyNum = #{PolicyNum}</if>
+             <if test="StartTime != null "> and StartTime = #{StartTime}</if>
+             <if test="EndTime != null "> and EndTime = #{EndTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="Attachment != null  and Attachment != '' "> and Attachment = #{Attachment}</if>
+             <if test="PolicyType != null  and PolicyType != '' "> and PolicyType = #{PolicyType}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Policy" resultType="Integer">
+        select count(*)  from Policy
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="PolicyNum != null  and PolicyNum != '' "> and PolicyNum = #{PolicyNum}</if>
+             <if test="StartTime != null "> and StartTime = #{StartTime}</if>
+             <if test="EndTime != null "> and EndTime = #{EndTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="Attachment != null  and Attachment != '' "> and Attachment = #{Attachment}</if>
+             <if test="PolicyType != null  and PolicyType != '' "> and PolicyType = #{PolicyType}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="PolicyResult">
+        <include refid="selectPolicyVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Policy">
+        insert into Policy
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="PolicyNum != null  and PolicyNum != ''  ">PolicyNum,</if>
+			<if test="StartTime != null  ">StartTime,</if>
+			<if test="EndTime != null  ">EndTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="Attachment != null  and Attachment != ''  ">Attachment,</if>
+			<if test="PolicyType != null  and PolicyType != ''  ">PolicyType,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="PolicyNum != null  and PolicyNum != ''  ">#{PolicyNum},</if>
+			<if test="StartTime != null  ">#{StartTime},</if>
+			<if test="EndTime != null  ">#{EndTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="Attachment != null  and Attachment != ''  ">#{Attachment},</if>
+			<if test="PolicyType != null  and PolicyType != ''  ">#{PolicyType},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Policy">
+        update Policy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="PolicyNum != null  and PolicyNum != ''  ">PolicyNum = #{PolicyNum},</if>
+            <if test="StartTime != null  ">StartTime = #{StartTime},</if>
+            <if test="EndTime != null  ">EndTime = #{EndTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="Attachment != null  and Attachment != ''  ">Attachment = #{Attachment},</if>
+            <if test="PolicyType != null  and PolicyType != ''  ">PolicyType = #{PolicyType},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Policy where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Policy where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Policy">
+        insert into Policy
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="PolicyNum != null  and PolicyNum != ''  ">PolicyNum,</if>
+			<if test="StartTime != null  ">StartTime,</if>
+			<if test="EndTime != null  ">EndTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="Attachment != null  and Attachment != ''  ">Attachment,</if>
+			<if test="PolicyType != null  and PolicyType != ''  ">PolicyType,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="PolicyNum != null  and PolicyNum != ''  ">#{t.PolicyNum},</if>
+			<if test="StartTime != null  ">#{t.StartTime},</if>
+			<if test="EndTime != null  ">#{t.EndTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="Attachment != null  and Attachment != ''  ">#{t.Attachment},</if>
+			<if test="PolicyType != null  and PolicyType != ''  ">#{t.PolicyType},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

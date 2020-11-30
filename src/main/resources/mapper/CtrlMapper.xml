@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.CtrlMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Ctrl" id="CtrlResult">
+        <result property="CtrlCode"    column="CtrlCode"    />
+        <result property="CtrlType"    column="CtrlType"    />
+        <result property="CustomerId"    column="CustomerId"    />
+        <result property="CtrlNickName"    column="CtrlNickName"    />
+    </resultMap>
+	
+	<sql id="selectCtrlVo">
+        select CtrlCode, CtrlType, CustomerId, CtrlNickName from Ctrl
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Ctrl" resultMap="CtrlResult">
+        <include refid="selectCtrlVo"/>
+        <where>  
+            <if test="CtrlCode != null  and CtrlCode != '' "> and CtrlCode = #{CtrlCode}</if>
+             <if test="CtrlType != null  and CtrlType != '' "> and CtrlType = #{CtrlType}</if>
+             <if test="CustomerId != null  and CustomerId != '' "> and CustomerId = #{CustomerId}</if>
+             <if test="CtrlNickName != null  and CtrlNickName != '' "> and CtrlNickName = #{CtrlNickName}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Ctrl" resultType="Integer">
+        select count(*)  from Ctrl
+        <where>  
+            <if test="CtrlCode != null  and CtrlCode != '' "> and CtrlCode = #{CtrlCode}</if>
+             <if test="CtrlType != null  and CtrlType != '' "> and CtrlType = #{CtrlType}</if>
+             <if test="CustomerId != null  and CustomerId != '' "> and CustomerId = #{CustomerId}</if>
+             <if test="CtrlNickName != null  and CtrlNickName != '' "> and CtrlNickName = #{CtrlNickName}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="CtrlResult">
+        <include refid="selectCtrlVo"/>
+        where CtrlCode = #{CtrlCode}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Ctrl">
+        insert into Ctrl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="CtrlCode != null  and CtrlCode != ''  ">CtrlCode,</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">CtrlType,</if>
+			<if test="CustomerId != null  and CustomerId != ''  ">CustomerId,</if>
+			<if test="CtrlNickName != null  and CtrlNickName != ''  ">CtrlNickName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="CtrlCode != null  and CtrlCode != ''  ">#{CtrlCode},</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">#{CtrlType},</if>
+			<if test="CustomerId != null  and CustomerId != ''  ">#{CustomerId},</if>
+			<if test="CtrlNickName != null  and CtrlNickName != ''  ">#{CtrlNickName},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Ctrl">
+        update Ctrl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CtrlType != null  and CtrlType != ''  ">CtrlType = #{CtrlType},</if>
+            <if test="CustomerId != null  and CustomerId != ''  ">CustomerId = #{CustomerId},</if>
+            <if test="CtrlNickName != null  and CtrlNickName != ''  ">CtrlNickName = #{CtrlNickName},</if>
+        </trim>
+        where CtrlCode = #{CtrlCode}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from Ctrl where CtrlCode = #{CtrlCode}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Ctrl where CtrlCode in 
+        <foreach item="CtrlCode" collection="array" open="(" separator="," close=")">
+            #{CtrlCode}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Ctrl">
+        insert into Ctrl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="CtrlCode != null  and CtrlCode != ''  ">CtrlCode,</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">CtrlType,</if>
+			<if test="CustomerId != null  and CustomerId != ''  ">CustomerId,</if>
+			<if test="CtrlNickName != null  and CtrlNickName != ''  ">CtrlNickName,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="CtrlCode != null  and CtrlCode != ''  ">#{t.CtrlCode},</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">#{t.CtrlType},</if>
+			<if test="CustomerId != null  and CustomerId != ''  ">#{t.CustomerId},</if>
+			<if test="CtrlNickName != null  and CtrlNickName != ''  ">#{t.CtrlNickName},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

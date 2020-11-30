@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.LiftBaseMapper">
+    
+    <resultMap type="com.hta.elevator.domain.LiftBase" id="LiftBaseResult">
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="RegisterCode"    column="RegisterCode"    />
+        <result property="Manufacturer"    column="Manufacturer"    />
+        <result property="Province"    column="Province"    />
+        <result property="City"    column="City"    />
+        <result property="Area"    column="Area"    />
+        <result property="Address"    column="Address"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="Enabled"    column="Enabled"    />
+        <result property="ImagePath"    column="ImagePath"    />
+    </resultMap>
+	
+	<sql id="selectLiftBaseVo">
+        select LiftBaseId, RegisterCode, Manufacturer, Province, City, Area, Address, CreateId, CreateTime, UpdateId, UpdateTime, Enabled, ImagePath from LiftBase
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.LiftBase" resultMap="LiftBaseResult">
+        <include refid="selectLiftBaseVo"/>
+        <where>  
+            <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="RegisterCode != null  and RegisterCode != '' "> and RegisterCode = #{RegisterCode}</if>
+             <if test="Manufacturer != null  and Manufacturer != '' "> and Manufacturer = #{Manufacturer}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Address != null  and Address != '' "> and Address = #{Address}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Enabled != null "> and Enabled = #{Enabled}</if>
+             <if test="ImagePath != null  and ImagePath != '' "> and ImagePath = #{ImagePath}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.LiftBase" resultType="Integer">
+        select count(*)  from LiftBase
+        <where>  
+            <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="RegisterCode != null  and RegisterCode != '' "> and RegisterCode = #{RegisterCode}</if>
+             <if test="Manufacturer != null  and Manufacturer != '' "> and Manufacturer = #{Manufacturer}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Address != null  and Address != '' "> and Address = #{Address}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Enabled != null "> and Enabled = #{Enabled}</if>
+             <if test="ImagePath != null  and ImagePath != '' "> and ImagePath = #{ImagePath}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="LiftBaseResult">
+        <include refid="selectLiftBaseVo"/>
+        where LiftBaseId = #{LiftBaseId}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.LiftBase">
+        insert into LiftBase
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode,</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Address != null  and Address != ''  ">Address,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Enabled != null  ">Enabled,</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">ImagePath,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">#{RegisterCode},</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">#{Manufacturer},</if>
+			<if test="Province != null  and Province != ''  ">#{Province},</if>
+			<if test="City != null  and City != ''  ">#{City},</if>
+			<if test="Area != null  and Area != ''  ">#{Area},</if>
+			<if test="Address != null  and Address != ''  ">#{Address},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="Enabled != null  ">#{Enabled},</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">#{ImagePath},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.LiftBase">
+        update LiftBase
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode = #{RegisterCode},</if>
+            <if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer = #{Manufacturer},</if>
+            <if test="Province != null  and Province != ''  ">Province = #{Province},</if>
+            <if test="City != null  and City != ''  ">City = #{City},</if>
+            <if test="Area != null  and Area != ''  ">Area = #{Area},</if>
+            <if test="Address != null  and Address != ''  ">Address = #{Address},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="Enabled != null  ">Enabled = #{Enabled},</if>
+            <if test="ImagePath != null  and ImagePath != ''  ">ImagePath = #{ImagePath},</if>
+        </trim>
+        where LiftBaseId = #{LiftBaseId}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from LiftBase where LiftBaseId = #{LiftBaseId}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from LiftBase where LiftBaseId in 
+        <foreach item="LiftBaseId" collection="array" open="(" separator="," close=")">
+            #{LiftBaseId}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.LiftBase">
+        insert into LiftBase
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode,</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Address != null  and Address != ''  ">Address,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Enabled != null  ">Enabled,</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">ImagePath,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">#{t.RegisterCode},</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">#{t.Manufacturer},</if>
+			<if test="Province != null  and Province != ''  ">#{t.Province},</if>
+			<if test="City != null  and City != ''  ">#{t.City},</if>
+			<if test="Area != null  and Area != ''  ">#{t.Area},</if>
+			<if test="Address != null  and Address != ''  ">#{t.Address},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="Enabled != null  ">#{t.Enabled},</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">#{t.ImagePath},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

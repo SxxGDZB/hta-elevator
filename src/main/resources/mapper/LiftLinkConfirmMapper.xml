@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.LiftLinkConfirmMapper">
+    
+    <resultMap type="com.hta.elevator.domain.LiftLinkConfirm" id="LiftLinkConfirmResult">
+        <result property="Id"    column="Id"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="LinkToGroupId"    column="LinkToGroupId"    />
+        <result property="LiftId"    column="LiftId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="ConfirmStatus"    column="ConfirmStatus"    />
+        <result property="UpdateUserId"    column="UpdateUserId"    />
+        <result property="CreateUserId"    column="CreateUserId"    />
+    </resultMap>
+	
+	<sql id="selectLiftLinkConfirmVo">
+        select Id, GroupId, LinkToGroupId, LiftId, CreateTime, UpdateTime, ConfirmStatus, UpdateUserId, CreateUserId from LiftLinkConfirm
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.LiftLinkConfirm" resultMap="LiftLinkConfirmResult">
+        <include refid="selectLiftLinkConfirmVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="LinkToGroupId != null "> and LinkToGroupId = #{LinkToGroupId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="ConfirmStatus != null "> and ConfirmStatus = #{ConfirmStatus}</if>
+             <if test="UpdateUserId != null "> and UpdateUserId = #{UpdateUserId}</if>
+             <if test="CreateUserId != null "> and CreateUserId = #{CreateUserId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.LiftLinkConfirm" resultType="Integer">
+        select count(*)  from LiftLinkConfirm
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="LinkToGroupId != null "> and LinkToGroupId = #{LinkToGroupId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="ConfirmStatus != null "> and ConfirmStatus = #{ConfirmStatus}</if>
+             <if test="UpdateUserId != null "> and UpdateUserId = #{UpdateUserId}</if>
+             <if test="CreateUserId != null "> and CreateUserId = #{CreateUserId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="LiftLinkConfirmResult">
+        <include refid="selectLiftLinkConfirmVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.LiftLinkConfirm">
+        insert into LiftLinkConfirm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="LinkToGroupId != null  ">LinkToGroupId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="ConfirmStatus != null  ">ConfirmStatus,</if>
+			<if test="UpdateUserId != null  ">UpdateUserId,</if>
+			<if test="CreateUserId != null  ">CreateUserId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="LinkToGroupId != null  ">#{LinkToGroupId},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="ConfirmStatus != null  ">#{ConfirmStatus},</if>
+			<if test="UpdateUserId != null  ">#{UpdateUserId},</if>
+			<if test="CreateUserId != null  ">#{CreateUserId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.LiftLinkConfirm">
+        update LiftLinkConfirm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="LinkToGroupId != null  ">LinkToGroupId = #{LinkToGroupId},</if>
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="ConfirmStatus != null  ">ConfirmStatus = #{ConfirmStatus},</if>
+            <if test="UpdateUserId != null  ">UpdateUserId = #{UpdateUserId},</if>
+            <if test="CreateUserId != null  ">CreateUserId = #{CreateUserId},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from LiftLinkConfirm where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from LiftLinkConfirm where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.LiftLinkConfirm">
+        insert into LiftLinkConfirm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="LinkToGroupId != null  ">LinkToGroupId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="ConfirmStatus != null  ">ConfirmStatus,</if>
+			<if test="UpdateUserId != null  ">UpdateUserId,</if>
+			<if test="CreateUserId != null  ">CreateUserId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="LinkToGroupId != null  ">#{t.LinkToGroupId},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="ConfirmStatus != null  ">#{t.ConfirmStatus},</if>
+			<if test="UpdateUserId != null  ">#{t.UpdateUserId},</if>
+			<if test="CreateUserId != null  ">#{t.CreateUserId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.ConfigMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Config" id="ConfigResult">
+        <result property="ID"    column="ID"    />
+        <result property="ConfigKey"    column="ConfigKey"    />
+        <result property="ConfigValue"    column="ConfigValue"    />
+        <result property="Remark"    column="Remark"    />
+    </resultMap>
+	
+	<sql id="selectConfigVo">
+        select ID, ConfigKey, ConfigValue, Remark from Config
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Config" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ConfigKey != null  and ConfigKey != '' "> and ConfigKey = #{ConfigKey}</if>
+             <if test="ConfigValue != null  and ConfigValue != '' "> and ConfigValue = #{ConfigValue}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Config" resultType="Integer">
+        select count(*)  from Config
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ConfigKey != null  and ConfigKey != '' "> and ConfigKey = #{ConfigKey}</if>
+             <if test="ConfigValue != null  and ConfigValue != '' "> and ConfigValue = #{ConfigValue}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Config">
+        insert into Config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="ConfigKey != null  and ConfigKey != ''  ">ConfigKey,</if>
+			<if test="ConfigValue != null  and ConfigValue != ''  ">ConfigValue,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="ConfigKey != null  and ConfigKey != ''  ">#{ConfigKey},</if>
+			<if test="ConfigValue != null  and ConfigValue != ''  ">#{ConfigValue},</if>
+			<if test="Remark != null  and Remark != ''  ">#{Remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Config">
+        update Config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ConfigKey != null  and ConfigKey != ''  ">ConfigKey = #{ConfigKey},</if>
+            <if test="ConfigValue != null  and ConfigValue != ''  ">ConfigValue = #{ConfigValue},</if>
+            <if test="Remark != null  and Remark != ''  ">Remark = #{Remark},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Config where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Config where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Config">
+        insert into Config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="ConfigKey != null  and ConfigKey != ''  ">ConfigKey,</if>
+			<if test="ConfigValue != null  and ConfigValue != ''  ">ConfigValue,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="ConfigKey != null  and ConfigKey != ''  ">#{t.ConfigKey},</if>
+			<if test="ConfigValue != null  and ConfigValue != ''  ">#{t.ConfigValue},</if>
+			<if test="Remark != null  and Remark != ''  ">#{t.Remark},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

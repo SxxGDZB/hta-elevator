@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.RoleMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Role" id="RoleResult">
+        <result property="Id"    column="Id"    />
+        <result property="Name"    column="Name"    />
+        <result property="Description"    column="Description"    />
+        <result property="SortCode"    column="SortCode"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateBy"    column="CreateBy"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateBy"    column="UpdateBy"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectRoleVo">
+        select Id, Name, Description, SortCode, CreateId, CreateBy, CreateTime, UpdateId, UpdateBy, UpdateTime from Role
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Role" resultMap="RoleResult">
+        <include refid="selectRoleVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Description != null  and Description != '' "> and Description = #{Description}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Role" resultType="Integer">
+        select count(*)  from Role
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Description != null  and Description != '' "> and Description = #{Description}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="RoleResult">
+        <include refid="selectRoleVo"/>
+        where Id = #{Id}
+    </select>
+	<select id="selectRoleByName" parameterType="String" resultType="com.hta.elevator.domain.Role">
+        <include refid="selectRoleVo"/>
+        where Name = #{Name}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Role">
+        insert into Role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Description != null  and Description != ''  ">Description,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="Description != null  and Description != ''  ">#{Description},</if>
+			<if test="SortCode != null  ">#{SortCode},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{CreateBy},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{UpdateBy},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Role">
+        update Role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="Description != null  and Description != ''  ">Description = #{Description},</if>
+            <if test="SortCode != null  ">SortCode = #{SortCode},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateBy != null  and CreateBy != ''  ">CreateBy = #{CreateBy},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy = #{UpdateBy},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Role where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Role where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Role">
+        insert into Role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Description != null  and Description != ''  ">Description,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="Description != null  and Description != ''  ">#{t.Description},</if>
+			<if test="SortCode != null  ">#{t.SortCode},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{t.CreateBy},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{t.UpdateBy},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.SysMenuMapper">
+    
+    <resultMap type="com.hta.elevator.domain.SysMenu" id="SysMenuResult">
+        <result property="ID"    column="ID"    />
+        <result property="Name"    column="Name"    />
+        <result property="ParentId"    column="ParentId"    />
+        <result property="OrderNum"    column="OrderNum"    />
+        <result property="Url"    column="Url"    />
+        <result property="Visible"    column="Visible"    />
+        <result property="Perms"    column="Perms"    />
+        <result property="Icon"    column="Icon"    />
+        <result property="CreateBy"    column="CreateBy"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateBy"    column="UpdateBy"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="Remark"    column="Remark"    />
+        <result property="IsBasic"    column="IsBasic"    />
+        <result property="RoleId"    column="RoleId"    />
+        <result property="PageType"    column="PageType"    />
+    </resultMap>
+	
+	<sql id="selectSysMenuVo">
+        select ID, Name, ParentId, OrderNum, Url, Visible, Perms, Icon, CreateBy, CreateTime, UpdateBy, UpdateTime, Remark, IsBasic, RoleId, PageType from SysMenu
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.SysMenu" resultMap="SysMenuResult">
+        <include refid="selectSysMenuVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="ParentId != null "> and ParentId = #{ParentId}</if>
+             <if test="OrderNum != null "> and OrderNum = #{OrderNum}</if>
+             <if test="Url != null  and Url != '' "> and Url = #{Url}</if>
+             <if test="Visible != null  and Visible != '' "> and Visible = #{Visible}</if>
+             <if test="Perms != null  and Perms != '' "> and Perms = #{Perms}</if>
+             <if test="Icon != null  and Icon != '' "> and Icon = #{Icon}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="IsBasic != null "> and IsBasic = #{IsBasic}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="PageType != null "> and PageType = #{PageType}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.SysMenu" resultType="Integer">
+        select count(*)  from SysMenu
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="ParentId != null "> and ParentId = #{ParentId}</if>
+             <if test="OrderNum != null "> and OrderNum = #{OrderNum}</if>
+             <if test="Url != null  and Url != '' "> and Url = #{Url}</if>
+             <if test="Visible != null  and Visible != '' "> and Visible = #{Visible}</if>
+             <if test="Perms != null  and Perms != '' "> and Perms = #{Perms}</if>
+             <if test="Icon != null  and Icon != '' "> and Icon = #{Icon}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="IsBasic != null "> and IsBasic = #{IsBasic}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="PageType != null "> and PageType = #{PageType}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="SysMenuResult">
+        <include refid="selectSysMenuVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.SysMenu" useGeneratedKeys="true" keyProperty="ID">
+        insert into SysMenu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="ParentId != null  ">ParentId,</if>
+			<if test="OrderNum != null  ">OrderNum,</if>
+			<if test="Url != null  and Url != ''  ">Url,</if>
+			<if test="Visible != null  and Visible != ''  ">Visible,</if>
+			<if test="Perms != null  and Perms != ''  ">Perms,</if>
+			<if test="Icon != null  and Icon != ''  ">Icon,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="IsBasic != null  ">IsBasic,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="PageType != null  ">PageType,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="ParentId != null  ">#{ParentId},</if>
+			<if test="OrderNum != null  ">#{OrderNum},</if>
+			<if test="Url != null  and Url != ''  ">#{Url},</if>
+			<if test="Visible != null  and Visible != ''  ">#{Visible},</if>
+			<if test="Perms != null  and Perms != ''  ">#{Perms},</if>
+			<if test="Icon != null  and Icon != ''  ">#{Icon},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{CreateBy},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{UpdateBy},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="Remark != null  and Remark != ''  ">#{Remark},</if>
+			<if test="IsBasic != null  ">#{IsBasic},</if>
+			<if test="RoleId != null  ">#{RoleId},</if>
+			<if test="PageType != null  ">#{PageType},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.SysMenu">
+        update SysMenu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="ParentId != null  ">ParentId = #{ParentId},</if>
+            <if test="OrderNum != null  ">OrderNum = #{OrderNum},</if>
+            <if test="Url != null  and Url != ''  ">Url = #{Url},</if>
+            <if test="Visible != null  and Visible != ''  ">Visible = #{Visible},</if>
+            <if test="Perms != null  and Perms != ''  ">Perms = #{Perms},</if>
+            <if test="Icon != null  and Icon != ''  ">Icon = #{Icon},</if>
+            <if test="CreateBy != null  and CreateBy != ''  ">CreateBy = #{CreateBy},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy = #{UpdateBy},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="Remark != null  and Remark != ''  ">Remark = #{Remark},</if>
+            <if test="IsBasic != null  ">IsBasic = #{IsBasic},</if>
+            <if test="RoleId != null  ">RoleId = #{RoleId},</if>
+            <if test="PageType != null  ">PageType = #{PageType},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from SysMenu where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from SysMenu where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.SysMenu">
+        insert into SysMenu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="ParentId != null  ">ParentId,</if>
+			<if test="OrderNum != null  ">OrderNum,</if>
+			<if test="Url != null  and Url != ''  ">Url,</if>
+			<if test="Visible != null  and Visible != ''  ">Visible,</if>
+			<if test="Perms != null  and Perms != ''  ">Perms,</if>
+			<if test="Icon != null  and Icon != ''  ">Icon,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="IsBasic != null  ">IsBasic,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="PageType != null  ">PageType,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="ParentId != null  ">#{t.ParentId},</if>
+			<if test="OrderNum != null  ">#{t.OrderNum},</if>
+			<if test="Url != null  and Url != ''  ">#{t.Url},</if>
+			<if test="Visible != null  and Visible != ''  ">#{t.Visible},</if>
+			<if test="Perms != null  and Perms != ''  ">#{t.Perms},</if>
+			<if test="Icon != null  and Icon != ''  ">#{t.Icon},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{t.CreateBy},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{t.UpdateBy},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="Remark != null  and Remark != ''  ">#{t.Remark},</if>
+			<if test="IsBasic != null  ">#{t.IsBasic},</if>
+			<if test="RoleId != null  ">#{t.RoleId},</if>
+			<if test="PageType != null  ">#{t.PageType},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

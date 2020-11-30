@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.PowerGroupMapper">
+    
+    <resultMap type="com.hta.elevator.domain.PowerGroup" id="PowerGroupResult">
+        <result property="GroupID"    column="GroupID"    />
+        <result property="GroupName"    column="GroupName"    />
+        <result property="SortCode"    column="SortCode"    />
+    </resultMap>
+	
+	<sql id="selectPowerGroupVo">
+        select GroupID, GroupName, SortCode from PowerGroup
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.PowerGroup" resultMap="PowerGroupResult">
+        <include refid="selectPowerGroupVo"/>
+        <where>  
+            <if test="GroupID != null "> and GroupID = #{GroupID}</if>
+             <if test="GroupName != null  and GroupName != '' "> and GroupName = #{GroupName}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.PowerGroup" resultType="Integer">
+        select count(*)  from PowerGroup
+        <where>  
+            <if test="GroupID != null "> and GroupID = #{GroupID}</if>
+             <if test="GroupName != null  and GroupName != '' "> and GroupName = #{GroupName}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="PowerGroupResult">
+        <include refid="selectPowerGroupVo"/>
+        where GroupID = #{GroupID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.PowerGroup">
+        insert into PowerGroup
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="GroupID != null  ">GroupID,</if>
+			<if test="GroupName != null  and GroupName != ''  ">GroupName,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="GroupID != null  ">#{GroupID},</if>
+			<if test="GroupName != null  and GroupName != ''  ">#{GroupName},</if>
+			<if test="SortCode != null  ">#{SortCode},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.PowerGroup">
+        update PowerGroup
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="GroupName != null  and GroupName != ''  ">GroupName = #{GroupName},</if>
+            <if test="SortCode != null  ">SortCode = #{SortCode},</if>
+        </trim>
+        where GroupID = #{GroupID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from PowerGroup where GroupID = #{GroupID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from PowerGroup where GroupID in 
+        <foreach item="GroupID" collection="array" open="(" separator="," close=")">
+            #{GroupID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.PowerGroup">
+        insert into PowerGroup
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="GroupID != null  ">GroupID,</if>
+			<if test="GroupName != null  and GroupName != ''  ">GroupName,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="GroupID != null  ">#{t.GroupID},</if>
+			<if test="GroupName != null  and GroupName != ''  ">#{t.GroupName},</if>
+			<if test="SortCode != null  ">#{t.SortCode},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

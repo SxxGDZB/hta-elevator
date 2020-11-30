@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.SysApiMapper">
+    
+    <resultMap type="com.hta.elevator.domain.SysApi" id="SysApiResult">
+        <result property="ID"    column="ID"    />
+        <result property="Name"    column="Name"    />
+        <result property="Code"    column="Code"    />
+        <result property="Uri"    column="Uri"    />
+        <result property="Method"    column="Method"    />
+        <result property="Sort"    column="Sort"    />
+        <result property="Status"    column="Status"    />
+        <result property="IsDelete"    column="IsDelete"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectSysApiVo">
+        select ID, Name, Code, Uri, Method, Sort, Status, IsDelete, CreateTime, UpdateTime from SysApi
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.SysApi" resultMap="SysApiResult">
+        <include refid="selectSysApiVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Code != null  and Code != '' "> and Code = #{Code}</if>
+             <if test="Uri != null  and Uri != '' "> and Uri = #{Uri}</if>
+             <if test="Method != null  and Method != '' "> and Method = #{Method}</if>
+             <if test="Sort != null "> and Sort = #{Sort}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.SysApi" resultType="Integer">
+        select count(*)  from SysApi
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Code != null  and Code != '' "> and Code = #{Code}</if>
+             <if test="Uri != null  and Uri != '' "> and Uri = #{Uri}</if>
+             <if test="Method != null  and Method != '' "> and Method = #{Method}</if>
+             <if test="Sort != null "> and Sort = #{Sort}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="SysApiResult">
+        <include refid="selectSysApiVo"/>
+        where ID = #{ID}
+    </select>
+	<select id="selectSysApiByName" parameterType="String" resultType="com.hta.elevator.domain.SysApi">
+        <include refid="selectSysApiVo"/>
+        where Name = #{Name}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.SysApi">
+        insert into SysApi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Code != null  and Code != ''  ">Code,</if>
+			<if test="Uri != null  and Uri != ''  ">Uri,</if>
+			<if test="Method != null  and Method != ''  ">Method,</if>
+			<if test="Sort != null  ">Sort,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="Code != null  and Code != ''  ">#{Code},</if>
+			<if test="Uri != null  and Uri != ''  ">#{Uri},</if>
+			<if test="Method != null  and Method != ''  ">#{Method},</if>
+			<if test="Sort != null  ">#{Sort},</if>
+			<if test="Status != null  ">#{Status},</if>
+			<if test="IsDelete != null  ">#{IsDelete},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.SysApi">
+        update SysApi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="Code != null  and Code != ''  ">Code = #{Code},</if>
+            <if test="Uri != null  and Uri != ''  ">Uri = #{Uri},</if>
+            <if test="Method != null  and Method != ''  ">Method = #{Method},</if>
+            <if test="Sort != null  ">Sort = #{Sort},</if>
+            <if test="Status != null  ">Status = #{Status},</if>
+            <if test="IsDelete != null  ">IsDelete = #{IsDelete},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from SysApi where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from SysApi where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.SysApi">
+        insert into SysApi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Code != null  and Code != ''  ">Code,</if>
+			<if test="Uri != null  and Uri != ''  ">Uri,</if>
+			<if test="Method != null  and Method != ''  ">Method,</if>
+			<if test="Sort != null  ">Sort,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="Code != null  and Code != ''  ">#{t.Code},</if>
+			<if test="Uri != null  and Uri != ''  ">#{t.Uri},</if>
+			<if test="Method != null  and Method != ''  ">#{t.Method},</if>
+			<if test="Sort != null  ">#{t.Sort},</if>
+			<if test="Status != null  ">#{t.Status},</if>
+			<if test="IsDelete != null  ">#{t.IsDelete},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

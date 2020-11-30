@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.FirewareMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Fireware" id="FirewareResult">
+        <result property="Id"    column="Id"    />
+        <result property="Version"    column="Version"    />
+        <result property="Category"    column="Category"    />
+        <result property="Size"    column="Size"    />
+        <result property="Remark"    column="Remark"    />
+        <result property="CreateTime"    column="CreateTime"    />
+    </resultMap>
+	
+	<sql id="selectFirewareVo">
+        select Id, Version, Category, Size, Remark, CreateTime from Fireware
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Fireware" resultMap="FirewareResult">
+        <include refid="selectFirewareVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="Version != null  and Version != '' "> and Version = #{Version}</if>
+             <if test="Category != null "> and Category = #{Category}</if>
+             <if test="Size != null "> and Size = #{Size}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Fireware" resultType="Integer">
+        select count(*)  from Fireware
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="Version != null  and Version != '' "> and Version = #{Version}</if>
+             <if test="Category != null "> and Category = #{Category}</if>
+             <if test="Size != null "> and Size = #{Size}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="FirewareResult">
+        <include refid="selectFirewareVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Fireware">
+        insert into Fireware
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="Version != null  and Version != ''  ">Version,</if>
+			<if test="Category != null  ">Category,</if>
+			<if test="Size != null  ">Size,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="Version != null  and Version != ''  ">#{Version},</if>
+			<if test="Category != null  ">#{Category},</if>
+			<if test="Size != null  ">#{Size},</if>
+			<if test="Remark != null  and Remark != ''  ">#{Remark},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Fireware">
+        update Fireware
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Version != null  and Version != ''  ">Version = #{Version},</if>
+            <if test="Category != null  ">Category = #{Category},</if>
+            <if test="Size != null  ">Size = #{Size},</if>
+            <if test="Remark != null  and Remark != ''  ">Remark = #{Remark},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Fireware where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Fireware where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Fireware">
+        insert into Fireware
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="Version != null  and Version != ''  ">Version,</if>
+			<if test="Category != null  ">Category,</if>
+			<if test="Size != null  ">Size,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="Version != null  and Version != ''  ">#{t.Version},</if>
+			<if test="Category != null  ">#{t.Category},</if>
+			<if test="Size != null  ">#{t.Size},</if>
+			<if test="Remark != null  and Remark != ''  ">#{t.Remark},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

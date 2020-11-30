@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.FaultCodeMapper">
+    
+    <resultMap type="com.hta.elevator.domain.FaultCode" id="FaultCodeResult">
+        <result property="FaultCode"    column="FaultCode"    />
+        <result property="FaultName"    column="FaultName"    />
+        <result property="Sort"    column="Sort"    />
+    </resultMap>
+	
+	<sql id="selectFaultCodeVo">
+        select FaultCode, FaultName, Sort from FaultCode
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.FaultCode" resultMap="FaultCodeResult">
+        <include refid="selectFaultCodeVo"/>
+        <where>  
+            <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="FaultName != null  and FaultName != '' "> and FaultName = #{FaultName}</if>
+             <if test="Sort != null "> and Sort = #{Sort}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.FaultCode" resultType="Integer">
+        select count(*)  from FaultCode
+        <where>  
+            <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="FaultName != null  and FaultName != '' "> and FaultName = #{FaultName}</if>
+             <if test="Sort != null "> and Sort = #{Sort}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="FaultCodeResult">
+        <include refid="selectFaultCodeVo"/>
+        where FaultCode = #{FaultCode}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.FaultCode">
+        insert into FaultCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="FaultName != null  and FaultName != ''  ">FaultName,</if>
+			<if test="Sort != null  ">Sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="FaultCode != null  and FaultCode != ''  ">#{FaultCode},</if>
+			<if test="FaultName != null  and FaultName != ''  ">#{FaultName},</if>
+			<if test="Sort != null  ">#{Sort},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.FaultCode">
+        update FaultCode
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="FaultName != null  and FaultName != ''  ">FaultName = #{FaultName},</if>
+            <if test="Sort != null  ">Sort = #{Sort},</if>
+        </trim>
+        where FaultCode = #{FaultCode}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from FaultCode where FaultCode = #{FaultCode}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from FaultCode where FaultCode in 
+        <foreach item="FaultCode" collection="array" open="(" separator="," close=")">
+            #{FaultCode}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.FaultCode">
+        insert into FaultCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="FaultName != null  and FaultName != ''  ">FaultName,</if>
+			<if test="Sort != null  ">Sort,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="FaultCode != null  and FaultCode != ''  ">#{t.FaultCode},</if>
+			<if test="FaultName != null  and FaultName != ''  ">#{t.FaultName},</if>
+			<if test="Sort != null  ">#{t.Sort},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

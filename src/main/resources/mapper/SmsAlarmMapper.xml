@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.SmsAlarmMapper">
+    
+    <resultMap type="com.hta.elevator.domain.SmsAlarm" id="SmsAlarmResult">
+        <result property="Id"    column="Id"    />
+        <result property="FaultId"    column="FaultId"    />
+        <result property="IsReset"    column="IsReset"    />
+        <result property="SmsContent"    column="SmsContent"    />
+        <result property="MobileCount"    column="MobileCount"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="ResultCode"    column="ResultCode"    />
+        <result property="ResultMessage"    column="ResultMessage"    />
+    </resultMap>
+	
+	<sql id="selectSmsAlarmVo">
+        select Id, FaultId, IsReset, SmsContent, MobileCount, CreateTime, ResultCode, ResultMessage from SmsAlarm
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.SmsAlarm" resultMap="SmsAlarmResult">
+        <include refid="selectSmsAlarmVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="FaultId != null "> and FaultId = #{FaultId}</if>
+             <if test="IsReset != null "> and IsReset = #{IsReset}</if>
+             <if test="SmsContent != null  and SmsContent != '' "> and SmsContent = #{SmsContent}</if>
+             <if test="MobileCount != null "> and MobileCount = #{MobileCount}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="ResultCode != null  and ResultCode != '' "> and ResultCode = #{ResultCode}</if>
+             <if test="ResultMessage != null  and ResultMessage != '' "> and ResultMessage = #{ResultMessage}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.SmsAlarm" resultType="Integer">
+        select count(*)  from SmsAlarm
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="FaultId != null "> and FaultId = #{FaultId}</if>
+             <if test="IsReset != null "> and IsReset = #{IsReset}</if>
+             <if test="SmsContent != null  and SmsContent != '' "> and SmsContent = #{SmsContent}</if>
+             <if test="MobileCount != null "> and MobileCount = #{MobileCount}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="ResultCode != null  and ResultCode != '' "> and ResultCode = #{ResultCode}</if>
+             <if test="ResultMessage != null  and ResultMessage != '' "> and ResultMessage = #{ResultMessage}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="SmsAlarmResult">
+        <include refid="selectSmsAlarmVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.SmsAlarm">
+        insert into SmsAlarm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="FaultId != null  ">FaultId,</if>
+			<if test="IsReset != null  ">IsReset,</if>
+			<if test="SmsContent != null  and SmsContent != ''  ">SmsContent,</if>
+			<if test="MobileCount != null  ">MobileCount,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="ResultCode != null  and ResultCode != ''  ">ResultCode,</if>
+			<if test="ResultMessage != null  and ResultMessage != ''  ">ResultMessage,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="FaultId != null  ">#{FaultId},</if>
+			<if test="IsReset != null  ">#{IsReset},</if>
+			<if test="SmsContent != null  and SmsContent != ''  ">#{SmsContent},</if>
+			<if test="MobileCount != null  ">#{MobileCount},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="ResultCode != null  and ResultCode != ''  ">#{ResultCode},</if>
+			<if test="ResultMessage != null  and ResultMessage != ''  ">#{ResultMessage},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.SmsAlarm">
+        update SmsAlarm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="FaultId != null  ">FaultId = #{FaultId},</if>
+            <if test="IsReset != null  ">IsReset = #{IsReset},</if>
+            <if test="SmsContent != null  and SmsContent != ''  ">SmsContent = #{SmsContent},</if>
+            <if test="MobileCount != null  ">MobileCount = #{MobileCount},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="ResultCode != null  and ResultCode != ''  ">ResultCode = #{ResultCode},</if>
+            <if test="ResultMessage != null  and ResultMessage != ''  ">ResultMessage = #{ResultMessage},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from SmsAlarm where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from SmsAlarm where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.SmsAlarm">
+        insert into SmsAlarm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="FaultId != null  ">FaultId,</if>
+			<if test="IsReset != null  ">IsReset,</if>
+			<if test="SmsContent != null  and SmsContent != ''  ">SmsContent,</if>
+			<if test="MobileCount != null  ">MobileCount,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="ResultCode != null  and ResultCode != ''  ">ResultCode,</if>
+			<if test="ResultMessage != null  and ResultMessage != ''  ">ResultMessage,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="FaultId != null  ">#{t.FaultId},</if>
+			<if test="IsReset != null  ">#{t.IsReset},</if>
+			<if test="SmsContent != null  and SmsContent != ''  ">#{t.SmsContent},</if>
+			<if test="MobileCount != null  ">#{t.MobileCount},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="ResultCode != null  and ResultCode != ''  ">#{t.ResultCode},</if>
+			<if test="ResultMessage != null  and ResultMessage != ''  ">#{t.ResultMessage},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

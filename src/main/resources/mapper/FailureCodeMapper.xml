@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.FailureCodeMapper">
+    
+    <resultMap type="com.hta.elevator.domain.FailureCode" id="FailureCodeResult">
+        <result property="ID"    column="ID"    />
+        <result property="CtrlCode"    column="CtrlCode"    />
+        <result property="CtrlType"    column="CtrlType"    />
+        <result property="CustomerID"    column="CustomerID"    />
+        <result property="MainCode"    column="MainCode"    />
+        <result property="SubCode"    column="SubCode"    />
+        <result property="FaultContent"    column="FaultContent"    />
+        <result property="FaultCause"    column="FaultCause"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectFailureCodeVo">
+        select ID, CtrlCode, CtrlType, CustomerID, MainCode, SubCode, FaultContent, FaultCause, UpdateTime from FailureCode
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.FailureCode" resultMap="FailureCodeResult">
+        <include refid="selectFailureCodeVo"/>
+        <where>  
+            <if test="ID != null  and ID != '' "> and ID = #{ID}</if>
+             <if test="CtrlCode != null  and CtrlCode != '' "> and CtrlCode = #{CtrlCode}</if>
+             <if test="CtrlType != null  and CtrlType != '' "> and CtrlType = #{CtrlType}</if>
+             <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="FaultContent != null  and FaultContent != '' "> and FaultContent = #{FaultContent}</if>
+             <if test="FaultCause != null  and FaultCause != '' "> and FaultCause = #{FaultCause}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.FailureCode" resultType="Integer">
+        select count(*)  from FailureCode
+        <where>  
+            <if test="ID != null  and ID != '' "> and ID = #{ID}</if>
+             <if test="CtrlCode != null  and CtrlCode != '' "> and CtrlCode = #{CtrlCode}</if>
+             <if test="CtrlType != null  and CtrlType != '' "> and CtrlType = #{CtrlType}</if>
+             <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="FaultContent != null  and FaultContent != '' "> and FaultContent = #{FaultContent}</if>
+             <if test="FaultCause != null  and FaultCause != '' "> and FaultCause = #{FaultCause}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="FailureCodeResult">
+        <include refid="selectFailureCodeVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.FailureCode">
+        insert into FailureCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  and ID != ''  ">ID,</if>
+			<if test="CtrlCode != null  and CtrlCode != ''  ">CtrlCode,</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">CtrlType,</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="FaultContent != null  and FaultContent != ''  ">FaultContent,</if>
+			<if test="FaultCause != null  and FaultCause != ''  ">FaultCause,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  and ID != ''  ">#{ID},</if>
+			<if test="CtrlCode != null  and CtrlCode != ''  ">#{CtrlCode},</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">#{CtrlType},</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">#{CustomerID},</if>
+			<if test="MainCode != null  ">#{MainCode},</if>
+			<if test="SubCode != null  ">#{SubCode},</if>
+			<if test="FaultContent != null  and FaultContent != ''  ">#{FaultContent},</if>
+			<if test="FaultCause != null  and FaultCause != ''  ">#{FaultCause},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.FailureCode">
+        update FailureCode
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CtrlCode != null  and CtrlCode != ''  ">CtrlCode = #{CtrlCode},</if>
+            <if test="CtrlType != null  and CtrlType != ''  ">CtrlType = #{CtrlType},</if>
+            <if test="CustomerID != null  and CustomerID != ''  ">CustomerID = #{CustomerID},</if>
+            <if test="MainCode != null  ">MainCode = #{MainCode},</if>
+            <if test="SubCode != null  ">SubCode = #{SubCode},</if>
+            <if test="FaultContent != null  and FaultContent != ''  ">FaultContent = #{FaultContent},</if>
+            <if test="FaultCause != null  and FaultCause != ''  ">FaultCause = #{FaultCause},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from FailureCode where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from FailureCode where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.FailureCode">
+        insert into FailureCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  and ID != ''  ">ID,</if>
+			<if test="CtrlCode != null  and CtrlCode != ''  ">CtrlCode,</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">CtrlType,</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="FaultContent != null  and FaultContent != ''  ">FaultContent,</if>
+			<if test="FaultCause != null  and FaultCause != ''  ">FaultCause,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  and ID != ''  ">#{t.ID},</if>
+			<if test="CtrlCode != null  and CtrlCode != ''  ">#{t.CtrlCode},</if>
+			<if test="CtrlType != null  and CtrlType != ''  ">#{t.CtrlType},</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">#{t.CustomerID},</if>
+			<if test="MainCode != null  ">#{t.MainCode},</if>
+			<if test="SubCode != null  ">#{t.SubCode},</if>
+			<if test="FaultContent != null  and FaultContent != ''  ">#{t.FaultContent},</if>
+			<if test="FaultCause != null  and FaultCause != ''  ">#{t.FaultCause},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

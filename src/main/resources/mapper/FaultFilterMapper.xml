@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.FaultFilterMapper">
+    
+    <resultMap type="com.hta.elevator.domain.FaultFilter" id="FaultFilterResult">
+        <result property="Id"    column="Id"    />
+        <result property="LiftId"    column="LiftId"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="EMU"    column="EMU"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="FaultType"    column="FaultType"    />
+        <result property="FaultCode"    column="FaultCode"    />
+        <result property="IsReset"    column="IsReset"    />
+        <result property="SetTime"    column="SetTime"    />
+        <result property="ResetTime"    column="ResetTime"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="CreateSource"    column="CreateSource"    />
+        <result property="DigitalData1"    column="DigitalData1"    />
+        <result property="AnalogData1"    column="AnalogData1"    />
+        <result property="Humity1"    column="Humity1"    />
+        <result property="Tempareture1"    column="Tempareture1"    />
+        <result property="DigitalData2"    column="DigitalData2"    />
+        <result property="Humity2"    column="Humity2"    />
+        <result property="Tempareture2"    column="Tempareture2"    />
+        <result property="NoticeTime1"    column="NoticeTime1"    />
+        <result property="NoticeTime2"    column="NoticeTime2"    />
+        <result property="NoticeTime3"    column="NoticeTime3"    />
+        <result property="AckTime"    column="AckTime"    />
+        <result property="AckUserId"    column="AckUserId"    />
+        <result property="AckLocation"    column="AckLocation"    />
+        <result property="ArriveTime"    column="ArriveTime"    />
+        <result property="ArriveUserId1"    column="ArriveUserId1"    />
+        <result property="ArriveUserId2"    column="ArriveUserId2"    />
+        <result property="RelieveTime"    column="RelieveTime"    />
+        <result property="RelieveUserId"    column="RelieveUserId"    />
+        <result property="RelieveReport"    column="RelieveReport"    />
+        <result property="ReportTime"    column="ReportTime"    />
+        <result property="ReportUserId"    column="ReportUserId"    />
+        <result property="ReportFailureCauseType"    column="ReportFailureCauseType"    />
+        <result property="ReportFailureCauseCode"    column="ReportFailureCauseCode"    />
+        <result property="ReportMeasure"    column="ReportMeasure"    />
+        <result property="FinishTime"    column="FinishTime"    />
+        <result property="ProcessStatus"    column="ProcessStatus"    />
+        <result property="ResponseTime"    column="ResponseTime"    />
+        <result property="RepairTime"    column="RepairTime"    />
+        <result property="UnableServeTime"    column="UnableServeTime"    />
+        <result property="RescueTime"    column="RescueTime"    />
+        <result property="SchuleOffTime"    column="SchuleOffTime"    />
+        <result property="SchuleOnTime"    column="SchuleOnTime"    />
+        <result property="ElevatorOnTime"    column="ElevatorOnTime"    />
+        <result property="FcNo"    column="FcNo"    />
+        <result property="MainCode"    column="MainCode"    />
+        <result property="SubCode"    column="SubCode"    />
+        <result property="RescueNum"    column="RescueNum"    />
+        <result property="FaultUuid"    column="FaultUuid"    />
+        <result property="AckLng"    column="AckLng"    />
+        <result property="AckLat"    column="AckLat"    />
+    </resultMap>
+	
+	<sql id="selectFaultFilterVo">
+        select Id, LiftId, LiftBaseId, EMU, GroupId, FaultType, FaultCode, IsReset, SetTime, ResetTime, CreateTime, CreateSource, DigitalData1, AnalogData1, Humity1, Tempareture1, DigitalData2, Humity2, Tempareture2, NoticeTime1, NoticeTime2, NoticeTime3, AckTime, AckUserId, AckLocation, ArriveTime, ArriveUserId1, ArriveUserId2, RelieveTime, RelieveUserId, RelieveReport, ReportTime, ReportUserId, ReportFailureCauseType, ReportFailureCauseCode, ReportMeasure, FinishTime, ProcessStatus, ResponseTime, RepairTime, UnableServeTime, RescueTime, SchuleOffTime, SchuleOnTime, ElevatorOnTime, FcNo, MainCode, SubCode, RescueNum, FaultUuid, AckLng, AckLat from FaultFilter
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.FaultFilter" resultMap="FaultFilterResult">
+        <include refid="selectFaultFilterVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="EMU != null "> and EMU = #{EMU}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="FaultType != null  and FaultType != '' "> and FaultType = #{FaultType}</if>
+             <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="IsReset != null "> and IsReset = #{IsReset}</if>
+             <if test="SetTime != null "> and SetTime = #{SetTime}</if>
+             <if test="ResetTime != null "> and ResetTime = #{ResetTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="CreateSource != null "> and CreateSource = #{CreateSource}</if>
+             <if test="DigitalData1 != null "> and DigitalData1 = #{DigitalData1}</if>
+             <if test="AnalogData1 != null "> and AnalogData1 = #{AnalogData1}</if>
+             <if test="Humity1 != null "> and Humity1 = #{Humity1}</if>
+             <if test="Tempareture1 != null "> and Tempareture1 = #{Tempareture1}</if>
+             <if test="DigitalData2 != null "> and DigitalData2 = #{DigitalData2}</if>
+             <if test="Humity2 != null "> and Humity2 = #{Humity2}</if>
+             <if test="Tempareture2 != null "> and Tempareture2 = #{Tempareture2}</if>
+             <if test="NoticeTime1 != null "> and NoticeTime1 = #{NoticeTime1}</if>
+             <if test="NoticeTime2 != null "> and NoticeTime2 = #{NoticeTime2}</if>
+             <if test="NoticeTime3 != null "> and NoticeTime3 = #{NoticeTime3}</if>
+             <if test="AckTime != null "> and AckTime = #{AckTime}</if>
+             <if test="AckUserId != null "> and AckUserId = #{AckUserId}</if>
+             <if test="AckLocation != null  and AckLocation != '' "> and AckLocation = #{AckLocation}</if>
+             <if test="ArriveTime != null "> and ArriveTime = #{ArriveTime}</if>
+             <if test="ArriveUserId1 != null "> and ArriveUserId1 = #{ArriveUserId1}</if>
+             <if test="ArriveUserId2 != null "> and ArriveUserId2 = #{ArriveUserId2}</if>
+             <if test="RelieveTime != null "> and RelieveTime = #{RelieveTime}</if>
+             <if test="RelieveUserId != null "> and RelieveUserId = #{RelieveUserId}</if>
+             <if test="RelieveReport != null  and RelieveReport != '' "> and RelieveReport = #{RelieveReport}</if>
+             <if test="ReportTime != null "> and ReportTime = #{ReportTime}</if>
+             <if test="ReportUserId != null "> and ReportUserId = #{ReportUserId}</if>
+             <if test="ReportFailureCauseType != null  and ReportFailureCauseType != '' "> and ReportFailureCauseType = #{ReportFailureCauseType}</if>
+             <if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != '' "> and ReportFailureCauseCode = #{ReportFailureCauseCode}</if>
+             <if test="ReportMeasure != null  and ReportMeasure != '' "> and ReportMeasure = #{ReportMeasure}</if>
+             <if test="FinishTime != null "> and FinishTime = #{FinishTime}</if>
+             <if test="ProcessStatus != null "> and ProcessStatus = #{ProcessStatus}</if>
+             <if test="ResponseTime != null "> and ResponseTime = #{ResponseTime}</if>
+             <if test="RepairTime != null "> and RepairTime = #{RepairTime}</if>
+             <if test="UnableServeTime != null "> and UnableServeTime = #{UnableServeTime}</if>
+             <if test="RescueTime != null "> and RescueTime = #{RescueTime}</if>
+             <if test="SchuleOffTime != null "> and SchuleOffTime = #{SchuleOffTime}</if>
+             <if test="SchuleOnTime != null "> and SchuleOnTime = #{SchuleOnTime}</if>
+             <if test="ElevatorOnTime != null "> and ElevatorOnTime = #{ElevatorOnTime}</if>
+             <if test="FcNo != null "> and FcNo = #{FcNo}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="RescueNum != null "> and RescueNum = #{RescueNum}</if>
+             <if test="FaultUuid != null  and FaultUuid != '' "> and FaultUuid = #{FaultUuid}</if>
+             <if test="AckLng != null "> and AckLng = #{AckLng}</if>
+             <if test="AckLat != null "> and AckLat = #{AckLat}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.FaultFilter" resultType="Integer">
+        select count(*)  from FaultFilter
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="EMU != null "> and EMU = #{EMU}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="FaultType != null  and FaultType != '' "> and FaultType = #{FaultType}</if>
+             <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="IsReset != null "> and IsReset = #{IsReset}</if>
+             <if test="SetTime != null "> and SetTime = #{SetTime}</if>
+             <if test="ResetTime != null "> and ResetTime = #{ResetTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="CreateSource != null "> and CreateSource = #{CreateSource}</if>
+             <if test="DigitalData1 != null "> and DigitalData1 = #{DigitalData1}</if>
+             <if test="AnalogData1 != null "> and AnalogData1 = #{AnalogData1}</if>
+             <if test="Humity1 != null "> and Humity1 = #{Humity1}</if>
+             <if test="Tempareture1 != null "> and Tempareture1 = #{Tempareture1}</if>
+             <if test="DigitalData2 != null "> and DigitalData2 = #{DigitalData2}</if>
+             <if test="Humity2 != null "> and Humity2 = #{Humity2}</if>
+             <if test="Tempareture2 != null "> and Tempareture2 = #{Tempareture2}</if>
+             <if test="NoticeTime1 != null "> and NoticeTime1 = #{NoticeTime1}</if>
+             <if test="NoticeTime2 != null "> and NoticeTime2 = #{NoticeTime2}</if>
+             <if test="NoticeTime3 != null "> and NoticeTime3 = #{NoticeTime3}</if>
+             <if test="AckTime != null "> and AckTime = #{AckTime}</if>
+             <if test="AckUserId != null "> and AckUserId = #{AckUserId}</if>
+             <if test="AckLocation != null  and AckLocation != '' "> and AckLocation = #{AckLocation}</if>
+             <if test="ArriveTime != null "> and ArriveTime = #{ArriveTime}</if>
+             <if test="ArriveUserId1 != null "> and ArriveUserId1 = #{ArriveUserId1}</if>
+             <if test="ArriveUserId2 != null "> and ArriveUserId2 = #{ArriveUserId2}</if>
+             <if test="RelieveTime != null "> and RelieveTime = #{RelieveTime}</if>
+             <if test="RelieveUserId != null "> and RelieveUserId = #{RelieveUserId}</if>
+             <if test="RelieveReport != null  and RelieveReport != '' "> and RelieveReport = #{RelieveReport}</if>
+             <if test="ReportTime != null "> and ReportTime = #{ReportTime}</if>
+             <if test="ReportUserId != null "> and ReportUserId = #{ReportUserId}</if>
+             <if test="ReportFailureCauseType != null  and ReportFailureCauseType != '' "> and ReportFailureCauseType = #{ReportFailureCauseType}</if>
+             <if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != '' "> and ReportFailureCauseCode = #{ReportFailureCauseCode}</if>
+             <if test="ReportMeasure != null  and ReportMeasure != '' "> and ReportMeasure = #{ReportMeasure}</if>
+             <if test="FinishTime != null "> and FinishTime = #{FinishTime}</if>
+             <if test="ProcessStatus != null "> and ProcessStatus = #{ProcessStatus}</if>
+             <if test="ResponseTime != null "> and ResponseTime = #{ResponseTime}</if>
+             <if test="RepairTime != null "> and RepairTime = #{RepairTime}</if>
+             <if test="UnableServeTime != null "> and UnableServeTime = #{UnableServeTime}</if>
+             <if test="RescueTime != null "> and RescueTime = #{RescueTime}</if>
+             <if test="SchuleOffTime != null "> and SchuleOffTime = #{SchuleOffTime}</if>
+             <if test="SchuleOnTime != null "> and SchuleOnTime = #{SchuleOnTime}</if>
+             <if test="ElevatorOnTime != null "> and ElevatorOnTime = #{ElevatorOnTime}</if>
+             <if test="FcNo != null "> and FcNo = #{FcNo}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="RescueNum != null "> and RescueNum = #{RescueNum}</if>
+             <if test="FaultUuid != null  and FaultUuid != '' "> and FaultUuid = #{FaultUuid}</if>
+             <if test="AckLng != null "> and AckLng = #{AckLng}</if>
+             <if test="AckLat != null "> and AckLat = #{AckLat}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="FaultFilterResult">
+        <include refid="selectFaultFilterVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.FaultFilter">
+        insert into FaultFilter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="EMU != null  ">EMU,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="FaultType != null  and FaultType != ''  ">FaultType,</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="IsReset != null  ">IsReset,</if>
+			<if test="SetTime != null  ">SetTime,</if>
+			<if test="ResetTime != null  ">ResetTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="CreateSource != null  ">CreateSource,</if>
+			<if test="DigitalData1 != null  ">DigitalData1,</if>
+			<if test="AnalogData1 != null  ">AnalogData1,</if>
+			<if test="Humity1 != null  ">Humity1,</if>
+			<if test="Tempareture1 != null  ">Tempareture1,</if>
+			<if test="DigitalData2 != null  ">DigitalData2,</if>
+			<if test="Humity2 != null  ">Humity2,</if>
+			<if test="Tempareture2 != null  ">Tempareture2,</if>
+			<if test="NoticeTime1 != null  ">NoticeTime1,</if>
+			<if test="NoticeTime2 != null  ">NoticeTime2,</if>
+			<if test="NoticeTime3 != null  ">NoticeTime3,</if>
+			<if test="AckTime != null  ">AckTime,</if>
+			<if test="AckUserId != null  ">AckUserId,</if>
+			<if test="AckLocation != null  and AckLocation != ''  ">AckLocation,</if>
+			<if test="ArriveTime != null  ">ArriveTime,</if>
+			<if test="ArriveUserId1 != null  ">ArriveUserId1,</if>
+			<if test="ArriveUserId2 != null  ">ArriveUserId2,</if>
+			<if test="RelieveTime != null  ">RelieveTime,</if>
+			<if test="RelieveUserId != null  ">RelieveUserId,</if>
+			<if test="RelieveReport != null  and RelieveReport != ''  ">RelieveReport,</if>
+			<if test="ReportTime != null  ">ReportTime,</if>
+			<if test="ReportUserId != null  ">ReportUserId,</if>
+			<if test="ReportFailureCauseType != null  and ReportFailureCauseType != ''  ">ReportFailureCauseType,</if>
+			<if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != ''  ">ReportFailureCauseCode,</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure,</if>
+			<if test="FinishTime != null  ">FinishTime,</if>
+			<if test="ProcessStatus != null  ">ProcessStatus,</if>
+			<if test="ResponseTime != null  ">ResponseTime,</if>
+			<if test="RepairTime != null  ">RepairTime,</if>
+			<if test="UnableServeTime != null  ">UnableServeTime,</if>
+			<if test="RescueTime != null  ">RescueTime,</if>
+			<if test="SchuleOffTime != null  ">SchuleOffTime,</if>
+			<if test="SchuleOnTime != null  ">SchuleOnTime,</if>
+			<if test="ElevatorOnTime != null  ">ElevatorOnTime,</if>
+			<if test="FcNo != null  ">FcNo,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="RescueNum != null  ">RescueNum,</if>
+			<if test="FaultUuid != null  and FaultUuid != ''  ">FaultUuid,</if>
+			<if test="AckLng != null  ">AckLng,</if>
+			<if test="AckLat != null  ">AckLat,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="EMU != null  ">#{EMU},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="FaultType != null  and FaultType != ''  ">#{FaultType},</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">#{FaultCode},</if>
+			<if test="IsReset != null  ">#{IsReset},</if>
+			<if test="SetTime != null  ">#{SetTime},</if>
+			<if test="ResetTime != null  ">#{ResetTime},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="CreateSource != null  ">#{CreateSource},</if>
+			<if test="DigitalData1 != null  ">#{DigitalData1},</if>
+			<if test="AnalogData1 != null  ">#{AnalogData1},</if>
+			<if test="Humity1 != null  ">#{Humity1},</if>
+			<if test="Tempareture1 != null  ">#{Tempareture1},</if>
+			<if test="DigitalData2 != null  ">#{DigitalData2},</if>
+			<if test="Humity2 != null  ">#{Humity2},</if>
+			<if test="Tempareture2 != null  ">#{Tempareture2},</if>
+			<if test="NoticeTime1 != null  ">#{NoticeTime1},</if>
+			<if test="NoticeTime2 != null  ">#{NoticeTime2},</if>
+			<if test="NoticeTime3 != null  ">#{NoticeTime3},</if>
+			<if test="AckTime != null  ">#{AckTime},</if>
+			<if test="AckUserId != null  ">#{AckUserId},</if>
+			<if test="AckLocation != null  and AckLocation != ''  ">#{AckLocation},</if>
+			<if test="ArriveTime != null  ">#{ArriveTime},</if>
+			<if test="ArriveUserId1 != null  ">#{ArriveUserId1},</if>
+			<if test="ArriveUserId2 != null  ">#{ArriveUserId2},</if>
+			<if test="RelieveTime != null  ">#{RelieveTime},</if>
+			<if test="RelieveUserId != null  ">#{RelieveUserId},</if>
+			<if test="RelieveReport != null  and RelieveReport != ''  ">#{RelieveReport},</if>
+			<if test="ReportTime != null  ">#{ReportTime},</if>
+			<if test="ReportUserId != null  ">#{ReportUserId},</if>
+			<if test="ReportFailureCauseType != null  and ReportFailureCauseType != ''  ">#{ReportFailureCauseType},</if>
+			<if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != ''  ">#{ReportFailureCauseCode},</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">#{ReportMeasure},</if>
+			<if test="FinishTime != null  ">#{FinishTime},</if>
+			<if test="ProcessStatus != null  ">#{ProcessStatus},</if>
+			<if test="ResponseTime != null  ">#{ResponseTime},</if>
+			<if test="RepairTime != null  ">#{RepairTime},</if>
+			<if test="UnableServeTime != null  ">#{UnableServeTime},</if>
+			<if test="RescueTime != null  ">#{RescueTime},</if>
+			<if test="SchuleOffTime != null  ">#{SchuleOffTime},</if>
+			<if test="SchuleOnTime != null  ">#{SchuleOnTime},</if>
+			<if test="ElevatorOnTime != null  ">#{ElevatorOnTime},</if>
+			<if test="FcNo != null  ">#{FcNo},</if>
+			<if test="MainCode != null  ">#{MainCode},</if>
+			<if test="SubCode != null  ">#{SubCode},</if>
+			<if test="RescueNum != null  ">#{RescueNum},</if>
+			<if test="FaultUuid != null  and FaultUuid != ''  ">#{FaultUuid},</if>
+			<if test="AckLng != null  ">#{AckLng},</if>
+			<if test="AckLat != null  ">#{AckLat},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.FaultFilter">
+        update FaultFilter
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="EMU != null  ">EMU = #{EMU},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="FaultType != null  and FaultType != ''  ">FaultType = #{FaultType},</if>
+            <if test="FaultCode != null  and FaultCode != ''  ">FaultCode = #{FaultCode},</if>
+            <if test="IsReset != null  ">IsReset = #{IsReset},</if>
+            <if test="SetTime != null  ">SetTime = #{SetTime},</if>
+            <if test="ResetTime != null  ">ResetTime = #{ResetTime},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="CreateSource != null  ">CreateSource = #{CreateSource},</if>
+            <if test="DigitalData1 != null  ">DigitalData1 = #{DigitalData1},</if>
+            <if test="AnalogData1 != null  ">AnalogData1 = #{AnalogData1},</if>
+            <if test="Humity1 != null  ">Humity1 = #{Humity1},</if>
+            <if test="Tempareture1 != null  ">Tempareture1 = #{Tempareture1},</if>
+            <if test="DigitalData2 != null  ">DigitalData2 = #{DigitalData2},</if>
+            <if test="Humity2 != null  ">Humity2 = #{Humity2},</if>
+            <if test="Tempareture2 != null  ">Tempareture2 = #{Tempareture2},</if>
+            <if test="NoticeTime1 != null  ">NoticeTime1 = #{NoticeTime1},</if>
+            <if test="NoticeTime2 != null  ">NoticeTime2 = #{NoticeTime2},</if>
+            <if test="NoticeTime3 != null  ">NoticeTime3 = #{NoticeTime3},</if>
+            <if test="AckTime != null  ">AckTime = #{AckTime},</if>
+            <if test="AckUserId != null  ">AckUserId = #{AckUserId},</if>
+            <if test="AckLocation != null  and AckLocation != ''  ">AckLocation = #{AckLocation},</if>
+            <if test="ArriveTime != null  ">ArriveTime = #{ArriveTime},</if>
+            <if test="ArriveUserId1 != null  ">ArriveUserId1 = #{ArriveUserId1},</if>
+            <if test="ArriveUserId2 != null  ">ArriveUserId2 = #{ArriveUserId2},</if>
+            <if test="RelieveTime != null  ">RelieveTime = #{RelieveTime},</if>
+            <if test="RelieveUserId != null  ">RelieveUserId = #{RelieveUserId},</if>
+            <if test="RelieveReport != null  and RelieveReport != ''  ">RelieveReport = #{RelieveReport},</if>
+            <if test="ReportTime != null  ">ReportTime = #{ReportTime},</if>
+            <if test="ReportUserId != null  ">ReportUserId = #{ReportUserId},</if>
+            <if test="ReportFailureCauseType != null  and ReportFailureCauseType != ''  ">ReportFailureCauseType = #{ReportFailureCauseType},</if>
+            <if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != ''  ">ReportFailureCauseCode = #{ReportFailureCauseCode},</if>
+            <if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure = #{ReportMeasure},</if>
+            <if test="FinishTime != null  ">FinishTime = #{FinishTime},</if>
+            <if test="ProcessStatus != null  ">ProcessStatus = #{ProcessStatus},</if>
+            <if test="ResponseTime != null  ">ResponseTime = #{ResponseTime},</if>
+            <if test="RepairTime != null  ">RepairTime = #{RepairTime},</if>
+            <if test="UnableServeTime != null  ">UnableServeTime = #{UnableServeTime},</if>
+            <if test="RescueTime != null  ">RescueTime = #{RescueTime},</if>
+            <if test="SchuleOffTime != null  ">SchuleOffTime = #{SchuleOffTime},</if>
+            <if test="SchuleOnTime != null  ">SchuleOnTime = #{SchuleOnTime},</if>
+            <if test="ElevatorOnTime != null  ">ElevatorOnTime = #{ElevatorOnTime},</if>
+            <if test="FcNo != null  ">FcNo = #{FcNo},</if>
+            <if test="MainCode != null  ">MainCode = #{MainCode},</if>
+            <if test="SubCode != null  ">SubCode = #{SubCode},</if>
+            <if test="RescueNum != null  ">RescueNum = #{RescueNum},</if>
+            <if test="FaultUuid != null  and FaultUuid != ''  ">FaultUuid = #{FaultUuid},</if>
+            <if test="AckLng != null  ">AckLng = #{AckLng},</if>
+            <if test="AckLat != null  ">AckLat = #{AckLat},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from FaultFilter where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from FaultFilter where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.FaultFilter">
+        insert into FaultFilter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="EMU != null  ">EMU,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="FaultType != null  and FaultType != ''  ">FaultType,</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="IsReset != null  ">IsReset,</if>
+			<if test="SetTime != null  ">SetTime,</if>
+			<if test="ResetTime != null  ">ResetTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="CreateSource != null  ">CreateSource,</if>
+			<if test="DigitalData1 != null  ">DigitalData1,</if>
+			<if test="AnalogData1 != null  ">AnalogData1,</if>
+			<if test="Humity1 != null  ">Humity1,</if>
+			<if test="Tempareture1 != null  ">Tempareture1,</if>
+			<if test="DigitalData2 != null  ">DigitalData2,</if>
+			<if test="Humity2 != null  ">Humity2,</if>
+			<if test="Tempareture2 != null  ">Tempareture2,</if>
+			<if test="NoticeTime1 != null  ">NoticeTime1,</if>
+			<if test="NoticeTime2 != null  ">NoticeTime2,</if>
+			<if test="NoticeTime3 != null  ">NoticeTime3,</if>
+			<if test="AckTime != null  ">AckTime,</if>
+			<if test="AckUserId != null  ">AckUserId,</if>
+			<if test="AckLocation != null  and AckLocation != ''  ">AckLocation,</if>
+			<if test="ArriveTime != null  ">ArriveTime,</if>
+			<if test="ArriveUserId1 != null  ">ArriveUserId1,</if>
+			<if test="ArriveUserId2 != null  ">ArriveUserId2,</if>
+			<if test="RelieveTime != null  ">RelieveTime,</if>
+			<if test="RelieveUserId != null  ">RelieveUserId,</if>
+			<if test="RelieveReport != null  and RelieveReport != ''  ">RelieveReport,</if>
+			<if test="ReportTime != null  ">ReportTime,</if>
+			<if test="ReportUserId != null  ">ReportUserId,</if>
+			<if test="ReportFailureCauseType != null  and ReportFailureCauseType != ''  ">ReportFailureCauseType,</if>
+			<if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != ''  ">ReportFailureCauseCode,</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure,</if>
+			<if test="FinishTime != null  ">FinishTime,</if>
+			<if test="ProcessStatus != null  ">ProcessStatus,</if>
+			<if test="ResponseTime != null  ">ResponseTime,</if>
+			<if test="RepairTime != null  ">RepairTime,</if>
+			<if test="UnableServeTime != null  ">UnableServeTime,</if>
+			<if test="RescueTime != null  ">RescueTime,</if>
+			<if test="SchuleOffTime != null  ">SchuleOffTime,</if>
+			<if test="SchuleOnTime != null  ">SchuleOnTime,</if>
+			<if test="ElevatorOnTime != null  ">ElevatorOnTime,</if>
+			<if test="FcNo != null  ">FcNo,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="RescueNum != null  ">RescueNum,</if>
+			<if test="FaultUuid != null  and FaultUuid != ''  ">FaultUuid,</if>
+			<if test="AckLng != null  ">AckLng,</if>
+			<if test="AckLat != null  ">AckLat,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="EMU != null  ">#{t.EMU},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="FaultType != null  and FaultType != ''  ">#{t.FaultType},</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">#{t.FaultCode},</if>
+			<if test="IsReset != null  ">#{t.IsReset},</if>
+			<if test="SetTime != null  ">#{t.SetTime},</if>
+			<if test="ResetTime != null  ">#{t.ResetTime},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="CreateSource != null  ">#{t.CreateSource},</if>
+			<if test="DigitalData1 != null  ">#{t.DigitalData1},</if>
+			<if test="AnalogData1 != null  ">#{t.AnalogData1},</if>
+			<if test="Humity1 != null  ">#{t.Humity1},</if>
+			<if test="Tempareture1 != null  ">#{t.Tempareture1},</if>
+			<if test="DigitalData2 != null  ">#{t.DigitalData2},</if>
+			<if test="Humity2 != null  ">#{t.Humity2},</if>
+			<if test="Tempareture2 != null  ">#{t.Tempareture2},</if>
+			<if test="NoticeTime1 != null  ">#{t.NoticeTime1},</if>
+			<if test="NoticeTime2 != null  ">#{t.NoticeTime2},</if>
+			<if test="NoticeTime3 != null  ">#{t.NoticeTime3},</if>
+			<if test="AckTime != null  ">#{t.AckTime},</if>
+			<if test="AckUserId != null  ">#{t.AckUserId},</if>
+			<if test="AckLocation != null  and AckLocation != ''  ">#{t.AckLocation},</if>
+			<if test="ArriveTime != null  ">#{t.ArriveTime},</if>
+			<if test="ArriveUserId1 != null  ">#{t.ArriveUserId1},</if>
+			<if test="ArriveUserId2 != null  ">#{t.ArriveUserId2},</if>
+			<if test="RelieveTime != null  ">#{t.RelieveTime},</if>
+			<if test="RelieveUserId != null  ">#{t.RelieveUserId},</if>
+			<if test="RelieveReport != null  and RelieveReport != ''  ">#{t.RelieveReport},</if>
+			<if test="ReportTime != null  ">#{t.ReportTime},</if>
+			<if test="ReportUserId != null  ">#{t.ReportUserId},</if>
+			<if test="ReportFailureCauseType != null  and ReportFailureCauseType != ''  ">#{t.ReportFailureCauseType},</if>
+			<if test="ReportFailureCauseCode != null  and ReportFailureCauseCode != ''  ">#{t.ReportFailureCauseCode},</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">#{t.ReportMeasure},</if>
+			<if test="FinishTime != null  ">#{t.FinishTime},</if>
+			<if test="ProcessStatus != null  ">#{t.ProcessStatus},</if>
+			<if test="ResponseTime != null  ">#{t.ResponseTime},</if>
+			<if test="RepairTime != null  ">#{t.RepairTime},</if>
+			<if test="UnableServeTime != null  ">#{t.UnableServeTime},</if>
+			<if test="RescueTime != null  ">#{t.RescueTime},</if>
+			<if test="SchuleOffTime != null  ">#{t.SchuleOffTime},</if>
+			<if test="SchuleOnTime != null  ">#{t.SchuleOnTime},</if>
+			<if test="ElevatorOnTime != null  ">#{t.ElevatorOnTime},</if>
+			<if test="FcNo != null  ">#{t.FcNo},</if>
+			<if test="MainCode != null  ">#{t.MainCode},</if>
+			<if test="SubCode != null  ">#{t.SubCode},</if>
+			<if test="RescueNum != null  ">#{t.RescueNum},</if>
+			<if test="FaultUuid != null  and FaultUuid != ''  ">#{t.FaultUuid},</if>
+			<if test="AckLng != null  ">#{t.AckLng},</if>
+			<if test="AckLat != null  ">#{t.AckLat},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

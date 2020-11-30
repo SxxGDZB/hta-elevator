@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.PushDefaultConfigMapper">
+    
+    <resultMap type="com.hta.elevator.domain.PushDefaultConfig" id="PushDefaultConfigResult">
+        <result property="Id"    column="Id"    />
+        <result property="RoleId"    column="RoleId"    />
+        <result property="Application"    column="Application"    />
+        <result property="FaultCode"    column="FaultCode"    />
+        <result property="IsSys"    column="IsSys"    />
+    </resultMap>
+	
+	<sql id="selectPushDefaultConfigVo">
+        select Id, RoleId, Application, FaultCode, IsSys from PushDefaultConfig
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.PushDefaultConfig" resultMap="PushDefaultConfigResult">
+        <include refid="selectPushDefaultConfigVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="Application != null  and Application != '' "> and Application = #{Application}</if>
+             <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="IsSys != null "> and IsSys = #{IsSys}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.PushDefaultConfig" resultType="Integer">
+        select count(*)  from PushDefaultConfig
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="Application != null  and Application != '' "> and Application = #{Application}</if>
+             <if test="FaultCode != null  and FaultCode != '' "> and FaultCode = #{FaultCode}</if>
+             <if test="IsSys != null "> and IsSys = #{IsSys}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="PushDefaultConfigResult">
+        <include refid="selectPushDefaultConfigVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.PushDefaultConfig">
+        insert into PushDefaultConfig
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="Application != null  and Application != ''  ">Application,</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="IsSys != null  ">IsSys,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="RoleId != null  ">#{RoleId},</if>
+			<if test="Application != null  and Application != ''  ">#{Application},</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">#{FaultCode},</if>
+			<if test="IsSys != null  ">#{IsSys},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.PushDefaultConfig">
+        update PushDefaultConfig
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="RoleId != null  ">RoleId = #{RoleId},</if>
+            <if test="Application != null  and Application != ''  ">Application = #{Application},</if>
+            <if test="FaultCode != null  and FaultCode != ''  ">FaultCode = #{FaultCode},</if>
+            <if test="IsSys != null  ">IsSys = #{IsSys},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from PushDefaultConfig where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from PushDefaultConfig where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.PushDefaultConfig">
+        insert into PushDefaultConfig
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="Application != null  and Application != ''  ">Application,</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">FaultCode,</if>
+			<if test="IsSys != null  ">IsSys,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="RoleId != null  ">#{t.RoleId},</if>
+			<if test="Application != null  and Application != ''  ">#{t.Application},</if>
+			<if test="FaultCode != null  and FaultCode != ''  ">#{t.FaultCode},</if>
+			<if test="IsSys != null  ">#{t.IsSys},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

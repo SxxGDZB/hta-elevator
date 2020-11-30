@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.AuthRoleMapper">
+    
+    <resultMap type="com.hta.elevator.domain.AuthRole" id="AuthRoleResult">
+        <result property="ID"    column="ID"    />
+        <result property="ParentId"    column="ParentId"    />
+        <result property="Code"    column="Code"    />
+        <result property="Name"    column="Name"    />
+        <result property="Status"    column="Status"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="Groups"    column="Groups"    />
+    </resultMap>
+	
+	<sql id="selectAuthRoleVo">
+        select ID, ParentId, Code, Name, Status, CreateTime, UpdateTime, Groups from AuthRole
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.AuthRole" resultMap="AuthRoleResult">
+        <include refid="selectAuthRoleVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentId != null "> and ParentId = #{ParentId}</if>
+             <if test="Code != null  and Code != '' "> and Code = #{Code}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Groups != null  and Groups != '' "> and Groups = #{Groups}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.AuthRole" resultType="Integer">
+        select count(*)  from AuthRole
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentId != null "> and ParentId = #{ParentId}</if>
+             <if test="Code != null  and Code != '' "> and Code = #{Code}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="Groups != null  and Groups != '' "> and Groups = #{Groups}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="AuthRoleResult">
+        <include refid="selectAuthRoleVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.AuthRole" useGeneratedKeys="true" keyProperty="ID">
+        insert into AuthRole
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ParentId != null  ">ParentId,</if>
+			<if test="Code != null  and Code != ''  ">Code,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Groups != null  and Groups != ''  ">Groups,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ParentId != null  ">#{ParentId},</if>
+			<if test="Code != null  and Code != ''  ">#{Code},</if>
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="Status != null  ">#{Status},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="Groups != null  and Groups != ''  ">#{Groups},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.AuthRole">
+        update AuthRole
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ParentId != null  ">ParentId = #{ParentId},</if>
+            <if test="Code != null  and Code != ''  ">Code = #{Code},</if>
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="Status != null  ">Status = #{Status},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="Groups != null  and Groups != ''  ">Groups = #{Groups},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from AuthRole where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from AuthRole where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.AuthRole">
+        insert into AuthRole
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ParentId != null  ">ParentId,</if>
+			<if test="Code != null  and Code != ''  ">Code,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="Groups != null  and Groups != ''  ">Groups,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ParentId != null  ">#{t.ParentId},</if>
+			<if test="Code != null  and Code != ''  ">#{t.Code},</if>
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="Status != null  ">#{t.Status},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="Groups != null  and Groups != ''  ">#{t.Groups},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

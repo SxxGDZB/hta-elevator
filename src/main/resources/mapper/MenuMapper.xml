@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MenuMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Menu" id="MenuResult">
+        <result property="ID"    column="ID"    />
+        <result property="Name"    column="Name"    />
+        <result property="ImageUrl"    column="ImageUrl"    />
+        <result property="NavigateUrl"    column="NavigateUrl"    />
+        <result property="Remark"    column="Remark"    />
+        <result property="SortCode"    column="SortCode"    />
+        <result property="ParentID"    column="ParentID"    />
+        <result property="ViewPowerID"    column="ViewPowerID"    />
+    </resultMap>
+	
+	<sql id="selectMenuVo">
+        select ID, Name, ImageUrl, NavigateUrl, Remark, SortCode, ParentID, ViewPowerID from Menu
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Menu" resultMap="MenuResult">
+        <include refid="selectMenuVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="ImageUrl != null  and ImageUrl != '' "> and ImageUrl = #{ImageUrl}</if>
+             <if test="NavigateUrl != null  and NavigateUrl != '' "> and NavigateUrl = #{NavigateUrl}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="ViewPowerID != null "> and ViewPowerID = #{ViewPowerID}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Menu" resultType="Integer">
+        select count(*)  from Menu
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="ImageUrl != null  and ImageUrl != '' "> and ImageUrl = #{ImageUrl}</if>
+             <if test="NavigateUrl != null  and NavigateUrl != '' "> and NavigateUrl = #{NavigateUrl}</if>
+             <if test="Remark != null  and Remark != '' "> and Remark = #{Remark}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="ViewPowerID != null "> and ViewPowerID = #{ViewPowerID}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="MenuResult">
+        <include refid="selectMenuVo"/>
+        where ID = #{ID}
+    </select>
+	<select id="selectMenuByName" parameterType="String" resultType="com.hta.elevator.domain.Menu">
+        <include refid="selectMenuVo"/>
+        where Name = #{Name}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Menu">
+        insert into Menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="ImageUrl != null  and ImageUrl != ''  ">ImageUrl,</if>
+			<if test="NavigateUrl != null  and NavigateUrl != ''  ">NavigateUrl,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="ViewPowerID != null  ">ViewPowerID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="ImageUrl != null  and ImageUrl != ''  ">#{ImageUrl},</if>
+			<if test="NavigateUrl != null  and NavigateUrl != ''  ">#{NavigateUrl},</if>
+			<if test="Remark != null  and Remark != ''  ">#{Remark},</if>
+			<if test="SortCode != null  ">#{SortCode},</if>
+			<if test="ParentID != null  ">#{ParentID},</if>
+			<if test="ViewPowerID != null  ">#{ViewPowerID},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Menu">
+        update Menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="ImageUrl != null  and ImageUrl != ''  ">ImageUrl = #{ImageUrl},</if>
+            <if test="NavigateUrl != null  and NavigateUrl != ''  ">NavigateUrl = #{NavigateUrl},</if>
+            <if test="Remark != null  and Remark != ''  ">Remark = #{Remark},</if>
+            <if test="SortCode != null  ">SortCode = #{SortCode},</if>
+            <if test="ParentID != null  ">ParentID = #{ParentID},</if>
+            <if test="ViewPowerID != null  ">ViewPowerID = #{ViewPowerID},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Menu where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Menu where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Menu">
+        insert into Menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="ImageUrl != null  and ImageUrl != ''  ">ImageUrl,</if>
+			<if test="NavigateUrl != null  and NavigateUrl != ''  ">NavigateUrl,</if>
+			<if test="Remark != null  and Remark != ''  ">Remark,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="ViewPowerID != null  ">ViewPowerID,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="ImageUrl != null  and ImageUrl != ''  ">#{t.ImageUrl},</if>
+			<if test="NavigateUrl != null  and NavigateUrl != ''  ">#{t.NavigateUrl},</if>
+			<if test="Remark != null  and Remark != ''  ">#{t.Remark},</if>
+			<if test="SortCode != null  ">#{t.SortCode},</if>
+			<if test="ParentID != null  ">#{t.ParentID},</if>
+			<if test="ViewPowerID != null  ">#{t.ViewPowerID},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

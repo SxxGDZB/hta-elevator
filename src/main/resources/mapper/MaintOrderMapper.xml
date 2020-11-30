@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MaintOrderMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MaintOrder" id="MaintOrderResult">
+        <result property="Id"    column="Id"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="LiftId"    column="LiftId"    />
+        <result property="MaintItem"    column="MaintItem"    />
+        <result property="Desc"    column="Desc"    />
+        <result property="Price"    column="Price"    />
+        <result property="EstimatedStartTime"    column="EstimatedStartTime"    />
+        <result property="EstimatedEndTime"    column="EstimatedEndTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="Status"    column="Status"    />
+        <result property="MaintUserId"    column="MaintUserId"    />
+        <result property="MaintRemark"    column="MaintRemark"    />
+    </resultMap>
+	
+	<sql id="selectMaintOrderVo">
+        select Id, LiftBaseId, LiftId, MaintItem, Desc, Price, EstimatedStartTime, EstimatedEndTime, UpdateTime, CreateTime, UpdateId, CreateId, Status, MaintUserId, MaintRemark from MaintOrder
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MaintOrder" resultMap="MaintOrderResult">
+        <include refid="selectMaintOrderVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="MaintItem != null  and MaintItem != '' "> and MaintItem = #{MaintItem}</if>
+             <if test="Desc != null  and Desc != '' "> and Desc = #{Desc}</if>
+             <if test="Price != null "> and Price = #{Price}</if>
+             <if test="EstimatedStartTime != null "> and EstimatedStartTime = #{EstimatedStartTime}</if>
+             <if test="EstimatedEndTime != null "> and EstimatedEndTime = #{EstimatedEndTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="MaintUserId != null "> and MaintUserId = #{MaintUserId}</if>
+             <if test="MaintRemark != null  and MaintRemark != '' "> and MaintRemark = #{MaintRemark}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MaintOrder" resultType="Integer">
+        select count(*)  from MaintOrder
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="MaintItem != null  and MaintItem != '' "> and MaintItem = #{MaintItem}</if>
+             <if test="Desc != null  and Desc != '' "> and Desc = #{Desc}</if>
+             <if test="Price != null "> and Price = #{Price}</if>
+             <if test="EstimatedStartTime != null "> and EstimatedStartTime = #{EstimatedStartTime}</if>
+             <if test="EstimatedEndTime != null "> and EstimatedEndTime = #{EstimatedEndTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="MaintUserId != null "> and MaintUserId = #{MaintUserId}</if>
+             <if test="MaintRemark != null  and MaintRemark != '' "> and MaintRemark = #{MaintRemark}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="MaintOrderResult">
+        <include refid="selectMaintOrderVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MaintOrder">
+        insert into MaintOrder
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="MaintItem != null  and MaintItem != ''  ">MaintItem,</if>
+			<if test="Desc != null  and Desc != ''  ">Desc,</if>
+			<if test="Price != null  ">Price,</if>
+			<if test="EstimatedStartTime != null  ">EstimatedStartTime,</if>
+			<if test="EstimatedEndTime != null  ">EstimatedEndTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="MaintUserId != null  ">MaintUserId,</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="MaintItem != null  and MaintItem != ''  ">#{MaintItem},</if>
+			<if test="Desc != null  and Desc != ''  ">#{Desc},</if>
+			<if test="Price != null  ">#{Price},</if>
+			<if test="EstimatedStartTime != null  ">#{EstimatedStartTime},</if>
+			<if test="EstimatedEndTime != null  ">#{EstimatedEndTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="Status != null  ">#{Status},</if>
+			<if test="MaintUserId != null  ">#{MaintUserId},</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">#{MaintRemark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MaintOrder">
+        update MaintOrder
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+            <if test="MaintItem != null  and MaintItem != ''  ">MaintItem = #{MaintItem},</if>
+            <if test="Desc != null  and Desc != ''  ">Desc = #{Desc},</if>
+            <if test="Price != null  ">Price = #{Price},</if>
+            <if test="EstimatedStartTime != null  ">EstimatedStartTime = #{EstimatedStartTime},</if>
+            <if test="EstimatedEndTime != null  ">EstimatedEndTime = #{EstimatedEndTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="Status != null  ">Status = #{Status},</if>
+            <if test="MaintUserId != null  ">MaintUserId = #{MaintUserId},</if>
+            <if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark = #{MaintRemark},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from MaintOrder where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from MaintOrder where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MaintOrder">
+        insert into MaintOrder
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="MaintItem != null  and MaintItem != ''  ">MaintItem,</if>
+			<if test="Desc != null  and Desc != ''  ">Desc,</if>
+			<if test="Price != null  ">Price,</if>
+			<if test="EstimatedStartTime != null  ">EstimatedStartTime,</if>
+			<if test="EstimatedEndTime != null  ">EstimatedEndTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="MaintUserId != null  ">MaintUserId,</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="MaintItem != null  and MaintItem != ''  ">#{t.MaintItem},</if>
+			<if test="Desc != null  and Desc != ''  ">#{t.Desc},</if>
+			<if test="Price != null  ">#{t.Price},</if>
+			<if test="EstimatedStartTime != null  ">#{t.EstimatedStartTime},</if>
+			<if test="EstimatedEndTime != null  ">#{t.EstimatedEndTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="Status != null  ">#{t.Status},</if>
+			<if test="MaintUserId != null  ">#{t.MaintUserId},</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">#{t.MaintRemark},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.GovSubscribeMapper">
+    
+    <resultMap type="com.hta.elevator.domain.GovSubscribe" id="GovSubscribeResult">
+        <result property="Id"    column="Id"    />
+        <result property="UserId"    column="UserId"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+    </resultMap>
+	
+	<sql id="selectGovSubscribeVo">
+        select Id, UserId, LiftBaseId, CreateId, CreateTime from GovSubscribe
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.GovSubscribe" resultMap="GovSubscribeResult">
+        <include refid="selectGovSubscribeVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.GovSubscribe" resultType="Integer">
+        select count(*)  from GovSubscribe
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="GovSubscribeResult">
+        <include refid="selectGovSubscribeVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.GovSubscribe">
+        insert into GovSubscribe
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="UserId != null  ">#{UserId},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.GovSubscribe">
+        update GovSubscribe
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="UserId != null  ">UserId = #{UserId},</if>
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from GovSubscribe where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from GovSubscribe where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.GovSubscribe">
+        insert into GovSubscribe
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="UserId != null  ">#{t.UserId},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

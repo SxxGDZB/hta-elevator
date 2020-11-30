@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.PushConfigMapper">
+    
+    <resultMap type="com.hta.elevator.domain.PushConfig" id="PushConfigResult">
+        <result property="Id"    column="Id"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="RoleId"    column="RoleId"    />
+        <result property="UnitId"    column="UnitId"    />
+        <result property="WxPushExclude"    column="WxPushExclude"    />
+        <result property="SmsPushExclude"    column="SmsPushExclude"    />
+        <result property="AppPushExclude"    column="AppPushExclude"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectPushConfigVo">
+        select Id, GroupId, RoleId, UnitId, WxPushExclude, SmsPushExclude, AppPushExclude, CreateId, CreateTime, UpdateId, UpdateTime from PushConfig
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.PushConfig" resultMap="PushConfigResult">
+        <include refid="selectPushConfigVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="UnitId != null "> and UnitId = #{UnitId}</if>
+             <if test="WxPushExclude != null  and WxPushExclude != '' "> and WxPushExclude = #{WxPushExclude}</if>
+             <if test="SmsPushExclude != null  and SmsPushExclude != '' "> and SmsPushExclude = #{SmsPushExclude}</if>
+             <if test="AppPushExclude != null  and AppPushExclude != '' "> and AppPushExclude = #{AppPushExclude}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.PushConfig" resultType="Integer">
+        select count(*)  from PushConfig
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="UnitId != null "> and UnitId = #{UnitId}</if>
+             <if test="WxPushExclude != null  and WxPushExclude != '' "> and WxPushExclude = #{WxPushExclude}</if>
+             <if test="SmsPushExclude != null  and SmsPushExclude != '' "> and SmsPushExclude = #{SmsPushExclude}</if>
+             <if test="AppPushExclude != null  and AppPushExclude != '' "> and AppPushExclude = #{AppPushExclude}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="PushConfigResult">
+        <include refid="selectPushConfigVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.PushConfig">
+        insert into PushConfig
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="UnitId != null  ">UnitId,</if>
+			<if test="WxPushExclude != null  and WxPushExclude != ''  ">WxPushExclude,</if>
+			<if test="SmsPushExclude != null  and SmsPushExclude != ''  ">SmsPushExclude,</if>
+			<if test="AppPushExclude != null  and AppPushExclude != ''  ">AppPushExclude,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="RoleId != null  ">#{RoleId},</if>
+			<if test="UnitId != null  ">#{UnitId},</if>
+			<if test="WxPushExclude != null  and WxPushExclude != ''  ">#{WxPushExclude},</if>
+			<if test="SmsPushExclude != null  and SmsPushExclude != ''  ">#{SmsPushExclude},</if>
+			<if test="AppPushExclude != null  and AppPushExclude != ''  ">#{AppPushExclude},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.PushConfig">
+        update PushConfig
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="RoleId != null  ">RoleId = #{RoleId},</if>
+            <if test="UnitId != null  ">UnitId = #{UnitId},</if>
+            <if test="WxPushExclude != null  and WxPushExclude != ''  ">WxPushExclude = #{WxPushExclude},</if>
+            <if test="SmsPushExclude != null  and SmsPushExclude != ''  ">SmsPushExclude = #{SmsPushExclude},</if>
+            <if test="AppPushExclude != null  and AppPushExclude != ''  ">AppPushExclude = #{AppPushExclude},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from PushConfig where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from PushConfig where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.PushConfig">
+        insert into PushConfig
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="UnitId != null  ">UnitId,</if>
+			<if test="WxPushExclude != null  and WxPushExclude != ''  ">WxPushExclude,</if>
+			<if test="SmsPushExclude != null  and SmsPushExclude != ''  ">SmsPushExclude,</if>
+			<if test="AppPushExclude != null  and AppPushExclude != ''  ">AppPushExclude,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="RoleId != null  ">#{t.RoleId},</if>
+			<if test="UnitId != null  ">#{t.UnitId},</if>
+			<if test="WxPushExclude != null  and WxPushExclude != ''  ">#{t.WxPushExclude},</if>
+			<if test="SmsPushExclude != null  and SmsPushExclude != ''  ">#{t.SmsPushExclude},</if>
+			<if test="AppPushExclude != null  and AppPushExclude != ''  ">#{t.AppPushExclude},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

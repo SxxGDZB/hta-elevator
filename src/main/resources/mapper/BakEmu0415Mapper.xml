@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.BakEmu0415Mapper">
+    
+    <resultMap type="com.hta.elevator.domain.BakEmu0415" id="BakEmu0415Result">
+        <result property="Id"    column="Id"    />
+        <result property="IMEI"    column="IMEI"    />
+        <result property="FactorySn"    column="FactorySn"    />
+        <result property="FactoryTime"    column="FactoryTime"    />
+        <result property="DeviceId"    column="DeviceId"    />
+        <result property="Mobile"    column="Mobile"    />
+        <result property="SIM"    column="SIM"    />
+        <result property="VH"    column="VH"    />
+        <result property="VS"    column="VS"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="LiftId"    column="LiftId"    />
+    </resultMap>
+	
+	<sql id="selectBakEmu0415Vo">
+        select Id, IMEI, FactorySn, FactoryTime, DeviceId, Mobile, SIM, VH, VS, GroupId, CreateId, CreateTime, UpdateId, UpdateTime, LiftId from bak_EMU_0415
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.BakEmu0415" resultMap="BakEmu0415Result">
+        <include refid="selectBakEmu0415Vo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="IMEI != null  and IMEI != '' "> and IMEI = #{IMEI}</if>
+             <if test="FactorySn != null  and FactorySn != '' "> and FactorySn = #{FactorySn}</if>
+             <if test="FactoryTime != null "> and FactoryTime = #{FactoryTime}</if>
+             <if test="DeviceId != null "> and DeviceId = #{DeviceId}</if>
+             <if test="Mobile != null  and Mobile != '' "> and Mobile = #{Mobile}</if>
+             <if test="SIM != null  and SIM != '' "> and SIM = #{SIM}</if>
+             <if test="VH != null  and VH != '' "> and VH = #{VH}</if>
+             <if test="VS != null  and VS != '' "> and VS = #{VS}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.BakEmu0415" resultType="Integer">
+        select count(*)  from bak_EMU_0415
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="IMEI != null  and IMEI != '' "> and IMEI = #{IMEI}</if>
+             <if test="FactorySn != null  and FactorySn != '' "> and FactorySn = #{FactorySn}</if>
+             <if test="FactoryTime != null "> and FactoryTime = #{FactoryTime}</if>
+             <if test="DeviceId != null "> and DeviceId = #{DeviceId}</if>
+             <if test="Mobile != null  and Mobile != '' "> and Mobile = #{Mobile}</if>
+             <if test="SIM != null  and SIM != '' "> and SIM = #{SIM}</if>
+             <if test="VH != null  and VH != '' "> and VH = #{VH}</if>
+             <if test="VS != null  and VS != '' "> and VS = #{VS}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BakEmu0415Result">
+        <include refid="selectBakEmu0415Vo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.BakEmu0415">
+        insert into bak_EMU_0415
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="IMEI != null  and IMEI != ''  ">IMEI,</if>
+			<if test="FactorySn != null  and FactorySn != ''  ">FactorySn,</if>
+			<if test="FactoryTime != null  ">FactoryTime,</if>
+			<if test="DeviceId != null  ">DeviceId,</if>
+			<if test="Mobile != null  and Mobile != ''  ">Mobile,</if>
+			<if test="SIM != null  and SIM != ''  ">SIM,</if>
+			<if test="VH != null  and VH != ''  ">VH,</if>
+			<if test="VS != null  and VS != ''  ">VS,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="IMEI != null  and IMEI != ''  ">#{IMEI},</if>
+			<if test="FactorySn != null  and FactorySn != ''  ">#{FactorySn},</if>
+			<if test="FactoryTime != null  ">#{FactoryTime},</if>
+			<if test="DeviceId != null  ">#{DeviceId},</if>
+			<if test="Mobile != null  and Mobile != ''  ">#{Mobile},</if>
+			<if test="SIM != null  and SIM != ''  ">#{SIM},</if>
+			<if test="VH != null  and VH != ''  ">#{VH},</if>
+			<if test="VS != null  and VS != ''  ">#{VS},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.BakEmu0415">
+        update bak_EMU_0415
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="IMEI != null  and IMEI != ''  ">IMEI = #{IMEI},</if>
+            <if test="FactorySn != null  and FactorySn != ''  ">FactorySn = #{FactorySn},</if>
+            <if test="FactoryTime != null  ">FactoryTime = #{FactoryTime},</if>
+            <if test="DeviceId != null  ">DeviceId = #{DeviceId},</if>
+            <if test="Mobile != null  and Mobile != ''  ">Mobile = #{Mobile},</if>
+            <if test="SIM != null  and SIM != ''  ">SIM = #{SIM},</if>
+            <if test="VH != null  and VH != ''  ">VH = #{VH},</if>
+            <if test="VS != null  and VS != ''  ">VS = #{VS},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from bak_EMU_0415 where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from bak_EMU_0415 where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.BakEmu0415">
+        insert into bak_EMU_0415
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="IMEI != null  and IMEI != ''  ">IMEI,</if>
+			<if test="FactorySn != null  and FactorySn != ''  ">FactorySn,</if>
+			<if test="FactoryTime != null  ">FactoryTime,</if>
+			<if test="DeviceId != null  ">DeviceId,</if>
+			<if test="Mobile != null  and Mobile != ''  ">Mobile,</if>
+			<if test="SIM != null  and SIM != ''  ">SIM,</if>
+			<if test="VH != null  and VH != ''  ">VH,</if>
+			<if test="VS != null  and VS != ''  ">VS,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="IMEI != null  and IMEI != ''  ">#{t.IMEI},</if>
+			<if test="FactorySn != null  and FactorySn != ''  ">#{t.FactorySn},</if>
+			<if test="FactoryTime != null  ">#{t.FactoryTime},</if>
+			<if test="DeviceId != null  ">#{t.DeviceId},</if>
+			<if test="Mobile != null  and Mobile != ''  ">#{t.Mobile},</if>
+			<if test="SIM != null  and SIM != ''  ">#{t.SIM},</if>
+			<if test="VH != null  and VH != ''  ">#{t.VH},</if>
+			<if test="VS != null  and VS != ''  ">#{t.VS},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

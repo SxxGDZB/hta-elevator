@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.LiftMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Lift" id="LiftResult">
+        <result property="LiftId"    column="LiftId"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="LID"    column="LID"    />
+        <result property="LiftCode"    column="LiftCode"    />
+        <result property="InternalNo"    column="InternalNo"    />
+        <result property="LiftName"    column="LiftName"    />
+        <result property="LiftType"    column="LiftType"    />
+        <result property="FactoryNo"    column="FactoryNo"    />
+        <result property="RegisterCode"    column="RegisterCode"    />
+        <result property="VarietyCode"    column="VarietyCode"    />
+        <result property="VarietyName"    column="VarietyName"    />
+        <result property="Manufacturer"    column="Manufacturer"    />
+        <result property="ManufacturerNo"    column="ManufacturerNo"    />
+        <result property="InstallDate"    column="InstallDate"    />
+        <result property="Floor"    column="Floor"    />
+        <result property="Station"    column="Station"    />
+        <result property="NotStopFloor"    column="NotStopFloor"    />
+        <result property="Speed"    column="Speed"    />
+        <result property="LoadWeight"    column="LoadWeight"    />
+        <result property="HasMachineRoom"    column="HasMachineRoom"    />
+        <result property="ARD"    column="ARD"    />
+        <result property="ARDDate"    column="ARDDate"    />
+        <result property="Province"    column="Province"    />
+        <result property="City"    column="City"    />
+        <result property="Area"    column="Area"    />
+        <result property="Address"    column="Address"    />
+        <result property="Lng"    column="Lng"    />
+        <result property="Lat"    column="Lat"    />
+        <result property="FirstUpkeepDate"    column="FirstUpkeepDate"    />
+        <result property="LastInspectionDate"    column="LastInspectionDate"    />
+        <result property="NextInspectionDate"    column="NextInspectionDate"    />
+        <result property="MaintenanceDate"    column="MaintenanceDate"    />
+        <result property="Inspection"    column="Inspection"    />
+        <result property="McomId"    column="McomId"    />
+        <result property="PcomId"    column="PcomId"    />
+        <result property="BuildId"    column="BuildId"    />
+        <result property="MPersonnel1"    column="MPersonnel1"    />
+        <result property="MPersonnelPhone1"    column="MPersonnelPhone1"    />
+        <result property="MPersonnel2"    column="MPersonnel2"    />
+        <result property="MPersonnelPhone2"    column="MPersonnelPhone2"    />
+        <result property="MPersonnel3"    column="MPersonnel3"    />
+        <result property="MPersonnelPhone3"    column="MPersonnelPhone3"    />
+        <result property="PPersonnel1"    column="PPersonnel1"    />
+        <result property="PPersonnelPhone1"    column="PPersonnelPhone1"    />
+        <result property="PPersonnel2"    column="PPersonnel2"    />
+        <result property="PPersonnelPhone2"    column="PPersonnelPhone2"    />
+        <result property="PPersonnel3"    column="PPersonnel3"    />
+        <result property="PPersonnelPhone3"    column="PPersonnelPhone3"    />
+        <result property="DutyPhone"    column="DutyPhone"    />
+        <result property="SortCode"    column="SortCode"    />
+        <result property="CreatePerson"    column="CreatePerson"    />
+        <result property="UpdatePerson"    column="UpdatePerson"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="OnlineTime"    column="OnlineTime"    />
+        <result property="Enabled"    column="Enabled"    />
+        <result property="ImagePath"    column="ImagePath"    />
+        <result property="LinkToGroupId"    column="LinkToGroupId"    />
+        <result property="SecurityAdminiId"    column="SecurityAdminiId"    />
+        <result property="PolicyId"    column="PolicyId"    />
+        <result property="PolicyUpdateTime"    column="PolicyUpdateTime"    />
+        <result property="PolicyUpdateId"    column="PolicyUpdateId"    />
+    </resultMap>
+	
+	<sql id="selectLiftVo">
+        select LiftId, LiftBaseId, LID, LiftCode, InternalNo, LiftName, LiftType, FactoryNo, RegisterCode, VarietyCode, VarietyName, Manufacturer, ManufacturerNo, InstallDate, Floor, Station, NotStopFloor, Speed, LoadWeight, HasMachineRoom, ARD, ARDDate, Province, City, Area, Address, Lng, Lat, FirstUpkeepDate, LastInspectionDate, NextInspectionDate, MaintenanceDate, Inspection, McomId, PcomId, BuildId, MPersonnel1, MPersonnelPhone1, MPersonnel2, MPersonnelPhone2, MPersonnel3, MPersonnelPhone3, PPersonnel1, PPersonnelPhone1, PPersonnel2, PPersonnelPhone2, PPersonnel3, PPersonnelPhone3, DutyPhone, SortCode, CreatePerson, UpdatePerson, GroupId, CreateId, CreateTime, UpdateId, UpdateTime, OnlineTime, Enabled, ImagePath, LinkToGroupId, SecurityAdminiId, PolicyId, PolicyUpdateTime, PolicyUpdateId from Lift
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Lift" resultMap="LiftResult">
+        <include refid="selectLiftVo"/>
+        <where>  
+            <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LID != null "> and LID = #{LID}</if>
+             <if test="LiftCode != null  and LiftCode != '' "> and LiftCode = #{LiftCode}</if>
+             <if test="InternalNo != null  and InternalNo != '' "> and InternalNo = #{InternalNo}</if>
+             <if test="LiftName != null  and LiftName != '' "> and LiftName = #{LiftName}</if>
+             <if test="LiftType != null "> and LiftType = #{LiftType}</if>
+             <if test="FactoryNo != null  and FactoryNo != '' "> and FactoryNo = #{FactoryNo}</if>
+             <if test="RegisterCode != null  and RegisterCode != '' "> and RegisterCode = #{RegisterCode}</if>
+             <if test="VarietyCode != null  and VarietyCode != '' "> and VarietyCode = #{VarietyCode}</if>
+             <if test="VarietyName != null  and VarietyName != '' "> and VarietyName = #{VarietyName}</if>
+             <if test="Manufacturer != null  and Manufacturer != '' "> and Manufacturer = #{Manufacturer}</if>
+             <if test="ManufacturerNo != null  and ManufacturerNo != '' "> and ManufacturerNo = #{ManufacturerNo}</if>
+             <if test="InstallDate != null "> and InstallDate = #{InstallDate}</if>
+             <if test="Floor != null "> and Floor = #{Floor}</if>
+             <if test="Station != null "> and Station = #{Station}</if>
+             <if test="NotStopFloor != null  and NotStopFloor != '' "> and NotStopFloor = #{NotStopFloor}</if>
+             <if test="Speed != null "> and Speed = #{Speed}</if>
+             <if test="LoadWeight != null "> and LoadWeight = #{LoadWeight}</if>
+             <if test="HasMachineRoom != null "> and HasMachineRoom = #{HasMachineRoom}</if>
+             <if test="ARD != null  and ARD != '' "> and ARD = #{ARD}</if>
+             <if test="ARDDate != null "> and ARDDate = #{ARDDate}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Address != null  and Address != '' "> and Address = #{Address}</if>
+             <if test="Lng != null "> and Lng = #{Lng}</if>
+             <if test="Lat != null "> and Lat = #{Lat}</if>
+             <if test="FirstUpkeepDate != null "> and FirstUpkeepDate = #{FirstUpkeepDate}</if>
+             <if test="LastInspectionDate != null "> and LastInspectionDate = #{LastInspectionDate}</if>
+             <if test="NextInspectionDate != null "> and NextInspectionDate = #{NextInspectionDate}</if>
+             <if test="MaintenanceDate != null "> and MaintenanceDate = #{MaintenanceDate}</if>
+             <if test="Inspection != null  and Inspection != '' "> and Inspection = #{Inspection}</if>
+             <if test="McomId != null "> and McomId = #{McomId}</if>
+             <if test="PcomId != null "> and PcomId = #{PcomId}</if>
+             <if test="BuildId != null "> and BuildId = #{BuildId}</if>
+             <if test="MPersonnel1 != null "> and MPersonnel1 = #{MPersonnel1}</if>
+             <if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != '' "> and MPersonnelPhone1 = #{MPersonnelPhone1}</if>
+             <if test="MPersonnel2 != null "> and MPersonnel2 = #{MPersonnel2}</if>
+             <if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != '' "> and MPersonnelPhone2 = #{MPersonnelPhone2}</if>
+             <if test="MPersonnel3 != null "> and MPersonnel3 = #{MPersonnel3}</if>
+             <if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != '' "> and MPersonnelPhone3 = #{MPersonnelPhone3}</if>
+             <if test="PPersonnel1 != null "> and PPersonnel1 = #{PPersonnel1}</if>
+             <if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != '' "> and PPersonnelPhone1 = #{PPersonnelPhone1}</if>
+             <if test="PPersonnel2 != null "> and PPersonnel2 = #{PPersonnel2}</if>
+             <if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != '' "> and PPersonnelPhone2 = #{PPersonnelPhone2}</if>
+             <if test="PPersonnel3 != null "> and PPersonnel3 = #{PPersonnel3}</if>
+             <if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != '' "> and PPersonnelPhone3 = #{PPersonnelPhone3}</if>
+             <if test="DutyPhone != null  and DutyPhone != '' "> and DutyPhone = #{DutyPhone}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CreatePerson != null  and CreatePerson != '' "> and CreatePerson = #{CreatePerson}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="OnlineTime != null "> and OnlineTime = #{OnlineTime}</if>
+             <if test="Enabled != null "> and Enabled = #{Enabled}</if>
+             <if test="ImagePath != null  and ImagePath != '' "> and ImagePath = #{ImagePath}</if>
+             <if test="LinkToGroupId != null "> and LinkToGroupId = #{LinkToGroupId}</if>
+             <if test="SecurityAdminiId != null "> and SecurityAdminiId = #{SecurityAdminiId}</if>
+             <if test="PolicyId != null "> and PolicyId = #{PolicyId}</if>
+             <if test="PolicyUpdateTime != null "> and PolicyUpdateTime = #{PolicyUpdateTime}</if>
+             <if test="PolicyUpdateId != null "> and PolicyUpdateId = #{PolicyUpdateId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Lift" resultType="Integer">
+        select count(*)  from Lift
+        <where>  
+            <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LID != null "> and LID = #{LID}</if>
+             <if test="LiftCode != null  and LiftCode != '' "> and LiftCode = #{LiftCode}</if>
+             <if test="InternalNo != null  and InternalNo != '' "> and InternalNo = #{InternalNo}</if>
+             <if test="LiftName != null  and LiftName != '' "> and LiftName = #{LiftName}</if>
+             <if test="LiftType != null "> and LiftType = #{LiftType}</if>
+             <if test="FactoryNo != null  and FactoryNo != '' "> and FactoryNo = #{FactoryNo}</if>
+             <if test="RegisterCode != null  and RegisterCode != '' "> and RegisterCode = #{RegisterCode}</if>
+             <if test="VarietyCode != null  and VarietyCode != '' "> and VarietyCode = #{VarietyCode}</if>
+             <if test="VarietyName != null  and VarietyName != '' "> and VarietyName = #{VarietyName}</if>
+             <if test="Manufacturer != null  and Manufacturer != '' "> and Manufacturer = #{Manufacturer}</if>
+             <if test="ManufacturerNo != null  and ManufacturerNo != '' "> and ManufacturerNo = #{ManufacturerNo}</if>
+             <if test="InstallDate != null "> and InstallDate = #{InstallDate}</if>
+             <if test="Floor != null "> and Floor = #{Floor}</if>
+             <if test="Station != null "> and Station = #{Station}</if>
+             <if test="NotStopFloor != null  and NotStopFloor != '' "> and NotStopFloor = #{NotStopFloor}</if>
+             <if test="Speed != null "> and Speed = #{Speed}</if>
+             <if test="LoadWeight != null "> and LoadWeight = #{LoadWeight}</if>
+             <if test="HasMachineRoom != null "> and HasMachineRoom = #{HasMachineRoom}</if>
+             <if test="ARD != null  and ARD != '' "> and ARD = #{ARD}</if>
+             <if test="ARDDate != null "> and ARDDate = #{ARDDate}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="Address != null  and Address != '' "> and Address = #{Address}</if>
+             <if test="Lng != null "> and Lng = #{Lng}</if>
+             <if test="Lat != null "> and Lat = #{Lat}</if>
+             <if test="FirstUpkeepDate != null "> and FirstUpkeepDate = #{FirstUpkeepDate}</if>
+             <if test="LastInspectionDate != null "> and LastInspectionDate = #{LastInspectionDate}</if>
+             <if test="NextInspectionDate != null "> and NextInspectionDate = #{NextInspectionDate}</if>
+             <if test="MaintenanceDate != null "> and MaintenanceDate = #{MaintenanceDate}</if>
+             <if test="Inspection != null  and Inspection != '' "> and Inspection = #{Inspection}</if>
+             <if test="McomId != null "> and McomId = #{McomId}</if>
+             <if test="PcomId != null "> and PcomId = #{PcomId}</if>
+             <if test="BuildId != null "> and BuildId = #{BuildId}</if>
+             <if test="MPersonnel1 != null "> and MPersonnel1 = #{MPersonnel1}</if>
+             <if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != '' "> and MPersonnelPhone1 = #{MPersonnelPhone1}</if>
+             <if test="MPersonnel2 != null "> and MPersonnel2 = #{MPersonnel2}</if>
+             <if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != '' "> and MPersonnelPhone2 = #{MPersonnelPhone2}</if>
+             <if test="MPersonnel3 != null "> and MPersonnel3 = #{MPersonnel3}</if>
+             <if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != '' "> and MPersonnelPhone3 = #{MPersonnelPhone3}</if>
+             <if test="PPersonnel1 != null "> and PPersonnel1 = #{PPersonnel1}</if>
+             <if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != '' "> and PPersonnelPhone1 = #{PPersonnelPhone1}</if>
+             <if test="PPersonnel2 != null "> and PPersonnel2 = #{PPersonnel2}</if>
+             <if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != '' "> and PPersonnelPhone2 = #{PPersonnelPhone2}</if>
+             <if test="PPersonnel3 != null "> and PPersonnel3 = #{PPersonnel3}</if>
+             <if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != '' "> and PPersonnelPhone3 = #{PPersonnelPhone3}</if>
+             <if test="DutyPhone != null  and DutyPhone != '' "> and DutyPhone = #{DutyPhone}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CreatePerson != null  and CreatePerson != '' "> and CreatePerson = #{CreatePerson}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="OnlineTime != null "> and OnlineTime = #{OnlineTime}</if>
+             <if test="Enabled != null "> and Enabled = #{Enabled}</if>
+             <if test="ImagePath != null  and ImagePath != '' "> and ImagePath = #{ImagePath}</if>
+             <if test="LinkToGroupId != null "> and LinkToGroupId = #{LinkToGroupId}</if>
+             <if test="SecurityAdminiId != null "> and SecurityAdminiId = #{SecurityAdminiId}</if>
+             <if test="PolicyId != null "> and PolicyId = #{PolicyId}</if>
+             <if test="PolicyUpdateTime != null "> and PolicyUpdateTime = #{PolicyUpdateTime}</if>
+             <if test="PolicyUpdateId != null "> and PolicyUpdateId = #{PolicyUpdateId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="LiftResult">
+        <include refid="selectLiftVo"/>
+        where LiftId = #{LiftId}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Lift">
+        insert into Lift
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LID != null  ">LID,</if>
+			<if test="LiftCode != null  and LiftCode != ''  ">LiftCode,</if>
+			<if test="InternalNo != null  and InternalNo != ''  ">InternalNo,</if>
+			<if test="LiftName != null  and LiftName != ''  ">LiftName,</if>
+			<if test="LiftType != null  ">LiftType,</if>
+			<if test="FactoryNo != null  and FactoryNo != ''  ">FactoryNo,</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode,</if>
+			<if test="VarietyCode != null  and VarietyCode != ''  ">VarietyCode,</if>
+			<if test="VarietyName != null  and VarietyName != ''  ">VarietyName,</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer,</if>
+			<if test="ManufacturerNo != null  and ManufacturerNo != ''  ">ManufacturerNo,</if>
+			<if test="InstallDate != null  ">InstallDate,</if>
+			<if test="Floor != null  ">Floor,</if>
+			<if test="Station != null  ">Station,</if>
+			<if test="NotStopFloor != null  and NotStopFloor != ''  ">NotStopFloor,</if>
+			<if test="Speed != null  ">Speed,</if>
+			<if test="LoadWeight != null  ">LoadWeight,</if>
+			<if test="HasMachineRoom != null  ">HasMachineRoom,</if>
+			<if test="ARD != null  and ARD != ''  ">ARD,</if>
+			<if test="ARDDate != null  ">ARDDate,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Address != null  and Address != ''  ">Address,</if>
+			<if test="Lng != null  ">Lng,</if>
+			<if test="Lat != null  ">Lat,</if>
+			<if test="FirstUpkeepDate != null  ">FirstUpkeepDate,</if>
+			<if test="LastInspectionDate != null  ">LastInspectionDate,</if>
+			<if test="NextInspectionDate != null  ">NextInspectionDate,</if>
+			<if test="MaintenanceDate != null  ">MaintenanceDate,</if>
+			<if test="Inspection != null  and Inspection != ''  ">Inspection,</if>
+			<if test="McomId != null  ">McomId,</if>
+			<if test="PcomId != null  ">PcomId,</if>
+			<if test="BuildId != null  ">BuildId,</if>
+			<if test="MPersonnel1 != null  ">MPersonnel1,</if>
+			<if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != ''  ">MPersonnelPhone1,</if>
+			<if test="MPersonnel2 != null  ">MPersonnel2,</if>
+			<if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != ''  ">MPersonnelPhone2,</if>
+			<if test="MPersonnel3 != null  ">MPersonnel3,</if>
+			<if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != ''  ">MPersonnelPhone3,</if>
+			<if test="PPersonnel1 != null  ">PPersonnel1,</if>
+			<if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != ''  ">PPersonnelPhone1,</if>
+			<if test="PPersonnel2 != null  ">PPersonnel2,</if>
+			<if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != ''  ">PPersonnelPhone2,</if>
+			<if test="PPersonnel3 != null  ">PPersonnel3,</if>
+			<if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != ''  ">PPersonnelPhone3,</if>
+			<if test="DutyPhone != null  and DutyPhone != ''  ">DutyPhone,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="OnlineTime != null  ">OnlineTime,</if>
+			<if test="Enabled != null  ">Enabled,</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">ImagePath,</if>
+			<if test="LinkToGroupId != null  ">LinkToGroupId,</if>
+			<if test="SecurityAdminiId != null  ">SecurityAdminiId,</if>
+			<if test="PolicyId != null  ">PolicyId,</if>
+			<if test="PolicyUpdateTime != null  ">PolicyUpdateTime,</if>
+			<if test="PolicyUpdateId != null  ">PolicyUpdateId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="LID != null  ">#{LID},</if>
+			<if test="LiftCode != null  and LiftCode != ''  ">#{LiftCode},</if>
+			<if test="InternalNo != null  and InternalNo != ''  ">#{InternalNo},</if>
+			<if test="LiftName != null  and LiftName != ''  ">#{LiftName},</if>
+			<if test="LiftType != null  ">#{LiftType},</if>
+			<if test="FactoryNo != null  and FactoryNo != ''  ">#{FactoryNo},</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">#{RegisterCode},</if>
+			<if test="VarietyCode != null  and VarietyCode != ''  ">#{VarietyCode},</if>
+			<if test="VarietyName != null  and VarietyName != ''  ">#{VarietyName},</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">#{Manufacturer},</if>
+			<if test="ManufacturerNo != null  and ManufacturerNo != ''  ">#{ManufacturerNo},</if>
+			<if test="InstallDate != null  ">#{InstallDate},</if>
+			<if test="Floor != null  ">#{Floor},</if>
+			<if test="Station != null  ">#{Station},</if>
+			<if test="NotStopFloor != null  and NotStopFloor != ''  ">#{NotStopFloor},</if>
+			<if test="Speed != null  ">#{Speed},</if>
+			<if test="LoadWeight != null  ">#{LoadWeight},</if>
+			<if test="HasMachineRoom != null  ">#{HasMachineRoom},</if>
+			<if test="ARD != null  and ARD != ''  ">#{ARD},</if>
+			<if test="ARDDate != null  ">#{ARDDate},</if>
+			<if test="Province != null  and Province != ''  ">#{Province},</if>
+			<if test="City != null  and City != ''  ">#{City},</if>
+			<if test="Area != null  and Area != ''  ">#{Area},</if>
+			<if test="Address != null  and Address != ''  ">#{Address},</if>
+			<if test="Lng != null  ">#{Lng},</if>
+			<if test="Lat != null  ">#{Lat},</if>
+			<if test="FirstUpkeepDate != null  ">#{FirstUpkeepDate},</if>
+			<if test="LastInspectionDate != null  ">#{LastInspectionDate},</if>
+			<if test="NextInspectionDate != null  ">#{NextInspectionDate},</if>
+			<if test="MaintenanceDate != null  ">#{MaintenanceDate},</if>
+			<if test="Inspection != null  and Inspection != ''  ">#{Inspection},</if>
+			<if test="McomId != null  ">#{McomId},</if>
+			<if test="PcomId != null  ">#{PcomId},</if>
+			<if test="BuildId != null  ">#{BuildId},</if>
+			<if test="MPersonnel1 != null  ">#{MPersonnel1},</if>
+			<if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != ''  ">#{MPersonnelPhone1},</if>
+			<if test="MPersonnel2 != null  ">#{MPersonnel2},</if>
+			<if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != ''  ">#{MPersonnelPhone2},</if>
+			<if test="MPersonnel3 != null  ">#{MPersonnel3},</if>
+			<if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != ''  ">#{MPersonnelPhone3},</if>
+			<if test="PPersonnel1 != null  ">#{PPersonnel1},</if>
+			<if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != ''  ">#{PPersonnelPhone1},</if>
+			<if test="PPersonnel2 != null  ">#{PPersonnel2},</if>
+			<if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != ''  ">#{PPersonnelPhone2},</if>
+			<if test="PPersonnel3 != null  ">#{PPersonnel3},</if>
+			<if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != ''  ">#{PPersonnelPhone3},</if>
+			<if test="DutyPhone != null  and DutyPhone != ''  ">#{DutyPhone},</if>
+			<if test="SortCode != null  ">#{SortCode},</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">#{CreatePerson},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{UpdatePerson},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="OnlineTime != null  ">#{OnlineTime},</if>
+			<if test="Enabled != null  ">#{Enabled},</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">#{ImagePath},</if>
+			<if test="LinkToGroupId != null  ">#{LinkToGroupId},</if>
+			<if test="SecurityAdminiId != null  ">#{SecurityAdminiId},</if>
+			<if test="PolicyId != null  ">#{PolicyId},</if>
+			<if test="PolicyUpdateTime != null  ">#{PolicyUpdateTime},</if>
+			<if test="PolicyUpdateId != null  ">#{PolicyUpdateId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Lift">
+        update Lift
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="LID != null  ">LID = #{LID},</if>
+            <if test="LiftCode != null  and LiftCode != ''  ">LiftCode = #{LiftCode},</if>
+            <if test="InternalNo != null  and InternalNo != ''  ">InternalNo = #{InternalNo},</if>
+            <if test="LiftName != null  and LiftName != ''  ">LiftName = #{LiftName},</if>
+            <if test="LiftType != null  ">LiftType = #{LiftType},</if>
+            <if test="FactoryNo != null  and FactoryNo != ''  ">FactoryNo = #{FactoryNo},</if>
+            <if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode = #{RegisterCode},</if>
+            <if test="VarietyCode != null  and VarietyCode != ''  ">VarietyCode = #{VarietyCode},</if>
+            <if test="VarietyName != null  and VarietyName != ''  ">VarietyName = #{VarietyName},</if>
+            <if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer = #{Manufacturer},</if>
+            <if test="ManufacturerNo != null  and ManufacturerNo != ''  ">ManufacturerNo = #{ManufacturerNo},</if>
+            <if test="InstallDate != null  ">InstallDate = #{InstallDate},</if>
+            <if test="Floor != null  ">Floor = #{Floor},</if>
+            <if test="Station != null  ">Station = #{Station},</if>
+            <if test="NotStopFloor != null  and NotStopFloor != ''  ">NotStopFloor = #{NotStopFloor},</if>
+            <if test="Speed != null  ">Speed = #{Speed},</if>
+            <if test="LoadWeight != null  ">LoadWeight = #{LoadWeight},</if>
+            <if test="HasMachineRoom != null  ">HasMachineRoom = #{HasMachineRoom},</if>
+            <if test="ARD != null  and ARD != ''  ">ARD = #{ARD},</if>
+            <if test="ARDDate != null  ">ARDDate = #{ARDDate},</if>
+            <if test="Province != null  and Province != ''  ">Province = #{Province},</if>
+            <if test="City != null  and City != ''  ">City = #{City},</if>
+            <if test="Area != null  and Area != ''  ">Area = #{Area},</if>
+            <if test="Address != null  and Address != ''  ">Address = #{Address},</if>
+            <if test="Lng != null  ">Lng = #{Lng},</if>
+            <if test="Lat != null  ">Lat = #{Lat},</if>
+            <if test="FirstUpkeepDate != null  ">FirstUpkeepDate = #{FirstUpkeepDate},</if>
+            <if test="LastInspectionDate != null  ">LastInspectionDate = #{LastInspectionDate},</if>
+            <if test="NextInspectionDate != null  ">NextInspectionDate = #{NextInspectionDate},</if>
+            <if test="MaintenanceDate != null  ">MaintenanceDate = #{MaintenanceDate},</if>
+            <if test="Inspection != null  and Inspection != ''  ">Inspection = #{Inspection},</if>
+            <if test="McomId != null  ">McomId = #{McomId},</if>
+            <if test="PcomId != null  ">PcomId = #{PcomId},</if>
+            <if test="BuildId != null  ">BuildId = #{BuildId},</if>
+            <if test="MPersonnel1 != null  ">MPersonnel1 = #{MPersonnel1},</if>
+            <if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != ''  ">MPersonnelPhone1 = #{MPersonnelPhone1},</if>
+            <if test="MPersonnel2 != null  ">MPersonnel2 = #{MPersonnel2},</if>
+            <if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != ''  ">MPersonnelPhone2 = #{MPersonnelPhone2},</if>
+            <if test="MPersonnel3 != null  ">MPersonnel3 = #{MPersonnel3},</if>
+            <if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != ''  ">MPersonnelPhone3 = #{MPersonnelPhone3},</if>
+            <if test="PPersonnel1 != null  ">PPersonnel1 = #{PPersonnel1},</if>
+            <if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != ''  ">PPersonnelPhone1 = #{PPersonnelPhone1},</if>
+            <if test="PPersonnel2 != null  ">PPersonnel2 = #{PPersonnel2},</if>
+            <if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != ''  ">PPersonnelPhone2 = #{PPersonnelPhone2},</if>
+            <if test="PPersonnel3 != null  ">PPersonnel3 = #{PPersonnel3},</if>
+            <if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != ''  ">PPersonnelPhone3 = #{PPersonnelPhone3},</if>
+            <if test="DutyPhone != null  and DutyPhone != ''  ">DutyPhone = #{DutyPhone},</if>
+            <if test="SortCode != null  ">SortCode = #{SortCode},</if>
+            <if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson = #{CreatePerson},</if>
+            <if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson = #{UpdatePerson},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="OnlineTime != null  ">OnlineTime = #{OnlineTime},</if>
+            <if test="Enabled != null  ">Enabled = #{Enabled},</if>
+            <if test="ImagePath != null  and ImagePath != ''  ">ImagePath = #{ImagePath},</if>
+            <if test="LinkToGroupId != null  ">LinkToGroupId = #{LinkToGroupId},</if>
+            <if test="SecurityAdminiId != null  ">SecurityAdminiId = #{SecurityAdminiId},</if>
+            <if test="PolicyId != null  ">PolicyId = #{PolicyId},</if>
+            <if test="PolicyUpdateTime != null  ">PolicyUpdateTime = #{PolicyUpdateTime},</if>
+            <if test="PolicyUpdateId != null  ">PolicyUpdateId = #{PolicyUpdateId},</if>
+        </trim>
+        where LiftId = #{LiftId}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Lift where LiftId = #{LiftId}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Lift where LiftId in 
+        <foreach item="LiftId" collection="array" open="(" separator="," close=")">
+            #{LiftId}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Lift">
+        insert into Lift
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LID != null  ">LID,</if>
+			<if test="LiftCode != null  and LiftCode != ''  ">LiftCode,</if>
+			<if test="InternalNo != null  and InternalNo != ''  ">InternalNo,</if>
+			<if test="LiftName != null  and LiftName != ''  ">LiftName,</if>
+			<if test="LiftType != null  ">LiftType,</if>
+			<if test="FactoryNo != null  and FactoryNo != ''  ">FactoryNo,</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">RegisterCode,</if>
+			<if test="VarietyCode != null  and VarietyCode != ''  ">VarietyCode,</if>
+			<if test="VarietyName != null  and VarietyName != ''  ">VarietyName,</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">Manufacturer,</if>
+			<if test="ManufacturerNo != null  and ManufacturerNo != ''  ">ManufacturerNo,</if>
+			<if test="InstallDate != null  ">InstallDate,</if>
+			<if test="Floor != null  ">Floor,</if>
+			<if test="Station != null  ">Station,</if>
+			<if test="NotStopFloor != null  and NotStopFloor != ''  ">NotStopFloor,</if>
+			<if test="Speed != null  ">Speed,</if>
+			<if test="LoadWeight != null  ">LoadWeight,</if>
+			<if test="HasMachineRoom != null  ">HasMachineRoom,</if>
+			<if test="ARD != null  and ARD != ''  ">ARD,</if>
+			<if test="ARDDate != null  ">ARDDate,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="Address != null  and Address != ''  ">Address,</if>
+			<if test="Lng != null  ">Lng,</if>
+			<if test="Lat != null  ">Lat,</if>
+			<if test="FirstUpkeepDate != null  ">FirstUpkeepDate,</if>
+			<if test="LastInspectionDate != null  ">LastInspectionDate,</if>
+			<if test="NextInspectionDate != null  ">NextInspectionDate,</if>
+			<if test="MaintenanceDate != null  ">MaintenanceDate,</if>
+			<if test="Inspection != null  and Inspection != ''  ">Inspection,</if>
+			<if test="McomId != null  ">McomId,</if>
+			<if test="PcomId != null  ">PcomId,</if>
+			<if test="BuildId != null  ">BuildId,</if>
+			<if test="MPersonnel1 != null  ">MPersonnel1,</if>
+			<if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != ''  ">MPersonnelPhone1,</if>
+			<if test="MPersonnel2 != null  ">MPersonnel2,</if>
+			<if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != ''  ">MPersonnelPhone2,</if>
+			<if test="MPersonnel3 != null  ">MPersonnel3,</if>
+			<if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != ''  ">MPersonnelPhone3,</if>
+			<if test="PPersonnel1 != null  ">PPersonnel1,</if>
+			<if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != ''  ">PPersonnelPhone1,</if>
+			<if test="PPersonnel2 != null  ">PPersonnel2,</if>
+			<if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != ''  ">PPersonnelPhone2,</if>
+			<if test="PPersonnel3 != null  ">PPersonnel3,</if>
+			<if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != ''  ">PPersonnelPhone3,</if>
+			<if test="DutyPhone != null  and DutyPhone != ''  ">DutyPhone,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="OnlineTime != null  ">OnlineTime,</if>
+			<if test="Enabled != null  ">Enabled,</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">ImagePath,</if>
+			<if test="LinkToGroupId != null  ">LinkToGroupId,</if>
+			<if test="SecurityAdminiId != null  ">SecurityAdminiId,</if>
+			<if test="PolicyId != null  ">PolicyId,</if>
+			<if test="PolicyUpdateTime != null  ">PolicyUpdateTime,</if>
+			<if test="PolicyUpdateId != null  ">PolicyUpdateId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="LID != null  ">#{t.LID},</if>
+			<if test="LiftCode != null  and LiftCode != ''  ">#{t.LiftCode},</if>
+			<if test="InternalNo != null  and InternalNo != ''  ">#{t.InternalNo},</if>
+			<if test="LiftName != null  and LiftName != ''  ">#{t.LiftName},</if>
+			<if test="LiftType != null  ">#{t.LiftType},</if>
+			<if test="FactoryNo != null  and FactoryNo != ''  ">#{t.FactoryNo},</if>
+			<if test="RegisterCode != null  and RegisterCode != ''  ">#{t.RegisterCode},</if>
+			<if test="VarietyCode != null  and VarietyCode != ''  ">#{t.VarietyCode},</if>
+			<if test="VarietyName != null  and VarietyName != ''  ">#{t.VarietyName},</if>
+			<if test="Manufacturer != null  and Manufacturer != ''  ">#{t.Manufacturer},</if>
+			<if test="ManufacturerNo != null  and ManufacturerNo != ''  ">#{t.ManufacturerNo},</if>
+			<if test="InstallDate != null  ">#{t.InstallDate},</if>
+			<if test="Floor != null  ">#{t.Floor},</if>
+			<if test="Station != null  ">#{t.Station},</if>
+			<if test="NotStopFloor != null  and NotStopFloor != ''  ">#{t.NotStopFloor},</if>
+			<if test="Speed != null  ">#{t.Speed},</if>
+			<if test="LoadWeight != null  ">#{t.LoadWeight},</if>
+			<if test="HasMachineRoom != null  ">#{t.HasMachineRoom},</if>
+			<if test="ARD != null  and ARD != ''  ">#{t.ARD},</if>
+			<if test="ARDDate != null  ">#{t.ARDDate},</if>
+			<if test="Province != null  and Province != ''  ">#{t.Province},</if>
+			<if test="City != null  and City != ''  ">#{t.City},</if>
+			<if test="Area != null  and Area != ''  ">#{t.Area},</if>
+			<if test="Address != null  and Address != ''  ">#{t.Address},</if>
+			<if test="Lng != null  ">#{t.Lng},</if>
+			<if test="Lat != null  ">#{t.Lat},</if>
+			<if test="FirstUpkeepDate != null  ">#{t.FirstUpkeepDate},</if>
+			<if test="LastInspectionDate != null  ">#{t.LastInspectionDate},</if>
+			<if test="NextInspectionDate != null  ">#{t.NextInspectionDate},</if>
+			<if test="MaintenanceDate != null  ">#{t.MaintenanceDate},</if>
+			<if test="Inspection != null  and Inspection != ''  ">#{t.Inspection},</if>
+			<if test="McomId != null  ">#{t.McomId},</if>
+			<if test="PcomId != null  ">#{t.PcomId},</if>
+			<if test="BuildId != null  ">#{t.BuildId},</if>
+			<if test="MPersonnel1 != null  ">#{t.MPersonnel1},</if>
+			<if test="MPersonnelPhone1 != null  and MPersonnelPhone1 != ''  ">#{t.MPersonnelPhone1},</if>
+			<if test="MPersonnel2 != null  ">#{t.MPersonnel2},</if>
+			<if test="MPersonnelPhone2 != null  and MPersonnelPhone2 != ''  ">#{t.MPersonnelPhone2},</if>
+			<if test="MPersonnel3 != null  ">#{t.MPersonnel3},</if>
+			<if test="MPersonnelPhone3 != null  and MPersonnelPhone3 != ''  ">#{t.MPersonnelPhone3},</if>
+			<if test="PPersonnel1 != null  ">#{t.PPersonnel1},</if>
+			<if test="PPersonnelPhone1 != null  and PPersonnelPhone1 != ''  ">#{t.PPersonnelPhone1},</if>
+			<if test="PPersonnel2 != null  ">#{t.PPersonnel2},</if>
+			<if test="PPersonnelPhone2 != null  and PPersonnelPhone2 != ''  ">#{t.PPersonnelPhone2},</if>
+			<if test="PPersonnel3 != null  ">#{t.PPersonnel3},</if>
+			<if test="PPersonnelPhone3 != null  and PPersonnelPhone3 != ''  ">#{t.PPersonnelPhone3},</if>
+			<if test="DutyPhone != null  and DutyPhone != ''  ">#{t.DutyPhone},</if>
+			<if test="SortCode != null  ">#{t.SortCode},</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">#{t.CreatePerson},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{t.UpdatePerson},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="OnlineTime != null  ">#{t.OnlineTime},</if>
+			<if test="Enabled != null  ">#{t.Enabled},</if>
+			<if test="ImagePath != null  and ImagePath != ''  ">#{t.ImagePath},</if>
+			<if test="LinkToGroupId != null  ">#{t.LinkToGroupId},</if>
+			<if test="SecurityAdminiId != null  ">#{t.SecurityAdminiId},</if>
+			<if test="PolicyId != null  ">#{t.PolicyId},</if>
+			<if test="PolicyUpdateTime != null  ">#{t.PolicyUpdateTime},</if>
+			<if test="PolicyUpdateId != null  ">#{t.PolicyUpdateId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

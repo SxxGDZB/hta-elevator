@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.ManufacturerMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Manufacturer" id="ManufacturerResult">
+        <result property="ManufacturerCode"    column="ManufacturerCode"    />
+        <result property="ManufacturerName"    column="ManufacturerName"    />
+    </resultMap>
+	
+	<sql id="selectManufacturerVo">
+        select ManufacturerCode, ManufacturerName from Manufacturer
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Manufacturer" resultMap="ManufacturerResult">
+        <include refid="selectManufacturerVo"/>
+        <where>  
+            <if test="ManufacturerCode != null  and ManufacturerCode != '' "> and ManufacturerCode = #{ManufacturerCode}</if>
+             <if test="ManufacturerName != null  and ManufacturerName != '' "> and ManufacturerName = #{ManufacturerName}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Manufacturer" resultType="Integer">
+        select count(*)  from Manufacturer
+        <where>  
+            <if test="ManufacturerCode != null  and ManufacturerCode != '' "> and ManufacturerCode = #{ManufacturerCode}</if>
+             <if test="ManufacturerName != null  and ManufacturerName != '' "> and ManufacturerName = #{ManufacturerName}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="ManufacturerResult">
+        <include refid="selectManufacturerVo"/>
+        where ManufacturerCode = #{ManufacturerCode}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Manufacturer">
+        insert into Manufacturer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ManufacturerCode != null  and ManufacturerCode != ''  ">ManufacturerCode,</if>
+			<if test="ManufacturerName != null  and ManufacturerName != ''  ">ManufacturerName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ManufacturerCode != null  and ManufacturerCode != ''  ">#{ManufacturerCode},</if>
+			<if test="ManufacturerName != null  and ManufacturerName != ''  ">#{ManufacturerName},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Manufacturer">
+        update Manufacturer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ManufacturerName != null  and ManufacturerName != ''  ">ManufacturerName = #{ManufacturerName},</if>
+        </trim>
+        where ManufacturerCode = #{ManufacturerCode}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from Manufacturer where ManufacturerCode = #{ManufacturerCode}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Manufacturer where ManufacturerCode in 
+        <foreach item="ManufacturerCode" collection="array" open="(" separator="," close=")">
+            #{ManufacturerCode}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Manufacturer">
+        insert into Manufacturer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ManufacturerCode != null  and ManufacturerCode != ''  ">ManufacturerCode,</if>
+			<if test="ManufacturerName != null  and ManufacturerName != ''  ">ManufacturerName,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ManufacturerCode != null  and ManufacturerCode != ''  ">#{t.ManufacturerCode},</if>
+			<if test="ManufacturerName != null  and ManufacturerName != ''  ">#{t.ManufacturerName},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

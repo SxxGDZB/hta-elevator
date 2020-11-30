@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.SysCodeMapper">
+    
+    <resultMap type="com.hta.elevator.domain.SysCode" id="SysCodeResult">
+        <result property="ID"    column="ID"    />
+        <result property="ParentID"    column="ParentID"    />
+        <result property="CodeType"    column="CodeType"    />
+        <result property="Value"    column="Value"    />
+        <result property="Text"    column="Text"    />
+        <result property="Description"    column="Description"    />
+        <result property="IsEnabled"    column="IsEnabled"    />
+        <result property="IsDefault"    column="IsDefault"    />
+        <result property="AllowEdit"    column="AllowEdit"    />
+        <result property="AllowDelete"    column="AllowDelete"    />
+        <result property="SortCode"    column="SortCode"    />
+        <result property="CretePerson"    column="CretePerson"    />
+        <result property="CreateDate"    column="CreateDate"    />
+        <result property="UpdatePerson"    column="UpdatePerson"    />
+        <result property="UpdateDate"    column="UpdateDate"    />
+    </resultMap>
+	
+	<sql id="selectSysCodeVo">
+        select ID, ParentID, CodeType, Value, Text, Description, IsEnabled, IsDefault, AllowEdit, AllowDelete, SortCode, CretePerson, CreateDate, UpdatePerson, UpdateDate from SysCode
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.SysCode" resultMap="SysCodeResult">
+        <include refid="selectSysCodeVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="CodeType != null  and CodeType != '' "> and CodeType = #{CodeType}</if>
+             <if test="Value != null  and Value != '' "> and Value = #{Value}</if>
+             <if test="Text != null  and Text != '' "> and Text = #{Text}</if>
+             <if test="Description != null  and Description != '' "> and Description = #{Description}</if>
+             <if test="IsEnabled != null "> and IsEnabled = #{IsEnabled}</if>
+             <if test="IsDefault != null "> and IsDefault = #{IsDefault}</if>
+             <if test="AllowEdit != null "> and AllowEdit = #{AllowEdit}</if>
+             <if test="AllowDelete != null "> and AllowDelete = #{AllowDelete}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CretePerson != null  and CretePerson != '' "> and CretePerson = #{CretePerson}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.SysCode" resultType="Integer">
+        select count(*)  from SysCode
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="CodeType != null  and CodeType != '' "> and CodeType = #{CodeType}</if>
+             <if test="Value != null  and Value != '' "> and Value = #{Value}</if>
+             <if test="Text != null  and Text != '' "> and Text = #{Text}</if>
+             <if test="Description != null  and Description != '' "> and Description = #{Description}</if>
+             <if test="IsEnabled != null "> and IsEnabled = #{IsEnabled}</if>
+             <if test="IsDefault != null "> and IsDefault = #{IsDefault}</if>
+             <if test="AllowEdit != null "> and AllowEdit = #{AllowEdit}</if>
+             <if test="AllowDelete != null "> and AllowDelete = #{AllowDelete}</if>
+             <if test="SortCode != null "> and SortCode = #{SortCode}</if>
+             <if test="CretePerson != null  and CretePerson != '' "> and CretePerson = #{CretePerson}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="SysCodeResult">
+        <include refid="selectSysCodeVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.SysCode">
+        insert into SysCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="CodeType != null  and CodeType != ''  ">CodeType,</if>
+			<if test="Value != null  and Value != ''  ">Value,</if>
+			<if test="Text != null  and Text != ''  ">Text,</if>
+			<if test="Description != null  and Description != ''  ">Description,</if>
+			<if test="IsEnabled != null  ">IsEnabled,</if>
+			<if test="IsDefault != null  ">IsDefault,</if>
+			<if test="AllowEdit != null  ">AllowEdit,</if>
+			<if test="AllowDelete != null  ">AllowDelete,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CretePerson != null  and CretePerson != ''  ">CretePerson,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="ParentID != null  ">#{ParentID},</if>
+			<if test="CodeType != null  and CodeType != ''  ">#{CodeType},</if>
+			<if test="Value != null  and Value != ''  ">#{Value},</if>
+			<if test="Text != null  and Text != ''  ">#{Text},</if>
+			<if test="Description != null  and Description != ''  ">#{Description},</if>
+			<if test="IsEnabled != null  ">#{IsEnabled},</if>
+			<if test="IsDefault != null  ">#{IsDefault},</if>
+			<if test="AllowEdit != null  ">#{AllowEdit},</if>
+			<if test="AllowDelete != null  ">#{AllowDelete},</if>
+			<if test="SortCode != null  ">#{SortCode},</if>
+			<if test="CretePerson != null  and CretePerson != ''  ">#{CretePerson},</if>
+			<if test="CreateDate != null  ">#{CreateDate},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{UpdatePerson},</if>
+			<if test="UpdateDate != null  ">#{UpdateDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.SysCode">
+        update SysCode
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ParentID != null  ">ParentID = #{ParentID},</if>
+            <if test="CodeType != null  and CodeType != ''  ">CodeType = #{CodeType},</if>
+            <if test="Value != null  and Value != ''  ">Value = #{Value},</if>
+            <if test="Text != null  and Text != ''  ">Text = #{Text},</if>
+            <if test="Description != null  and Description != ''  ">Description = #{Description},</if>
+            <if test="IsEnabled != null  ">IsEnabled = #{IsEnabled},</if>
+            <if test="IsDefault != null  ">IsDefault = #{IsDefault},</if>
+            <if test="AllowEdit != null  ">AllowEdit = #{AllowEdit},</if>
+            <if test="AllowDelete != null  ">AllowDelete = #{AllowDelete},</if>
+            <if test="SortCode != null  ">SortCode = #{SortCode},</if>
+            <if test="CretePerson != null  and CretePerson != ''  ">CretePerson = #{CretePerson},</if>
+            <if test="CreateDate != null  ">CreateDate = #{CreateDate},</if>
+            <if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson = #{UpdatePerson},</if>
+            <if test="UpdateDate != null  ">UpdateDate = #{UpdateDate},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from SysCode where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from SysCode where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.SysCode">
+        insert into SysCode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="CodeType != null  and CodeType != ''  ">CodeType,</if>
+			<if test="Value != null  and Value != ''  ">Value,</if>
+			<if test="Text != null  and Text != ''  ">Text,</if>
+			<if test="Description != null  and Description != ''  ">Description,</if>
+			<if test="IsEnabled != null  ">IsEnabled,</if>
+			<if test="IsDefault != null  ">IsDefault,</if>
+			<if test="AllowEdit != null  ">AllowEdit,</if>
+			<if test="AllowDelete != null  ">AllowDelete,</if>
+			<if test="SortCode != null  ">SortCode,</if>
+			<if test="CretePerson != null  and CretePerson != ''  ">CretePerson,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="ParentID != null  ">#{t.ParentID},</if>
+			<if test="CodeType != null  and CodeType != ''  ">#{t.CodeType},</if>
+			<if test="Value != null  and Value != ''  ">#{t.Value},</if>
+			<if test="Text != null  and Text != ''  ">#{t.Text},</if>
+			<if test="Description != null  and Description != ''  ">#{t.Description},</if>
+			<if test="IsEnabled != null  ">#{t.IsEnabled},</if>
+			<if test="IsDefault != null  ">#{t.IsDefault},</if>
+			<if test="AllowEdit != null  ">#{t.AllowEdit},</if>
+			<if test="AllowDelete != null  ">#{t.AllowDelete},</if>
+			<if test="SortCode != null  ">#{t.SortCode},</if>
+			<if test="CretePerson != null  and CretePerson != ''  ">#{t.CretePerson},</if>
+			<if test="CreateDate != null  ">#{t.CreateDate},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{t.UpdatePerson},</if>
+			<if test="UpdateDate != null  ">#{t.UpdateDate},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.FaultReportMapper">
+    
+    <resultMap type="com.hta.elevator.domain.FaultReport" id="FaultReportResult">
+        <result property="ID"    column="ID"    />
+        <result property="FaultId"    column="FaultId"    />
+        <result property="UserId"    column="UserId"    />
+        <result property="UserName"    column="UserName"    />
+        <result property="FailureCauseType"    column="FailureCauseType"    />
+        <result property="FailureCauseCode"    column="FailureCauseCode"    />
+        <result property="ReportMeasure"    column="ReportMeasure"    />
+        <result property="RescueNum"    column="RescueNum"    />
+        <result property="ReportTime"    column="ReportTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="GroupId"    column="GroupId"    />
+    </resultMap>
+	
+	<sql id="selectFaultReportVo">
+        select ID, FaultId, UserId, UserName, FailureCauseType, FailureCauseCode, ReportMeasure, RescueNum, ReportTime, UpdateTime, GroupId from FaultReport
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.FaultReport" resultMap="FaultReportResult">
+        <include refid="selectFaultReportVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="FaultId != null "> and FaultId = #{FaultId}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="UserName != null  and UserName != '' "> and UserName = #{UserName}</if>
+             <if test="FailureCauseType != null  and FailureCauseType != '' "> and FailureCauseType = #{FailureCauseType}</if>
+             <if test="FailureCauseCode != null  and FailureCauseCode != '' "> and FailureCauseCode = #{FailureCauseCode}</if>
+             <if test="ReportMeasure != null  and ReportMeasure != '' "> and ReportMeasure = #{ReportMeasure}</if>
+             <if test="RescueNum != null "> and RescueNum = #{RescueNum}</if>
+             <if test="ReportTime != null "> and ReportTime = #{ReportTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.FaultReport" resultType="Integer">
+        select count(*)  from FaultReport
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="FaultId != null "> and FaultId = #{FaultId}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="UserName != null  and UserName != '' "> and UserName = #{UserName}</if>
+             <if test="FailureCauseType != null  and FailureCauseType != '' "> and FailureCauseType = #{FailureCauseType}</if>
+             <if test="FailureCauseCode != null  and FailureCauseCode != '' "> and FailureCauseCode = #{FailureCauseCode}</if>
+             <if test="ReportMeasure != null  and ReportMeasure != '' "> and ReportMeasure = #{ReportMeasure}</if>
+             <if test="RescueNum != null "> and RescueNum = #{RescueNum}</if>
+             <if test="ReportTime != null "> and ReportTime = #{ReportTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="FaultReportResult">
+        <include refid="selectFaultReportVo"/>
+        where ID = #{ID}
+    </select>
+	<select id="selectFaultReportByName" parameterType="String" resultType="com.hta.elevator.domain.FaultReport">
+        <include refid="selectFaultReportVo"/>
+        where UserName = #{UserName}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.FaultReport">
+        insert into FaultReport
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="FaultId != null  ">FaultId,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="UserName != null  and UserName != ''  ">UserName,</if>
+			<if test="FailureCauseType != null  and FailureCauseType != ''  ">FailureCauseType,</if>
+			<if test="FailureCauseCode != null  and FailureCauseCode != ''  ">FailureCauseCode,</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure,</if>
+			<if test="RescueNum != null  ">RescueNum,</if>
+			<if test="ReportTime != null  ">ReportTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="FaultId != null  ">#{FaultId},</if>
+			<if test="UserId != null  ">#{UserId},</if>
+			<if test="UserName != null  and UserName != ''  ">#{UserName},</if>
+			<if test="FailureCauseType != null  and FailureCauseType != ''  ">#{FailureCauseType},</if>
+			<if test="FailureCauseCode != null  and FailureCauseCode != ''  ">#{FailureCauseCode},</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">#{ReportMeasure},</if>
+			<if test="RescueNum != null  ">#{RescueNum},</if>
+			<if test="ReportTime != null  ">#{ReportTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.FaultReport">
+        update FaultReport
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="FaultId != null  ">FaultId = #{FaultId},</if>
+            <if test="UserId != null  ">UserId = #{UserId},</if>
+            <if test="UserName != null  and UserName != ''  ">UserName = #{UserName},</if>
+            <if test="FailureCauseType != null  and FailureCauseType != ''  ">FailureCauseType = #{FailureCauseType},</if>
+            <if test="FailureCauseCode != null  and FailureCauseCode != ''  ">FailureCauseCode = #{FailureCauseCode},</if>
+            <if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure = #{ReportMeasure},</if>
+            <if test="RescueNum != null  ">RescueNum = #{RescueNum},</if>
+            <if test="ReportTime != null  ">ReportTime = #{ReportTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from FaultReport where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from FaultReport where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.FaultReport">
+        insert into FaultReport
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="FaultId != null  ">FaultId,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="UserName != null  and UserName != ''  ">UserName,</if>
+			<if test="FailureCauseType != null  and FailureCauseType != ''  ">FailureCauseType,</if>
+			<if test="FailureCauseCode != null  and FailureCauseCode != ''  ">FailureCauseCode,</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">ReportMeasure,</if>
+			<if test="RescueNum != null  ">RescueNum,</if>
+			<if test="ReportTime != null  ">ReportTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="FaultId != null  ">#{t.FaultId},</if>
+			<if test="UserId != null  ">#{t.UserId},</if>
+			<if test="UserName != null  and UserName != ''  ">#{t.UserName},</if>
+			<if test="FailureCauseType != null  and FailureCauseType != ''  ">#{t.FailureCauseType},</if>
+			<if test="FailureCauseCode != null  and FailureCauseCode != ''  ">#{t.FailureCauseCode},</if>
+			<if test="ReportMeasure != null  and ReportMeasure != ''  ">#{t.ReportMeasure},</if>
+			<if test="RescueNum != null  ">#{t.RescueNum},</if>
+			<if test="ReportTime != null  ">#{t.ReportTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

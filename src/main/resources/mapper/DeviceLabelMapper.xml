@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.DeviceLabelMapper">
+    
+    <resultMap type="com.hta.elevator.domain.DeviceLabel" id="DeviceLabelResult">
+        <result property="DeviceSn"    column="DeviceSn"    />
+        <result property="LabelSn"    column="LabelSn"    />
+        <result property="Iccid"    column="Iccid"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectDeviceLabelVo">
+        select DeviceSn, LabelSn, Iccid, CreateTime, UpdateTime from DeviceLabel
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.DeviceLabel" resultMap="DeviceLabelResult">
+        <include refid="selectDeviceLabelVo"/>
+        <where>  
+            <if test="DeviceSn != null "> and DeviceSn = #{DeviceSn}</if>
+             <if test="LabelSn != null  and LabelSn != '' "> and LabelSn = #{LabelSn}</if>
+             <if test="Iccid != null  and Iccid != '' "> and Iccid = #{Iccid}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.DeviceLabel" resultType="Integer">
+        select count(*)  from DeviceLabel
+        <where>  
+            <if test="DeviceSn != null "> and DeviceSn = #{DeviceSn}</if>
+             <if test="LabelSn != null  and LabelSn != '' "> and LabelSn = #{LabelSn}</if>
+             <if test="Iccid != null  and Iccid != '' "> and Iccid = #{Iccid}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="DeviceLabelResult">
+        <include refid="selectDeviceLabelVo"/>
+        where DeviceSn = #{DeviceSn}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.DeviceLabel">
+        insert into DeviceLabel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="DeviceSn != null  ">DeviceSn,</if>
+			<if test="LabelSn != null  and LabelSn != ''  ">LabelSn,</if>
+			<if test="Iccid != null  and Iccid != ''  ">Iccid,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="DeviceSn != null  ">#{DeviceSn},</if>
+			<if test="LabelSn != null  and LabelSn != ''  ">#{LabelSn},</if>
+			<if test="Iccid != null  and Iccid != ''  ">#{Iccid},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.DeviceLabel">
+        update DeviceLabel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LabelSn != null  and LabelSn != ''  ">LabelSn = #{LabelSn},</if>
+            <if test="Iccid != null  and Iccid != ''  ">Iccid = #{Iccid},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where DeviceSn = #{DeviceSn}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from DeviceLabel where DeviceSn = #{DeviceSn}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from DeviceLabel where DeviceSn in 
+        <foreach item="DeviceSn" collection="array" open="(" separator="," close=")">
+            #{DeviceSn}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.DeviceLabel">
+        insert into DeviceLabel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="DeviceSn != null  ">DeviceSn,</if>
+			<if test="LabelSn != null  and LabelSn != ''  ">LabelSn,</if>
+			<if test="Iccid != null  and Iccid != ''  ">Iccid,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="DeviceSn != null  ">#{t.DeviceSn},</if>
+			<if test="LabelSn != null  and LabelSn != ''  ">#{t.LabelSn},</if>
+			<if test="Iccid != null  and Iccid != ''  ">#{t.Iccid},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

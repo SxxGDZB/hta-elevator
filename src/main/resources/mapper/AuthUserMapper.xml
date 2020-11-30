@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.AuthUserMapper">
+    
+    <resultMap type="com.hta.elevator.domain.AuthUser" id="AuthUserResult">
+        <result property="UID"    column="UID"    />
+        <result property="UserName"    column="UserName"    />
+        <result property="Password"    column="Password"    />
+        <result property="Salt"    column="Salt"    />
+        <result property="RealName"    column="RealName"    />
+        <result property="Avatar"    column="Avatar"    />
+        <result property="Phone"    column="Phone"    />
+        <result property="Email"    column="Email"    />
+        <result property="Sex"    column="Sex"    />
+        <result property="Status"    column="Status"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="CreateWhere"    column="CreateWhere"    />
+        <result property="IsAdmin"    column="IsAdmin"    />
+        <result property="GroupIds"    column="GroupIds"    />
+        <result property="OpenId"    column="OpenId"    />
+        <result property="UnionId"    column="UnionId"    />
+    </resultMap>
+	
+	<sql id="selectAuthUserVo">
+        select UID, UserName, Password, Salt, RealName, Avatar, Phone, Email, Sex, Status, CreateTime, UpdateTime, CreateWhere, IsAdmin, GroupIds, OpenId, UnionId from AuthUser
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.AuthUser" resultMap="AuthUserResult">
+        <include refid="selectAuthUserVo"/>
+        <where>  
+            <if test="UID != null "> and UID = #{UID}</if>
+             <if test="UserName != null  and UserName != '' "> and UserName = #{UserName}</if>
+             <if test="Password != null  and Password != '' "> and Password = #{Password}</if>
+             <if test="Salt != null  and Salt != '' "> and Salt = #{Salt}</if>
+             <if test="RealName != null  and RealName != '' "> and RealName = #{RealName}</if>
+             <if test="Avatar != null  and Avatar != '' "> and Avatar = #{Avatar}</if>
+             <if test="Phone != null  and Phone != '' "> and Phone = #{Phone}</if>
+             <if test="Email != null  and Email != '' "> and Email = #{Email}</if>
+             <if test="Sex != null "> and Sex = #{Sex}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreateWhere != null "> and CreateWhere = #{CreateWhere}</if>
+             <if test="IsAdmin != null "> and IsAdmin = #{IsAdmin}</if>
+             <if test="GroupIds != null  and GroupIds != '' "> and GroupIds = #{GroupIds}</if>
+             <if test="OpenId != null  and OpenId != '' "> and OpenId = #{OpenId}</if>
+             <if test="UnionId != null  and UnionId != '' "> and UnionId = #{UnionId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.AuthUser" resultType="Integer">
+        select count(*)  from AuthUser
+        <where>  
+            <if test="UID != null "> and UID = #{UID}</if>
+             <if test="UserName != null  and UserName != '' "> and UserName = #{UserName}</if>
+             <if test="Password != null  and Password != '' "> and Password = #{Password}</if>
+             <if test="Salt != null  and Salt != '' "> and Salt = #{Salt}</if>
+             <if test="RealName != null  and RealName != '' "> and RealName = #{RealName}</if>
+             <if test="Avatar != null  and Avatar != '' "> and Avatar = #{Avatar}</if>
+             <if test="Phone != null  and Phone != '' "> and Phone = #{Phone}</if>
+             <if test="Email != null  and Email != '' "> and Email = #{Email}</if>
+             <if test="Sex != null "> and Sex = #{Sex}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreateWhere != null "> and CreateWhere = #{CreateWhere}</if>
+             <if test="IsAdmin != null "> and IsAdmin = #{IsAdmin}</if>
+             <if test="GroupIds != null  and GroupIds != '' "> and GroupIds = #{GroupIds}</if>
+             <if test="OpenId != null  and OpenId != '' "> and OpenId = #{OpenId}</if>
+             <if test="UnionId != null  and UnionId != '' "> and UnionId = #{UnionId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="AuthUserResult">
+        <include refid="selectAuthUserVo"/>
+        where UID = #{UID}
+    </select>
+	<select id="selectByName" parameterType="String" resultType="com.hta.elevator.domain.AuthUser">
+        <include refid="selectAuthUserVo"/>
+        where UserName = #{UserName}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.AuthUser" useGeneratedKeys="true" keyProperty="UID">
+        insert into AuthUser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserName != null  and UserName != ''  ">UserName,</if>
+			<if test="Password != null  and Password != ''  ">Password,</if>
+			<if test="Salt != null  and Salt != ''  ">Salt,</if>
+			<if test="RealName != null  and RealName != ''  ">RealName,</if>
+			<if test="Avatar != null  and Avatar != ''  ">Avatar,</if>
+			<if test="Phone != null  and Phone != ''  ">Phone,</if>
+			<if test="Email != null  and Email != ''  ">Email,</if>
+			<if test="Sex != null  ">Sex,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreateWhere != null  ">CreateWhere,</if>
+			<if test="IsAdmin != null  ">IsAdmin,</if>
+			<if test="GroupIds != null  and GroupIds != ''  ">GroupIds,</if>
+			<if test="OpenId != null  and OpenId != ''  ">OpenId,</if>
+			<if test="UnionId != null  and UnionId != ''  ">UnionId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserName != null  and UserName != ''  ">#{UserName},</if>
+			<if test="Password != null  and Password != ''  ">#{Password},</if>
+			<if test="Salt != null  and Salt != ''  ">#{Salt},</if>
+			<if test="RealName != null  and RealName != ''  ">#{RealName},</if>
+			<if test="Avatar != null  and Avatar != ''  ">#{Avatar},</if>
+			<if test="Phone != null  and Phone != ''  ">#{Phone},</if>
+			<if test="Email != null  and Email != ''  ">#{Email},</if>
+			<if test="Sex != null  ">#{Sex},</if>
+			<if test="Status != null  ">#{Status},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="CreateWhere != null  ">#{CreateWhere},</if>
+			<if test="IsAdmin != null  ">#{IsAdmin},</if>
+			<if test="GroupIds != null  and GroupIds != ''  ">#{GroupIds},</if>
+			<if test="OpenId != null  and OpenId != ''  ">#{OpenId},</if>
+			<if test="UnionId != null  and UnionId != ''  ">#{UnionId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.AuthUser">
+        update AuthUser
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="UserName != null  and UserName != ''  ">UserName = #{UserName},</if>
+            <if test="Password != null  and Password != ''  ">Password = #{Password},</if>
+            <if test="Salt != null  and Salt != ''  ">Salt = #{Salt},</if>
+            <if test="RealName != null  and RealName != ''  ">RealName = #{RealName},</if>
+            <if test="Avatar != null  and Avatar != ''  ">Avatar = #{Avatar},</if>
+            <if test="Phone != null  and Phone != ''  ">Phone = #{Phone},</if>
+            <if test="Email != null  and Email != ''  ">Email = #{Email},</if>
+            <if test="Sex != null  ">Sex = #{Sex},</if>
+            <if test="Status != null  ">Status = #{Status},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="CreateWhere != null  ">CreateWhere = #{CreateWhere},</if>
+            <if test="IsAdmin != null  ">IsAdmin = #{IsAdmin},</if>
+            <if test="GroupIds != null  and GroupIds != ''  ">GroupIds = #{GroupIds},</if>
+            <if test="OpenId != null  and OpenId != ''  ">OpenId = #{OpenId},</if>
+            <if test="UnionId != null  and UnionId != ''  ">UnionId = #{UnionId},</if>
+        </trim>
+        where UID = #{UID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from AuthUser where UID = #{UID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from AuthUser where UID in 
+        <foreach item="UID" collection="array" open="(" separator="," close=")">
+            #{UID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.AuthUser">
+        insert into AuthUser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserName != null  and UserName != ''  ">UserName,</if>
+			<if test="Password != null  and Password != ''  ">Password,</if>
+			<if test="Salt != null  and Salt != ''  ">Salt,</if>
+			<if test="RealName != null  and RealName != ''  ">RealName,</if>
+			<if test="Avatar != null  and Avatar != ''  ">Avatar,</if>
+			<if test="Phone != null  and Phone != ''  ">Phone,</if>
+			<if test="Email != null  and Email != ''  ">Email,</if>
+			<if test="Sex != null  ">Sex,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreateWhere != null  ">CreateWhere,</if>
+			<if test="IsAdmin != null  ">IsAdmin,</if>
+			<if test="GroupIds != null  and GroupIds != ''  ">GroupIds,</if>
+			<if test="OpenId != null  and OpenId != ''  ">OpenId,</if>
+			<if test="UnionId != null  and UnionId != ''  ">UnionId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserName != null  and UserName != ''  ">#{t.UserName},</if>
+			<if test="Password != null  and Password != ''  ">#{t.Password},</if>
+			<if test="Salt != null  and Salt != ''  ">#{t.Salt},</if>
+			<if test="RealName != null  and RealName != ''  ">#{t.RealName},</if>
+			<if test="Avatar != null  and Avatar != ''  ">#{t.Avatar},</if>
+			<if test="Phone != null  and Phone != ''  ">#{t.Phone},</if>
+			<if test="Email != null  and Email != ''  ">#{t.Email},</if>
+			<if test="Sex != null  ">#{t.Sex},</if>
+			<if test="Status != null  ">#{t.Status},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="CreateWhere != null  ">#{t.CreateWhere},</if>
+			<if test="IsAdmin != null  ">#{t.IsAdmin},</if>
+			<if test="GroupIds != null  and GroupIds != ''  ">#{t.GroupIds},</if>
+			<if test="OpenId != null  and OpenId != ''  ">#{t.OpenId},</if>
+			<if test="UnionId != null  and UnionId != ''  ">#{t.UnionId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+     <select id="selectUserRoles" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT GROUP_CONCAT(rol.Code) AS Roles
+    FROM AuthUser AS usr
+    JOIN AuthUserRole uro ON usr.UID = uro.UserId
+    JOIN AuthRole rol ON uro.RoleId = rol.ID
+    WHERE usr.UID = #{UID,jdbcType=INTEGER}
+  </select>
+    <select id="selectUserRolesByUsername" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT GROUP_CONCAT(rol.Code) AS Roles
+    FROM AuthUser AS usr
+    JOIN AuthUserRole uro ON usr.UID = uro.UserId
+    JOIN AuthRole rol ON uro.RoleId = rol.ID
+    WHERE usr.UserName = #{UserName,jdbcType=VARCHAR}
+  </select>
+</mapper>

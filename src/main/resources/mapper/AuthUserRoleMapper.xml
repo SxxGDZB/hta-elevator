@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.AuthUserRoleMapper">
+    
+    <resultMap type="com.hta.elevator.domain.AuthUserRole" id="AuthUserRoleResult">
+        <result property="ID"    column="ID"    />
+        <result property="UserId"    column="UserId"    />
+        <result property="RoleId"    column="RoleId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectAuthUserRoleVo">
+        select ID, UserId, RoleId, CreateTime, UpdateTime from AuthUserRole
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.AuthUserRole" resultMap="AuthUserRoleResult">
+        <include refid="selectAuthUserRoleVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.AuthUserRole" resultType="Integer">
+        select count(*)  from AuthUserRole
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="RoleId != null "> and RoleId = #{RoleId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="AuthUserRoleResult">
+        <include refid="selectAuthUserRoleVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.AuthUserRole" useGeneratedKeys="true" keyProperty="ID">
+        insert into AuthUserRole
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserId != null  ">UserId,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserId != null  ">#{UserId},</if>
+			<if test="RoleId != null  ">#{RoleId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.AuthUserRole">
+        update AuthUserRole
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="UserId != null  ">UserId = #{UserId},</if>
+            <if test="RoleId != null  ">RoleId = #{RoleId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from AuthUserRole where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from AuthUserRole where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.AuthUserRole">
+        insert into AuthUserRole
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserId != null  ">UserId,</if>
+			<if test="RoleId != null  ">RoleId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserId != null  ">#{t.UserId},</if>
+			<if test="RoleId != null  ">#{t.RoleId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

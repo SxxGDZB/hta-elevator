@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>首页</title>
+<script type="text/javascript" src="../jquery/jquery-3.3.1.min.js" th:href="@{/jquery/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+	<input type="button" value="生成代码" id="generator">
+	<script type="text/javascript">
+		$("#generator").on('click',function(){
+			/* $.ajax({
+	  			url: "elevator/authResource/selectAll",
+			    method: "GET",
+			    data:{"tables":"AuthResource,AuthRole,AuthRoleMenu,AuthUser,AuthUserRole,MenuResource,MenuResourceModel"},
+			    dataType : "json",
+			    async : false,
+			    success:function(data){
+			 }
+		   }); */
+		   $.ajax({
+               url: "elevator/authResource/export",
+               method: "POST",
+               dataType : "json",
+               async : false,
+               success:function(data){
+            	   
+            }
+          });
+		   //var tables = "AuthResource,AuthRole,AuthRoleMenu,AuthUser,AuthUserRole,MenuResource,MenuResourceModel,SysMenu";
+		   //location.href = "/tool/gen/batchGenCode?tables="+ tables;
+		//location.href = "/tool/gen/genCode/auth_user";
+		})
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MaintHistoryMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MaintHistory" id="MaintHistoryResult">
+        <result property="Id"    column="Id"    />
+        <result property="ReportId"    column="ReportId"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="LiftId"    column="LiftId"    />
+        <result property="UserId"    column="UserId"    />
+        <result property="McomName"    column="McomName"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="ContentType"    column="ContentType"    />
+        <result property="NormalMainTtime"    column="NormalMainTtime"    />
+        <result property="MaintTime"    column="MaintTime"    />
+        <result property="MakeupTime"    column="MakeupTime"    />
+        <result property="Suggest"    column="Suggest"    />
+        <result property="MaintStaff"    column="MaintStaff"    />
+        <result property="UseorgOpinion"    column="UseorgOpinion"    />
+        <result property="UseorgConTime"    column="UseorgConTime"    />
+        <result property="UseorgStaff"    column="UseorgStaff"    />
+        <result property="ReportStatus"    column="ReportStatus"    />
+        <result property="MaintRemark"    column="MaintRemark"    />
+        <result property="MaintImage"    column="MaintImage"    />
+        <result property="Hm1"    column="Hm1"    />
+        <result property="Hm2"    column="Hm2"    />
+        <result property="Hm3"    column="Hm3"    />
+        <result property="Hm4"    column="Hm4"    />
+        <result property="Hm5"    column="Hm5"    />
+        <result property="Hm6"    column="Hm6"    />
+        <result property="Hm7"    column="Hm7"    />
+        <result property="Hm8"    column="Hm8"    />
+        <result property="Hm9"    column="Hm9"    />
+        <result property="Hm10"    column="Hm10"    />
+        <result property="Hm11"    column="Hm11"    />
+        <result property="Hm12"    column="Hm12"    />
+        <result property="Hm13"    column="Hm13"    />
+        <result property="Hm14"    column="Hm14"    />
+        <result property="Hm15"    column="Hm15"    />
+        <result property="Hm16"    column="Hm16"    />
+        <result property="Hm17"    column="Hm17"    />
+        <result property="Hm18"    column="Hm18"    />
+        <result property="Hm19"    column="Hm19"    />
+        <result property="Hm20"    column="Hm20"    />
+        <result property="Hm21"    column="Hm21"    />
+        <result property="Hm22"    column="Hm22"    />
+        <result property="Hm23"    column="Hm23"    />
+        <result property="Hm24"    column="Hm24"    />
+        <result property="Hm25"    column="Hm25"    />
+        <result property="Hm26"    column="Hm26"    />
+        <result property="Hm27"    column="Hm27"    />
+        <result property="Hm28"    column="Hm28"    />
+        <result property="Hm29"    column="Hm29"    />
+        <result property="Hm30"    column="Hm30"    />
+        <result property="Hm31"    column="Hm31"    />
+        <result property="Qtr1"    column="Qtr1"    />
+        <result property="Qtr2"    column="Qtr2"    />
+        <result property="Qtr3"    column="Qtr3"    />
+        <result property="Qtr4"    column="Qtr4"    />
+        <result property="Qtr5"    column="Qtr5"    />
+        <result property="Qtr6"    column="Qtr6"    />
+        <result property="Qtr7"    column="Qtr7"    />
+        <result property="Qtr8"    column="Qtr8"    />
+        <result property="Qtr9"    column="Qtr9"    />
+        <result property="Qtr10"    column="Qtr10"    />
+        <result property="Qtr11"    column="Qtr11"    />
+        <result property="Qtr12"    column="Qtr12"    />
+        <result property="Qtr13"    column="Qtr13"    />
+        <result property="Hy1"    column="Hy1"    />
+        <result property="Hy2"    column="Hy2"    />
+        <result property="Hy3"    column="Hy3"    />
+        <result property="Hy4"    column="Hy4"    />
+        <result property="Hy5"    column="Hy5"    />
+        <result property="Hy6"    column="Hy6"    />
+        <result property="Hy7"    column="Hy7"    />
+        <result property="Hy8"    column="Hy8"    />
+        <result property="Hy9"    column="Hy9"    />
+        <result property="Hy10"    column="Hy10"    />
+        <result property="Hy11"    column="Hy11"    />
+        <result property="Hy12"    column="Hy12"    />
+        <result property="Hy13"    column="Hy13"    />
+        <result property="Hy14"    column="Hy14"    />
+        <result property="Hy15"    column="Hy15"    />
+        <result property="Y1"    column="Y1"    />
+        <result property="Y2"    column="Y2"    />
+        <result property="Y3"    column="Y3"    />
+        <result property="Y4"    column="Y4"    />
+        <result property="Y5"    column="Y5"    />
+        <result property="Y6"    column="Y6"    />
+        <result property="Y7"    column="Y7"    />
+        <result property="Y8"    column="Y8"    />
+        <result property="Y9"    column="Y9"    />
+        <result property="Y10"    column="Y10"    />
+        <result property="Y11"    column="Y11"    />
+        <result property="Y12"    column="Y12"    />
+        <result property="Y13"    column="Y13"    />
+        <result property="Y14"    column="Y14"    />
+        <result property="Y15"    column="Y15"    />
+        <result property="Y16"    column="Y16"    />
+        <result property="Y17"    column="Y17"    />
+    </resultMap>
+	
+	<sql id="selectMaintHistoryVo">
+        select Id, ReportId, LiftBaseId, LiftId, UserId, McomName, CreateTime, UpdateTime, ContentType, NormalMainTtime, MaintTime, MakeupTime, Suggest, MaintStaff, UseorgOpinion, UseorgConTime, UseorgStaff, ReportStatus, MaintRemark, MaintImage, Hm1, Hm2, Hm3, Hm4, Hm5, Hm6, Hm7, Hm8, Hm9, Hm10, Hm11, Hm12, Hm13, Hm14, Hm15, Hm16, Hm17, Hm18, Hm19, Hm20, Hm21, Hm22, Hm23, Hm24, Hm25, Hm26, Hm27, Hm28, Hm29, Hm30, Hm31, Qtr1, Qtr2, Qtr3, Qtr4, Qtr5, Qtr6, Qtr7, Qtr8, Qtr9, Qtr10, Qtr11, Qtr12, Qtr13, Hy1, Hy2, Hy3, Hy4, Hy5, Hy6, Hy7, Hy8, Hy9, Hy10, Hy11, Hy12, Hy13, Hy14, Hy15, Y1, Y2, Y3, Y4, Y5, Y6, Y7, Y8, Y9, Y10, Y11, Y12, Y13, Y14, Y15, Y16, Y17 from MaintHistory
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MaintHistory" resultMap="MaintHistoryResult">
+        <include refid="selectMaintHistoryVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="ReportId != null "> and ReportId = #{ReportId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="McomName != null  and McomName != '' "> and McomName = #{McomName}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="ContentType != null "> and ContentType = #{ContentType}</if>
+             <if test="NormalMainTtime != null "> and NormalMainTtime = #{NormalMainTtime}</if>
+             <if test="MaintTime != null "> and MaintTime = #{MaintTime}</if>
+             <if test="MakeupTime != null "> and MakeupTime = #{MakeupTime}</if>
+             <if test="Suggest != null  and Suggest != '' "> and Suggest = #{Suggest}</if>
+             <if test="MaintStaff != null  and MaintStaff != '' "> and MaintStaff = #{MaintStaff}</if>
+             <if test="UseorgOpinion != null  and UseorgOpinion != '' "> and UseorgOpinion = #{UseorgOpinion}</if>
+             <if test="UseorgConTime != null "> and UseorgConTime = #{UseorgConTime}</if>
+             <if test="UseorgStaff != null  and UseorgStaff != '' "> and UseorgStaff = #{UseorgStaff}</if>
+             <if test="ReportStatus != null "> and ReportStatus = #{ReportStatus}</if>
+             <if test="MaintRemark != null  and MaintRemark != '' "> and MaintRemark = #{MaintRemark}</if>
+             <if test="MaintImage != null  and MaintImage != '' "> and MaintImage = #{MaintImage}</if>
+             <if test="Hm1 != null "> and Hm1 = #{Hm1}</if>
+             <if test="Hm2 != null "> and Hm2 = #{Hm2}</if>
+             <if test="Hm3 != null "> and Hm3 = #{Hm3}</if>
+             <if test="Hm4 != null "> and Hm4 = #{Hm4}</if>
+             <if test="Hm5 != null "> and Hm5 = #{Hm5}</if>
+             <if test="Hm6 != null "> and Hm6 = #{Hm6}</if>
+             <if test="Hm7 != null "> and Hm7 = #{Hm7}</if>
+             <if test="Hm8 != null "> and Hm8 = #{Hm8}</if>
+             <if test="Hm9 != null "> and Hm9 = #{Hm9}</if>
+             <if test="Hm10 != null "> and Hm10 = #{Hm10}</if>
+             <if test="Hm11 != null "> and Hm11 = #{Hm11}</if>
+             <if test="Hm12 != null "> and Hm12 = #{Hm12}</if>
+             <if test="Hm13 != null "> and Hm13 = #{Hm13}</if>
+             <if test="Hm14 != null "> and Hm14 = #{Hm14}</if>
+             <if test="Hm15 != null "> and Hm15 = #{Hm15}</if>
+             <if test="Hm16 != null "> and Hm16 = #{Hm16}</if>
+             <if test="Hm17 != null "> and Hm17 = #{Hm17}</if>
+             <if test="Hm18 != null "> and Hm18 = #{Hm18}</if>
+             <if test="Hm19 != null "> and Hm19 = #{Hm19}</if>
+             <if test="Hm20 != null "> and Hm20 = #{Hm20}</if>
+             <if test="Hm21 != null "> and Hm21 = #{Hm21}</if>
+             <if test="Hm22 != null "> and Hm22 = #{Hm22}</if>
+             <if test="Hm23 != null "> and Hm23 = #{Hm23}</if>
+             <if test="Hm24 != null "> and Hm24 = #{Hm24}</if>
+             <if test="Hm25 != null "> and Hm25 = #{Hm25}</if>
+             <if test="Hm26 != null "> and Hm26 = #{Hm26}</if>
+             <if test="Hm27 != null "> and Hm27 = #{Hm27}</if>
+             <if test="Hm28 != null "> and Hm28 = #{Hm28}</if>
+             <if test="Hm29 != null "> and Hm29 = #{Hm29}</if>
+             <if test="Hm30 != null "> and Hm30 = #{Hm30}</if>
+             <if test="Hm31 != null "> and Hm31 = #{Hm31}</if>
+             <if test="Qtr1 != null "> and Qtr1 = #{Qtr1}</if>
+             <if test="Qtr2 != null "> and Qtr2 = #{Qtr2}</if>
+             <if test="Qtr3 != null "> and Qtr3 = #{Qtr3}</if>
+             <if test="Qtr4 != null "> and Qtr4 = #{Qtr4}</if>
+             <if test="Qtr5 != null "> and Qtr5 = #{Qtr5}</if>
+             <if test="Qtr6 != null "> and Qtr6 = #{Qtr6}</if>
+             <if test="Qtr7 != null "> and Qtr7 = #{Qtr7}</if>
+             <if test="Qtr8 != null "> and Qtr8 = #{Qtr8}</if>
+             <if test="Qtr9 != null "> and Qtr9 = #{Qtr9}</if>
+             <if test="Qtr10 != null "> and Qtr10 = #{Qtr10}</if>
+             <if test="Qtr11 != null "> and Qtr11 = #{Qtr11}</if>
+             <if test="Qtr12 != null "> and Qtr12 = #{Qtr12}</if>
+             <if test="Qtr13 != null "> and Qtr13 = #{Qtr13}</if>
+             <if test="Hy1 != null "> and Hy1 = #{Hy1}</if>
+             <if test="Hy2 != null "> and Hy2 = #{Hy2}</if>
+             <if test="Hy3 != null "> and Hy3 = #{Hy3}</if>
+             <if test="Hy4 != null "> and Hy4 = #{Hy4}</if>
+             <if test="Hy5 != null "> and Hy5 = #{Hy5}</if>
+             <if test="Hy6 != null "> and Hy6 = #{Hy6}</if>
+             <if test="Hy7 != null "> and Hy7 = #{Hy7}</if>
+             <if test="Hy8 != null "> and Hy8 = #{Hy8}</if>
+             <if test="Hy9 != null "> and Hy9 = #{Hy9}</if>
+             <if test="Hy10 != null "> and Hy10 = #{Hy10}</if>
+             <if test="Hy11 != null "> and Hy11 = #{Hy11}</if>
+             <if test="Hy12 != null "> and Hy12 = #{Hy12}</if>
+             <if test="Hy13 != null "> and Hy13 = #{Hy13}</if>
+             <if test="Hy14 != null "> and Hy14 = #{Hy14}</if>
+             <if test="Hy15 != null "> and Hy15 = #{Hy15}</if>
+             <if test="Y1 != null "> and Y1 = #{Y1}</if>
+             <if test="Y2 != null "> and Y2 = #{Y2}</if>
+             <if test="Y3 != null "> and Y3 = #{Y3}</if>
+             <if test="Y4 != null "> and Y4 = #{Y4}</if>
+             <if test="Y5 != null "> and Y5 = #{Y5}</if>
+             <if test="Y6 != null "> and Y6 = #{Y6}</if>
+             <if test="Y7 != null "> and Y7 = #{Y7}</if>
+             <if test="Y8 != null "> and Y8 = #{Y8}</if>
+             <if test="Y9 != null "> and Y9 = #{Y9}</if>
+             <if test="Y10 != null "> and Y10 = #{Y10}</if>
+             <if test="Y11 != null "> and Y11 = #{Y11}</if>
+             <if test="Y12 != null "> and Y12 = #{Y12}</if>
+             <if test="Y13 != null "> and Y13 = #{Y13}</if>
+             <if test="Y14 != null "> and Y14 = #{Y14}</if>
+             <if test="Y15 != null "> and Y15 = #{Y15}</if>
+             <if test="Y16 != null "> and Y16 = #{Y16}</if>
+             <if test="Y17 != null "> and Y17 = #{Y17}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MaintHistory" resultType="Integer">
+        select count(*)  from MaintHistory
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="ReportId != null "> and ReportId = #{ReportId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="McomName != null  and McomName != '' "> and McomName = #{McomName}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="ContentType != null "> and ContentType = #{ContentType}</if>
+             <if test="NormalMainTtime != null "> and NormalMainTtime = #{NormalMainTtime}</if>
+             <if test="MaintTime != null "> and MaintTime = #{MaintTime}</if>
+             <if test="MakeupTime != null "> and MakeupTime = #{MakeupTime}</if>
+             <if test="Suggest != null  and Suggest != '' "> and Suggest = #{Suggest}</if>
+             <if test="MaintStaff != null  and MaintStaff != '' "> and MaintStaff = #{MaintStaff}</if>
+             <if test="UseorgOpinion != null  and UseorgOpinion != '' "> and UseorgOpinion = #{UseorgOpinion}</if>
+             <if test="UseorgConTime != null "> and UseorgConTime = #{UseorgConTime}</if>
+             <if test="UseorgStaff != null  and UseorgStaff != '' "> and UseorgStaff = #{UseorgStaff}</if>
+             <if test="ReportStatus != null "> and ReportStatus = #{ReportStatus}</if>
+             <if test="MaintRemark != null  and MaintRemark != '' "> and MaintRemark = #{MaintRemark}</if>
+             <if test="MaintImage != null  and MaintImage != '' "> and MaintImage = #{MaintImage}</if>
+             <if test="Hm1 != null "> and Hm1 = #{Hm1}</if>
+             <if test="Hm2 != null "> and Hm2 = #{Hm2}</if>
+             <if test="Hm3 != null "> and Hm3 = #{Hm3}</if>
+             <if test="Hm4 != null "> and Hm4 = #{Hm4}</if>
+             <if test="Hm5 != null "> and Hm5 = #{Hm5}</if>
+             <if test="Hm6 != null "> and Hm6 = #{Hm6}</if>
+             <if test="Hm7 != null "> and Hm7 = #{Hm7}</if>
+             <if test="Hm8 != null "> and Hm8 = #{Hm8}</if>
+             <if test="Hm9 != null "> and Hm9 = #{Hm9}</if>
+             <if test="Hm10 != null "> and Hm10 = #{Hm10}</if>
+             <if test="Hm11 != null "> and Hm11 = #{Hm11}</if>
+             <if test="Hm12 != null "> and Hm12 = #{Hm12}</if>
+             <if test="Hm13 != null "> and Hm13 = #{Hm13}</if>
+             <if test="Hm14 != null "> and Hm14 = #{Hm14}</if>
+             <if test="Hm15 != null "> and Hm15 = #{Hm15}</if>
+             <if test="Hm16 != null "> and Hm16 = #{Hm16}</if>
+             <if test="Hm17 != null "> and Hm17 = #{Hm17}</if>
+             <if test="Hm18 != null "> and Hm18 = #{Hm18}</if>
+             <if test="Hm19 != null "> and Hm19 = #{Hm19}</if>
+             <if test="Hm20 != null "> and Hm20 = #{Hm20}</if>
+             <if test="Hm21 != null "> and Hm21 = #{Hm21}</if>
+             <if test="Hm22 != null "> and Hm22 = #{Hm22}</if>
+             <if test="Hm23 != null "> and Hm23 = #{Hm23}</if>
+             <if test="Hm24 != null "> and Hm24 = #{Hm24}</if>
+             <if test="Hm25 != null "> and Hm25 = #{Hm25}</if>
+             <if test="Hm26 != null "> and Hm26 = #{Hm26}</if>
+             <if test="Hm27 != null "> and Hm27 = #{Hm27}</if>
+             <if test="Hm28 != null "> and Hm28 = #{Hm28}</if>
+             <if test="Hm29 != null "> and Hm29 = #{Hm29}</if>
+             <if test="Hm30 != null "> and Hm30 = #{Hm30}</if>
+             <if test="Hm31 != null "> and Hm31 = #{Hm31}</if>
+             <if test="Qtr1 != null "> and Qtr1 = #{Qtr1}</if>
+             <if test="Qtr2 != null "> and Qtr2 = #{Qtr2}</if>
+             <if test="Qtr3 != null "> and Qtr3 = #{Qtr3}</if>
+             <if test="Qtr4 != null "> and Qtr4 = #{Qtr4}</if>
+             <if test="Qtr5 != null "> and Qtr5 = #{Qtr5}</if>
+             <if test="Qtr6 != null "> and Qtr6 = #{Qtr6}</if>
+             <if test="Qtr7 != null "> and Qtr7 = #{Qtr7}</if>
+             <if test="Qtr8 != null "> and Qtr8 = #{Qtr8}</if>
+             <if test="Qtr9 != null "> and Qtr9 = #{Qtr9}</if>
+             <if test="Qtr10 != null "> and Qtr10 = #{Qtr10}</if>
+             <if test="Qtr11 != null "> and Qtr11 = #{Qtr11}</if>
+             <if test="Qtr12 != null "> and Qtr12 = #{Qtr12}</if>
+             <if test="Qtr13 != null "> and Qtr13 = #{Qtr13}</if>
+             <if test="Hy1 != null "> and Hy1 = #{Hy1}</if>
+             <if test="Hy2 != null "> and Hy2 = #{Hy2}</if>
+             <if test="Hy3 != null "> and Hy3 = #{Hy3}</if>
+             <if test="Hy4 != null "> and Hy4 = #{Hy4}</if>
+             <if test="Hy5 != null "> and Hy5 = #{Hy5}</if>
+             <if test="Hy6 != null "> and Hy6 = #{Hy6}</if>
+             <if test="Hy7 != null "> and Hy7 = #{Hy7}</if>
+             <if test="Hy8 != null "> and Hy8 = #{Hy8}</if>
+             <if test="Hy9 != null "> and Hy9 = #{Hy9}</if>
+             <if test="Hy10 != null "> and Hy10 = #{Hy10}</if>
+             <if test="Hy11 != null "> and Hy11 = #{Hy11}</if>
+             <if test="Hy12 != null "> and Hy12 = #{Hy12}</if>
+             <if test="Hy13 != null "> and Hy13 = #{Hy13}</if>
+             <if test="Hy14 != null "> and Hy14 = #{Hy14}</if>
+             <if test="Hy15 != null "> and Hy15 = #{Hy15}</if>
+             <if test="Y1 != null "> and Y1 = #{Y1}</if>
+             <if test="Y2 != null "> and Y2 = #{Y2}</if>
+             <if test="Y3 != null "> and Y3 = #{Y3}</if>
+             <if test="Y4 != null "> and Y4 = #{Y4}</if>
+             <if test="Y5 != null "> and Y5 = #{Y5}</if>
+             <if test="Y6 != null "> and Y6 = #{Y6}</if>
+             <if test="Y7 != null "> and Y7 = #{Y7}</if>
+             <if test="Y8 != null "> and Y8 = #{Y8}</if>
+             <if test="Y9 != null "> and Y9 = #{Y9}</if>
+             <if test="Y10 != null "> and Y10 = #{Y10}</if>
+             <if test="Y11 != null "> and Y11 = #{Y11}</if>
+             <if test="Y12 != null "> and Y12 = #{Y12}</if>
+             <if test="Y13 != null "> and Y13 = #{Y13}</if>
+             <if test="Y14 != null "> and Y14 = #{Y14}</if>
+             <if test="Y15 != null "> and Y15 = #{Y15}</if>
+             <if test="Y16 != null "> and Y16 = #{Y16}</if>
+             <if test="Y17 != null "> and Y17 = #{Y17}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="MaintHistoryResult">
+        <include refid="selectMaintHistoryVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MaintHistory">
+        insert into MaintHistory
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="ReportId != null  ">ReportId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="McomName != null  and McomName != ''  ">McomName,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="ContentType != null  ">ContentType,</if>
+			<if test="NormalMainTtime != null  ">NormalMainTtime,</if>
+			<if test="MaintTime != null  ">MaintTime,</if>
+			<if test="MakeupTime != null  ">MakeupTime,</if>
+			<if test="Suggest != null  and Suggest != ''  ">Suggest,</if>
+			<if test="MaintStaff != null  and MaintStaff != ''  ">MaintStaff,</if>
+			<if test="UseorgOpinion != null  and UseorgOpinion != ''  ">UseorgOpinion,</if>
+			<if test="UseorgConTime != null  ">UseorgConTime,</if>
+			<if test="UseorgStaff != null  and UseorgStaff != ''  ">UseorgStaff,</if>
+			<if test="ReportStatus != null  ">ReportStatus,</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark,</if>
+			<if test="MaintImage != null  and MaintImage != ''  ">MaintImage,</if>
+			<if test="Hm1 != null  ">Hm1,</if>
+			<if test="Hm2 != null  ">Hm2,</if>
+			<if test="Hm3 != null  ">Hm3,</if>
+			<if test="Hm4 != null  ">Hm4,</if>
+			<if test="Hm5 != null  ">Hm5,</if>
+			<if test="Hm6 != null  ">Hm6,</if>
+			<if test="Hm7 != null  ">Hm7,</if>
+			<if test="Hm8 != null  ">Hm8,</if>
+			<if test="Hm9 != null  ">Hm9,</if>
+			<if test="Hm10 != null  ">Hm10,</if>
+			<if test="Hm11 != null  ">Hm11,</if>
+			<if test="Hm12 != null  ">Hm12,</if>
+			<if test="Hm13 != null  ">Hm13,</if>
+			<if test="Hm14 != null  ">Hm14,</if>
+			<if test="Hm15 != null  ">Hm15,</if>
+			<if test="Hm16 != null  ">Hm16,</if>
+			<if test="Hm17 != null  ">Hm17,</if>
+			<if test="Hm18 != null  ">Hm18,</if>
+			<if test="Hm19 != null  ">Hm19,</if>
+			<if test="Hm20 != null  ">Hm20,</if>
+			<if test="Hm21 != null  ">Hm21,</if>
+			<if test="Hm22 != null  ">Hm22,</if>
+			<if test="Hm23 != null  ">Hm23,</if>
+			<if test="Hm24 != null  ">Hm24,</if>
+			<if test="Hm25 != null  ">Hm25,</if>
+			<if test="Hm26 != null  ">Hm26,</if>
+			<if test="Hm27 != null  ">Hm27,</if>
+			<if test="Hm28 != null  ">Hm28,</if>
+			<if test="Hm29 != null  ">Hm29,</if>
+			<if test="Hm30 != null  ">Hm30,</if>
+			<if test="Hm31 != null  ">Hm31,</if>
+			<if test="Qtr1 != null  ">Qtr1,</if>
+			<if test="Qtr2 != null  ">Qtr2,</if>
+			<if test="Qtr3 != null  ">Qtr3,</if>
+			<if test="Qtr4 != null  ">Qtr4,</if>
+			<if test="Qtr5 != null  ">Qtr5,</if>
+			<if test="Qtr6 != null  ">Qtr6,</if>
+			<if test="Qtr7 != null  ">Qtr7,</if>
+			<if test="Qtr8 != null  ">Qtr8,</if>
+			<if test="Qtr9 != null  ">Qtr9,</if>
+			<if test="Qtr10 != null  ">Qtr10,</if>
+			<if test="Qtr11 != null  ">Qtr11,</if>
+			<if test="Qtr12 != null  ">Qtr12,</if>
+			<if test="Qtr13 != null  ">Qtr13,</if>
+			<if test="Hy1 != null  ">Hy1,</if>
+			<if test="Hy2 != null  ">Hy2,</if>
+			<if test="Hy3 != null  ">Hy3,</if>
+			<if test="Hy4 != null  ">Hy4,</if>
+			<if test="Hy5 != null  ">Hy5,</if>
+			<if test="Hy6 != null  ">Hy6,</if>
+			<if test="Hy7 != null  ">Hy7,</if>
+			<if test="Hy8 != null  ">Hy8,</if>
+			<if test="Hy9 != null  ">Hy9,</if>
+			<if test="Hy10 != null  ">Hy10,</if>
+			<if test="Hy11 != null  ">Hy11,</if>
+			<if test="Hy12 != null  ">Hy12,</if>
+			<if test="Hy13 != null  ">Hy13,</if>
+			<if test="Hy14 != null  ">Hy14,</if>
+			<if test="Hy15 != null  ">Hy15,</if>
+			<if test="Y1 != null  ">Y1,</if>
+			<if test="Y2 != null  ">Y2,</if>
+			<if test="Y3 != null  ">Y3,</if>
+			<if test="Y4 != null  ">Y4,</if>
+			<if test="Y5 != null  ">Y5,</if>
+			<if test="Y6 != null  ">Y6,</if>
+			<if test="Y7 != null  ">Y7,</if>
+			<if test="Y8 != null  ">Y8,</if>
+			<if test="Y9 != null  ">Y9,</if>
+			<if test="Y10 != null  ">Y10,</if>
+			<if test="Y11 != null  ">Y11,</if>
+			<if test="Y12 != null  ">Y12,</if>
+			<if test="Y13 != null  ">Y13,</if>
+			<if test="Y14 != null  ">Y14,</if>
+			<if test="Y15 != null  ">Y15,</if>
+			<if test="Y16 != null  ">Y16,</if>
+			<if test="Y17 != null  ">Y17,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="ReportId != null  ">#{ReportId},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="UserId != null  ">#{UserId},</if>
+			<if test="McomName != null  and McomName != ''  ">#{McomName},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="ContentType != null  ">#{ContentType},</if>
+			<if test="NormalMainTtime != null  ">#{NormalMainTtime},</if>
+			<if test="MaintTime != null  ">#{MaintTime},</if>
+			<if test="MakeupTime != null  ">#{MakeupTime},</if>
+			<if test="Suggest != null  and Suggest != ''  ">#{Suggest},</if>
+			<if test="MaintStaff != null  and MaintStaff != ''  ">#{MaintStaff},</if>
+			<if test="UseorgOpinion != null  and UseorgOpinion != ''  ">#{UseorgOpinion},</if>
+			<if test="UseorgConTime != null  ">#{UseorgConTime},</if>
+			<if test="UseorgStaff != null  and UseorgStaff != ''  ">#{UseorgStaff},</if>
+			<if test="ReportStatus != null  ">#{ReportStatus},</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">#{MaintRemark},</if>
+			<if test="MaintImage != null  and MaintImage != ''  ">#{MaintImage},</if>
+			<if test="Hm1 != null  ">#{Hm1},</if>
+			<if test="Hm2 != null  ">#{Hm2},</if>
+			<if test="Hm3 != null  ">#{Hm3},</if>
+			<if test="Hm4 != null  ">#{Hm4},</if>
+			<if test="Hm5 != null  ">#{Hm5},</if>
+			<if test="Hm6 != null  ">#{Hm6},</if>
+			<if test="Hm7 != null  ">#{Hm7},</if>
+			<if test="Hm8 != null  ">#{Hm8},</if>
+			<if test="Hm9 != null  ">#{Hm9},</if>
+			<if test="Hm10 != null  ">#{Hm10},</if>
+			<if test="Hm11 != null  ">#{Hm11},</if>
+			<if test="Hm12 != null  ">#{Hm12},</if>
+			<if test="Hm13 != null  ">#{Hm13},</if>
+			<if test="Hm14 != null  ">#{Hm14},</if>
+			<if test="Hm15 != null  ">#{Hm15},</if>
+			<if test="Hm16 != null  ">#{Hm16},</if>
+			<if test="Hm17 != null  ">#{Hm17},</if>
+			<if test="Hm18 != null  ">#{Hm18},</if>
+			<if test="Hm19 != null  ">#{Hm19},</if>
+			<if test="Hm20 != null  ">#{Hm20},</if>
+			<if test="Hm21 != null  ">#{Hm21},</if>
+			<if test="Hm22 != null  ">#{Hm22},</if>
+			<if test="Hm23 != null  ">#{Hm23},</if>
+			<if test="Hm24 != null  ">#{Hm24},</if>
+			<if test="Hm25 != null  ">#{Hm25},</if>
+			<if test="Hm26 != null  ">#{Hm26},</if>
+			<if test="Hm27 != null  ">#{Hm27},</if>
+			<if test="Hm28 != null  ">#{Hm28},</if>
+			<if test="Hm29 != null  ">#{Hm29},</if>
+			<if test="Hm30 != null  ">#{Hm30},</if>
+			<if test="Hm31 != null  ">#{Hm31},</if>
+			<if test="Qtr1 != null  ">#{Qtr1},</if>
+			<if test="Qtr2 != null  ">#{Qtr2},</if>
+			<if test="Qtr3 != null  ">#{Qtr3},</if>
+			<if test="Qtr4 != null  ">#{Qtr4},</if>
+			<if test="Qtr5 != null  ">#{Qtr5},</if>
+			<if test="Qtr6 != null  ">#{Qtr6},</if>
+			<if test="Qtr7 != null  ">#{Qtr7},</if>
+			<if test="Qtr8 != null  ">#{Qtr8},</if>
+			<if test="Qtr9 != null  ">#{Qtr9},</if>
+			<if test="Qtr10 != null  ">#{Qtr10},</if>
+			<if test="Qtr11 != null  ">#{Qtr11},</if>
+			<if test="Qtr12 != null  ">#{Qtr12},</if>
+			<if test="Qtr13 != null  ">#{Qtr13},</if>
+			<if test="Hy1 != null  ">#{Hy1},</if>
+			<if test="Hy2 != null  ">#{Hy2},</if>
+			<if test="Hy3 != null  ">#{Hy3},</if>
+			<if test="Hy4 != null  ">#{Hy4},</if>
+			<if test="Hy5 != null  ">#{Hy5},</if>
+			<if test="Hy6 != null  ">#{Hy6},</if>
+			<if test="Hy7 != null  ">#{Hy7},</if>
+			<if test="Hy8 != null  ">#{Hy8},</if>
+			<if test="Hy9 != null  ">#{Hy9},</if>
+			<if test="Hy10 != null  ">#{Hy10},</if>
+			<if test="Hy11 != null  ">#{Hy11},</if>
+			<if test="Hy12 != null  ">#{Hy12},</if>
+			<if test="Hy13 != null  ">#{Hy13},</if>
+			<if test="Hy14 != null  ">#{Hy14},</if>
+			<if test="Hy15 != null  ">#{Hy15},</if>
+			<if test="Y1 != null  ">#{Y1},</if>
+			<if test="Y2 != null  ">#{Y2},</if>
+			<if test="Y3 != null  ">#{Y3},</if>
+			<if test="Y4 != null  ">#{Y4},</if>
+			<if test="Y5 != null  ">#{Y5},</if>
+			<if test="Y6 != null  ">#{Y6},</if>
+			<if test="Y7 != null  ">#{Y7},</if>
+			<if test="Y8 != null  ">#{Y8},</if>
+			<if test="Y9 != null  ">#{Y9},</if>
+			<if test="Y10 != null  ">#{Y10},</if>
+			<if test="Y11 != null  ">#{Y11},</if>
+			<if test="Y12 != null  ">#{Y12},</if>
+			<if test="Y13 != null  ">#{Y13},</if>
+			<if test="Y14 != null  ">#{Y14},</if>
+			<if test="Y15 != null  ">#{Y15},</if>
+			<if test="Y16 != null  ">#{Y16},</if>
+			<if test="Y17 != null  ">#{Y17},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MaintHistory">
+        update MaintHistory
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ReportId != null  ">ReportId = #{ReportId},</if>
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+            <if test="UserId != null  ">UserId = #{UserId},</if>
+            <if test="McomName != null  and McomName != ''  ">McomName = #{McomName},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="ContentType != null  ">ContentType = #{ContentType},</if>
+            <if test="NormalMainTtime != null  ">NormalMainTtime = #{NormalMainTtime},</if>
+            <if test="MaintTime != null  ">MaintTime = #{MaintTime},</if>
+            <if test="MakeupTime != null  ">MakeupTime = #{MakeupTime},</if>
+            <if test="Suggest != null  and Suggest != ''  ">Suggest = #{Suggest},</if>
+            <if test="MaintStaff != null  and MaintStaff != ''  ">MaintStaff = #{MaintStaff},</if>
+            <if test="UseorgOpinion != null  and UseorgOpinion != ''  ">UseorgOpinion = #{UseorgOpinion},</if>
+            <if test="UseorgConTime != null  ">UseorgConTime = #{UseorgConTime},</if>
+            <if test="UseorgStaff != null  and UseorgStaff != ''  ">UseorgStaff = #{UseorgStaff},</if>
+            <if test="ReportStatus != null  ">ReportStatus = #{ReportStatus},</if>
+            <if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark = #{MaintRemark},</if>
+            <if test="MaintImage != null  and MaintImage != ''  ">MaintImage = #{MaintImage},</if>
+            <if test="Hm1 != null  ">Hm1 = #{Hm1},</if>
+            <if test="Hm2 != null  ">Hm2 = #{Hm2},</if>
+            <if test="Hm3 != null  ">Hm3 = #{Hm3},</if>
+            <if test="Hm4 != null  ">Hm4 = #{Hm4},</if>
+            <if test="Hm5 != null  ">Hm5 = #{Hm5},</if>
+            <if test="Hm6 != null  ">Hm6 = #{Hm6},</if>
+            <if test="Hm7 != null  ">Hm7 = #{Hm7},</if>
+            <if test="Hm8 != null  ">Hm8 = #{Hm8},</if>
+            <if test="Hm9 != null  ">Hm9 = #{Hm9},</if>
+            <if test="Hm10 != null  ">Hm10 = #{Hm10},</if>
+            <if test="Hm11 != null  ">Hm11 = #{Hm11},</if>
+            <if test="Hm12 != null  ">Hm12 = #{Hm12},</if>
+            <if test="Hm13 != null  ">Hm13 = #{Hm13},</if>
+            <if test="Hm14 != null  ">Hm14 = #{Hm14},</if>
+            <if test="Hm15 != null  ">Hm15 = #{Hm15},</if>
+            <if test="Hm16 != null  ">Hm16 = #{Hm16},</if>
+            <if test="Hm17 != null  ">Hm17 = #{Hm17},</if>
+            <if test="Hm18 != null  ">Hm18 = #{Hm18},</if>
+            <if test="Hm19 != null  ">Hm19 = #{Hm19},</if>
+            <if test="Hm20 != null  ">Hm20 = #{Hm20},</if>
+            <if test="Hm21 != null  ">Hm21 = #{Hm21},</if>
+            <if test="Hm22 != null  ">Hm22 = #{Hm22},</if>
+            <if test="Hm23 != null  ">Hm23 = #{Hm23},</if>
+            <if test="Hm24 != null  ">Hm24 = #{Hm24},</if>
+            <if test="Hm25 != null  ">Hm25 = #{Hm25},</if>
+            <if test="Hm26 != null  ">Hm26 = #{Hm26},</if>
+            <if test="Hm27 != null  ">Hm27 = #{Hm27},</if>
+            <if test="Hm28 != null  ">Hm28 = #{Hm28},</if>
+            <if test="Hm29 != null  ">Hm29 = #{Hm29},</if>
+            <if test="Hm30 != null  ">Hm30 = #{Hm30},</if>
+            <if test="Hm31 != null  ">Hm31 = #{Hm31},</if>
+            <if test="Qtr1 != null  ">Qtr1 = #{Qtr1},</if>
+            <if test="Qtr2 != null  ">Qtr2 = #{Qtr2},</if>
+            <if test="Qtr3 != null  ">Qtr3 = #{Qtr3},</if>
+            <if test="Qtr4 != null  ">Qtr4 = #{Qtr4},</if>
+            <if test="Qtr5 != null  ">Qtr5 = #{Qtr5},</if>
+            <if test="Qtr6 != null  ">Qtr6 = #{Qtr6},</if>
+            <if test="Qtr7 != null  ">Qtr7 = #{Qtr7},</if>
+            <if test="Qtr8 != null  ">Qtr8 = #{Qtr8},</if>
+            <if test="Qtr9 != null  ">Qtr9 = #{Qtr9},</if>
+            <if test="Qtr10 != null  ">Qtr10 = #{Qtr10},</if>
+            <if test="Qtr11 != null  ">Qtr11 = #{Qtr11},</if>
+            <if test="Qtr12 != null  ">Qtr12 = #{Qtr12},</if>
+            <if test="Qtr13 != null  ">Qtr13 = #{Qtr13},</if>
+            <if test="Hy1 != null  ">Hy1 = #{Hy1},</if>
+            <if test="Hy2 != null  ">Hy2 = #{Hy2},</if>
+            <if test="Hy3 != null  ">Hy3 = #{Hy3},</if>
+            <if test="Hy4 != null  ">Hy4 = #{Hy4},</if>
+            <if test="Hy5 != null  ">Hy5 = #{Hy5},</if>
+            <if test="Hy6 != null  ">Hy6 = #{Hy6},</if>
+            <if test="Hy7 != null  ">Hy7 = #{Hy7},</if>
+            <if test="Hy8 != null  ">Hy8 = #{Hy8},</if>
+            <if test="Hy9 != null  ">Hy9 = #{Hy9},</if>
+            <if test="Hy10 != null  ">Hy10 = #{Hy10},</if>
+            <if test="Hy11 != null  ">Hy11 = #{Hy11},</if>
+            <if test="Hy12 != null  ">Hy12 = #{Hy12},</if>
+            <if test="Hy13 != null  ">Hy13 = #{Hy13},</if>
+            <if test="Hy14 != null  ">Hy14 = #{Hy14},</if>
+            <if test="Hy15 != null  ">Hy15 = #{Hy15},</if>
+            <if test="Y1 != null  ">Y1 = #{Y1},</if>
+            <if test="Y2 != null  ">Y2 = #{Y2},</if>
+            <if test="Y3 != null  ">Y3 = #{Y3},</if>
+            <if test="Y4 != null  ">Y4 = #{Y4},</if>
+            <if test="Y5 != null  ">Y5 = #{Y5},</if>
+            <if test="Y6 != null  ">Y6 = #{Y6},</if>
+            <if test="Y7 != null  ">Y7 = #{Y7},</if>
+            <if test="Y8 != null  ">Y8 = #{Y8},</if>
+            <if test="Y9 != null  ">Y9 = #{Y9},</if>
+            <if test="Y10 != null  ">Y10 = #{Y10},</if>
+            <if test="Y11 != null  ">Y11 = #{Y11},</if>
+            <if test="Y12 != null  ">Y12 = #{Y12},</if>
+            <if test="Y13 != null  ">Y13 = #{Y13},</if>
+            <if test="Y14 != null  ">Y14 = #{Y14},</if>
+            <if test="Y15 != null  ">Y15 = #{Y15},</if>
+            <if test="Y16 != null  ">Y16 = #{Y16},</if>
+            <if test="Y17 != null  ">Y17 = #{Y17},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from MaintHistory where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from MaintHistory where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MaintHistory">
+        insert into MaintHistory
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="ReportId != null  ">ReportId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="McomName != null  and McomName != ''  ">McomName,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="ContentType != null  ">ContentType,</if>
+			<if test="NormalMainTtime != null  ">NormalMainTtime,</if>
+			<if test="MaintTime != null  ">MaintTime,</if>
+			<if test="MakeupTime != null  ">MakeupTime,</if>
+			<if test="Suggest != null  and Suggest != ''  ">Suggest,</if>
+			<if test="MaintStaff != null  and MaintStaff != ''  ">MaintStaff,</if>
+			<if test="UseorgOpinion != null  and UseorgOpinion != ''  ">UseorgOpinion,</if>
+			<if test="UseorgConTime != null  ">UseorgConTime,</if>
+			<if test="UseorgStaff != null  and UseorgStaff != ''  ">UseorgStaff,</if>
+			<if test="ReportStatus != null  ">ReportStatus,</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">MaintRemark,</if>
+			<if test="MaintImage != null  and MaintImage != ''  ">MaintImage,</if>
+			<if test="Hm1 != null  ">Hm1,</if>
+			<if test="Hm2 != null  ">Hm2,</if>
+			<if test="Hm3 != null  ">Hm3,</if>
+			<if test="Hm4 != null  ">Hm4,</if>
+			<if test="Hm5 != null  ">Hm5,</if>
+			<if test="Hm6 != null  ">Hm6,</if>
+			<if test="Hm7 != null  ">Hm7,</if>
+			<if test="Hm8 != null  ">Hm8,</if>
+			<if test="Hm9 != null  ">Hm9,</if>
+			<if test="Hm10 != null  ">Hm10,</if>
+			<if test="Hm11 != null  ">Hm11,</if>
+			<if test="Hm12 != null  ">Hm12,</if>
+			<if test="Hm13 != null  ">Hm13,</if>
+			<if test="Hm14 != null  ">Hm14,</if>
+			<if test="Hm15 != null  ">Hm15,</if>
+			<if test="Hm16 != null  ">Hm16,</if>
+			<if test="Hm17 != null  ">Hm17,</if>
+			<if test="Hm18 != null  ">Hm18,</if>
+			<if test="Hm19 != null  ">Hm19,</if>
+			<if test="Hm20 != null  ">Hm20,</if>
+			<if test="Hm21 != null  ">Hm21,</if>
+			<if test="Hm22 != null  ">Hm22,</if>
+			<if test="Hm23 != null  ">Hm23,</if>
+			<if test="Hm24 != null  ">Hm24,</if>
+			<if test="Hm25 != null  ">Hm25,</if>
+			<if test="Hm26 != null  ">Hm26,</if>
+			<if test="Hm27 != null  ">Hm27,</if>
+			<if test="Hm28 != null  ">Hm28,</if>
+			<if test="Hm29 != null  ">Hm29,</if>
+			<if test="Hm30 != null  ">Hm30,</if>
+			<if test="Hm31 != null  ">Hm31,</if>
+			<if test="Qtr1 != null  ">Qtr1,</if>
+			<if test="Qtr2 != null  ">Qtr2,</if>
+			<if test="Qtr3 != null  ">Qtr3,</if>
+			<if test="Qtr4 != null  ">Qtr4,</if>
+			<if test="Qtr5 != null  ">Qtr5,</if>
+			<if test="Qtr6 != null  ">Qtr6,</if>
+			<if test="Qtr7 != null  ">Qtr7,</if>
+			<if test="Qtr8 != null  ">Qtr8,</if>
+			<if test="Qtr9 != null  ">Qtr9,</if>
+			<if test="Qtr10 != null  ">Qtr10,</if>
+			<if test="Qtr11 != null  ">Qtr11,</if>
+			<if test="Qtr12 != null  ">Qtr12,</if>
+			<if test="Qtr13 != null  ">Qtr13,</if>
+			<if test="Hy1 != null  ">Hy1,</if>
+			<if test="Hy2 != null  ">Hy2,</if>
+			<if test="Hy3 != null  ">Hy3,</if>
+			<if test="Hy4 != null  ">Hy4,</if>
+			<if test="Hy5 != null  ">Hy5,</if>
+			<if test="Hy6 != null  ">Hy6,</if>
+			<if test="Hy7 != null  ">Hy7,</if>
+			<if test="Hy8 != null  ">Hy8,</if>
+			<if test="Hy9 != null  ">Hy9,</if>
+			<if test="Hy10 != null  ">Hy10,</if>
+			<if test="Hy11 != null  ">Hy11,</if>
+			<if test="Hy12 != null  ">Hy12,</if>
+			<if test="Hy13 != null  ">Hy13,</if>
+			<if test="Hy14 != null  ">Hy14,</if>
+			<if test="Hy15 != null  ">Hy15,</if>
+			<if test="Y1 != null  ">Y1,</if>
+			<if test="Y2 != null  ">Y2,</if>
+			<if test="Y3 != null  ">Y3,</if>
+			<if test="Y4 != null  ">Y4,</if>
+			<if test="Y5 != null  ">Y5,</if>
+			<if test="Y6 != null  ">Y6,</if>
+			<if test="Y7 != null  ">Y7,</if>
+			<if test="Y8 != null  ">Y8,</if>
+			<if test="Y9 != null  ">Y9,</if>
+			<if test="Y10 != null  ">Y10,</if>
+			<if test="Y11 != null  ">Y11,</if>
+			<if test="Y12 != null  ">Y12,</if>
+			<if test="Y13 != null  ">Y13,</if>
+			<if test="Y14 != null  ">Y14,</if>
+			<if test="Y15 != null  ">Y15,</if>
+			<if test="Y16 != null  ">Y16,</if>
+			<if test="Y17 != null  ">Y17,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="ReportId != null  ">#{t.ReportId},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="UserId != null  ">#{t.UserId},</if>
+			<if test="McomName != null  and McomName != ''  ">#{t.McomName},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="ContentType != null  ">#{t.ContentType},</if>
+			<if test="NormalMainTtime != null  ">#{t.NormalMainTtime},</if>
+			<if test="MaintTime != null  ">#{t.MaintTime},</if>
+			<if test="MakeupTime != null  ">#{t.MakeupTime},</if>
+			<if test="Suggest != null  and Suggest != ''  ">#{t.Suggest},</if>
+			<if test="MaintStaff != null  and MaintStaff != ''  ">#{t.MaintStaff},</if>
+			<if test="UseorgOpinion != null  and UseorgOpinion != ''  ">#{t.UseorgOpinion},</if>
+			<if test="UseorgConTime != null  ">#{t.UseorgConTime},</if>
+			<if test="UseorgStaff != null  and UseorgStaff != ''  ">#{t.UseorgStaff},</if>
+			<if test="ReportStatus != null  ">#{t.ReportStatus},</if>
+			<if test="MaintRemark != null  and MaintRemark != ''  ">#{t.MaintRemark},</if>
+			<if test="MaintImage != null  and MaintImage != ''  ">#{t.MaintImage},</if>
+			<if test="Hm1 != null  ">#{t.Hm1},</if>
+			<if test="Hm2 != null  ">#{t.Hm2},</if>
+			<if test="Hm3 != null  ">#{t.Hm3},</if>
+			<if test="Hm4 != null  ">#{t.Hm4},</if>
+			<if test="Hm5 != null  ">#{t.Hm5},</if>
+			<if test="Hm6 != null  ">#{t.Hm6},</if>
+			<if test="Hm7 != null  ">#{t.Hm7},</if>
+			<if test="Hm8 != null  ">#{t.Hm8},</if>
+			<if test="Hm9 != null  ">#{t.Hm9},</if>
+			<if test="Hm10 != null  ">#{t.Hm10},</if>
+			<if test="Hm11 != null  ">#{t.Hm11},</if>
+			<if test="Hm12 != null  ">#{t.Hm12},</if>
+			<if test="Hm13 != null  ">#{t.Hm13},</if>
+			<if test="Hm14 != null  ">#{t.Hm14},</if>
+			<if test="Hm15 != null  ">#{t.Hm15},</if>
+			<if test="Hm16 != null  ">#{t.Hm16},</if>
+			<if test="Hm17 != null  ">#{t.Hm17},</if>
+			<if test="Hm18 != null  ">#{t.Hm18},</if>
+			<if test="Hm19 != null  ">#{t.Hm19},</if>
+			<if test="Hm20 != null  ">#{t.Hm20},</if>
+			<if test="Hm21 != null  ">#{t.Hm21},</if>
+			<if test="Hm22 != null  ">#{t.Hm22},</if>
+			<if test="Hm23 != null  ">#{t.Hm23},</if>
+			<if test="Hm24 != null  ">#{t.Hm24},</if>
+			<if test="Hm25 != null  ">#{t.Hm25},</if>
+			<if test="Hm26 != null  ">#{t.Hm26},</if>
+			<if test="Hm27 != null  ">#{t.Hm27},</if>
+			<if test="Hm28 != null  ">#{t.Hm28},</if>
+			<if test="Hm29 != null  ">#{t.Hm29},</if>
+			<if test="Hm30 != null  ">#{t.Hm30},</if>
+			<if test="Hm31 != null  ">#{t.Hm31},</if>
+			<if test="Qtr1 != null  ">#{t.Qtr1},</if>
+			<if test="Qtr2 != null  ">#{t.Qtr2},</if>
+			<if test="Qtr3 != null  ">#{t.Qtr3},</if>
+			<if test="Qtr4 != null  ">#{t.Qtr4},</if>
+			<if test="Qtr5 != null  ">#{t.Qtr5},</if>
+			<if test="Qtr6 != null  ">#{t.Qtr6},</if>
+			<if test="Qtr7 != null  ">#{t.Qtr7},</if>
+			<if test="Qtr8 != null  ">#{t.Qtr8},</if>
+			<if test="Qtr9 != null  ">#{t.Qtr9},</if>
+			<if test="Qtr10 != null  ">#{t.Qtr10},</if>
+			<if test="Qtr11 != null  ">#{t.Qtr11},</if>
+			<if test="Qtr12 != null  ">#{t.Qtr12},</if>
+			<if test="Qtr13 != null  ">#{t.Qtr13},</if>
+			<if test="Hy1 != null  ">#{t.Hy1},</if>
+			<if test="Hy2 != null  ">#{t.Hy2},</if>
+			<if test="Hy3 != null  ">#{t.Hy3},</if>
+			<if test="Hy4 != null  ">#{t.Hy4},</if>
+			<if test="Hy5 != null  ">#{t.Hy5},</if>
+			<if test="Hy6 != null  ">#{t.Hy6},</if>
+			<if test="Hy7 != null  ">#{t.Hy7},</if>
+			<if test="Hy8 != null  ">#{t.Hy8},</if>
+			<if test="Hy9 != null  ">#{t.Hy9},</if>
+			<if test="Hy10 != null  ">#{t.Hy10},</if>
+			<if test="Hy11 != null  ">#{t.Hy11},</if>
+			<if test="Hy12 != null  ">#{t.Hy12},</if>
+			<if test="Hy13 != null  ">#{t.Hy13},</if>
+			<if test="Hy14 != null  ">#{t.Hy14},</if>
+			<if test="Hy15 != null  ">#{t.Hy15},</if>
+			<if test="Y1 != null  ">#{t.Y1},</if>
+			<if test="Y2 != null  ">#{t.Y2},</if>
+			<if test="Y3 != null  ">#{t.Y3},</if>
+			<if test="Y4 != null  ">#{t.Y4},</if>
+			<if test="Y5 != null  ">#{t.Y5},</if>
+			<if test="Y6 != null  ">#{t.Y6},</if>
+			<if test="Y7 != null  ">#{t.Y7},</if>
+			<if test="Y8 != null  ">#{t.Y8},</if>
+			<if test="Y9 != null  ">#{t.Y9},</if>
+			<if test="Y10 != null  ">#{t.Y10},</if>
+			<if test="Y11 != null  ">#{t.Y11},</if>
+			<if test="Y12 != null  ">#{t.Y12},</if>
+			<if test="Y13 != null  ">#{t.Y13},</if>
+			<if test="Y14 != null  ">#{t.Y14},</if>
+			<if test="Y15 != null  ">#{t.Y15},</if>
+			<if test="Y16 != null  ">#{t.Y16},</if>
+			<if test="Y17 != null  ">#{t.Y17},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

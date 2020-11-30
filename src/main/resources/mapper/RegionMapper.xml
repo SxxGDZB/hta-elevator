@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.RegionMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Region" id="RegionResult">
+        <result property="TID"    column="tID"    />
+        <result property="ID"    column="ID"    />
+        <result property="ParentID"    column="ParentID"    />
+        <result property="Name"    column="Name"    />
+        <result property="MergerName"    column="MergerName"    />
+        <result property="ShortName"    column="ShortName"    />
+        <result property="MergerShortName"    column="MergerShortName"    />
+        <result property="Level"    column="level"    />
+        <result property="LevelType"    column="LevelType"    />
+        <result property="ParentPath"    column="ParentPath"    />
+        <result property="TelCode"    column="TelCode"    />
+        <result property="ZipCode"    column="ZipCode"    />
+        <result property="Pinyin"    column="Pinyin"    />
+        <result property="Jianpin"    column="Jianpin"    />
+        <result property="FirstChar"    column="FirstChar"    />
+        <result property="Center"    column="Center"    />
+        <result property="Longitude"    column="Longitude"    />
+        <result property="Latitude"    column="Latitude"    />
+        <result property="Status"    column="Status"    />
+        <result property="Version"    column="Version"    />
+    </resultMap>
+	
+	<sql id="selectRegionVo">
+        select tID, ID, ParentID, Name, MergerName, ShortName, MergerShortName, level, LevelType, ParentPath, TelCode, ZipCode, Pinyin, Jianpin, FirstChar, Center, Longitude, Latitude, Status, Version from Region
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Region" resultMap="RegionResult">
+        <include refid="selectRegionVo"/>
+        <where>  
+            <if test="TID != null "> and tID = #{TID}</if>
+             <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="MergerName != null  and MergerName != '' "> and MergerName = #{MergerName}</if>
+             <if test="ShortName != null  and ShortName != '' "> and ShortName = #{ShortName}</if>
+             <if test="MergerShortName != null  and MergerShortName != '' "> and MergerShortName = #{MergerShortName}</if>
+             <if test="Level != null  and Level != '' "> and level = #{Level}</if>
+             <if test="LevelType != null "> and LevelType = #{LevelType}</if>
+             <if test="ParentPath != null  and ParentPath != '' "> and ParentPath = #{ParentPath}</if>
+             <if test="TelCode != null  and TelCode != '' "> and TelCode = #{TelCode}</if>
+             <if test="ZipCode != null  and ZipCode != '' "> and ZipCode = #{ZipCode}</if>
+             <if test="Pinyin != null  and Pinyin != '' "> and Pinyin = #{Pinyin}</if>
+             <if test="Jianpin != null  and Jianpin != '' "> and Jianpin = #{Jianpin}</if>
+             <if test="FirstChar != null  and FirstChar != '' "> and FirstChar = #{FirstChar}</if>
+             <if test="Center != null  and Center != '' "> and Center = #{Center}</if>
+             <if test="Longitude != null  and Longitude != '' "> and Longitude = #{Longitude}</if>
+             <if test="Latitude != null  and Latitude != '' "> and Latitude = #{Latitude}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="Version != null  and Version != '' "> and Version = #{Version}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Region" resultType="Integer">
+        select count(*)  from Region
+        <where>  
+            <if test="TID != null "> and tID = #{TID}</if>
+             <if test="ID != null "> and ID = #{ID}</if>
+             <if test="ParentID != null "> and ParentID = #{ParentID}</if>
+             <if test="Name != null  and Name != '' "> and Name = #{Name}</if>
+             <if test="MergerName != null  and MergerName != '' "> and MergerName = #{MergerName}</if>
+             <if test="ShortName != null  and ShortName != '' "> and ShortName = #{ShortName}</if>
+             <if test="MergerShortName != null  and MergerShortName != '' "> and MergerShortName = #{MergerShortName}</if>
+             <if test="Level != null  and Level != '' "> and level = #{Level}</if>
+             <if test="LevelType != null "> and LevelType = #{LevelType}</if>
+             <if test="ParentPath != null  and ParentPath != '' "> and ParentPath = #{ParentPath}</if>
+             <if test="TelCode != null  and TelCode != '' "> and TelCode = #{TelCode}</if>
+             <if test="ZipCode != null  and ZipCode != '' "> and ZipCode = #{ZipCode}</if>
+             <if test="Pinyin != null  and Pinyin != '' "> and Pinyin = #{Pinyin}</if>
+             <if test="Jianpin != null  and Jianpin != '' "> and Jianpin = #{Jianpin}</if>
+             <if test="FirstChar != null  and FirstChar != '' "> and FirstChar = #{FirstChar}</if>
+             <if test="Center != null  and Center != '' "> and Center = #{Center}</if>
+             <if test="Longitude != null  and Longitude != '' "> and Longitude = #{Longitude}</if>
+             <if test="Latitude != null  and Latitude != '' "> and Latitude = #{Latitude}</if>
+             <if test="Status != null "> and Status = #{Status}</if>
+             <if test="Version != null  and Version != '' "> and Version = #{Version}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="RegionResult">
+        <include refid="selectRegionVo"/>
+        where tID = #{TID}
+    </select>
+	<select id="selectRegionByName" parameterType="String" resultType="com.hta.elevator.domain.Region">
+        <include refid="selectRegionVo"/>
+        where Name = #{Name}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Region">
+        insert into Region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="TID != null  ">tID,</if>
+			<if test="ID != null  ">ID,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="MergerName != null  and MergerName != ''  ">MergerName,</if>
+			<if test="ShortName != null  and ShortName != ''  ">ShortName,</if>
+			<if test="MergerShortName != null  and MergerShortName != ''  ">MergerShortName,</if>
+			<if test="Level != null  and Level != ''  ">level,</if>
+			<if test="LevelType != null  ">LevelType,</if>
+			<if test="ParentPath != null  and ParentPath != ''  ">ParentPath,</if>
+			<if test="TelCode != null  and TelCode != ''  ">TelCode,</if>
+			<if test="ZipCode != null  and ZipCode != ''  ">ZipCode,</if>
+			<if test="Pinyin != null  and Pinyin != ''  ">Pinyin,</if>
+			<if test="Jianpin != null  and Jianpin != ''  ">Jianpin,</if>
+			<if test="FirstChar != null  and FirstChar != ''  ">FirstChar,</if>
+			<if test="Center != null  and Center != ''  ">Center,</if>
+			<if test="Longitude != null  and Longitude != ''  ">Longitude,</if>
+			<if test="Latitude != null  and Latitude != ''  ">Latitude,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="Version != null  and Version != ''  ">Version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="TID != null  ">#{TID},</if>
+			<if test="ID != null  ">#{ID},</if>
+			<if test="ParentID != null  ">#{ParentID},</if>
+			<if test="Name != null  and Name != ''  ">#{Name},</if>
+			<if test="MergerName != null  and MergerName != ''  ">#{MergerName},</if>
+			<if test="ShortName != null  and ShortName != ''  ">#{ShortName},</if>
+			<if test="MergerShortName != null  and MergerShortName != ''  ">#{MergerShortName},</if>
+			<if test="Level != null  and Level != ''  ">#{Level},</if>
+			<if test="LevelType != null  ">#{LevelType},</if>
+			<if test="ParentPath != null  and ParentPath != ''  ">#{ParentPath},</if>
+			<if test="TelCode != null  and TelCode != ''  ">#{TelCode},</if>
+			<if test="ZipCode != null  and ZipCode != ''  ">#{ZipCode},</if>
+			<if test="Pinyin != null  and Pinyin != ''  ">#{Pinyin},</if>
+			<if test="Jianpin != null  and Jianpin != ''  ">#{Jianpin},</if>
+			<if test="FirstChar != null  and FirstChar != ''  ">#{FirstChar},</if>
+			<if test="Center != null  and Center != ''  ">#{Center},</if>
+			<if test="Longitude != null  and Longitude != ''  ">#{Longitude},</if>
+			<if test="Latitude != null  and Latitude != ''  ">#{Latitude},</if>
+			<if test="Status != null  ">#{Status},</if>
+			<if test="Version != null  and Version != ''  ">#{Version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Region">
+        update Region
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ID != null  ">ID = #{ID},</if>
+            <if test="ParentID != null  ">ParentID = #{ParentID},</if>
+            <if test="Name != null  and Name != ''  ">Name = #{Name},</if>
+            <if test="MergerName != null  and MergerName != ''  ">MergerName = #{MergerName},</if>
+            <if test="ShortName != null  and ShortName != ''  ">ShortName = #{ShortName},</if>
+            <if test="MergerShortName != null  and MergerShortName != ''  ">MergerShortName = #{MergerShortName},</if>
+            <if test="Level != null  and Level != ''  ">level = #{Level},</if>
+            <if test="LevelType != null  ">LevelType = #{LevelType},</if>
+            <if test="ParentPath != null  and ParentPath != ''  ">ParentPath = #{ParentPath},</if>
+            <if test="TelCode != null  and TelCode != ''  ">TelCode = #{TelCode},</if>
+            <if test="ZipCode != null  and ZipCode != ''  ">ZipCode = #{ZipCode},</if>
+            <if test="Pinyin != null  and Pinyin != ''  ">Pinyin = #{Pinyin},</if>
+            <if test="Jianpin != null  and Jianpin != ''  ">Jianpin = #{Jianpin},</if>
+            <if test="FirstChar != null  and FirstChar != ''  ">FirstChar = #{FirstChar},</if>
+            <if test="Center != null  and Center != ''  ">Center = #{Center},</if>
+            <if test="Longitude != null  and Longitude != ''  ">Longitude = #{Longitude},</if>
+            <if test="Latitude != null  and Latitude != ''  ">Latitude = #{Latitude},</if>
+            <if test="Status != null  ">Status = #{Status},</if>
+            <if test="Version != null  and Version != ''  ">Version = #{Version},</if>
+        </trim>
+        where tID = #{TID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Region where tID = #{TID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Region where tID in 
+        <foreach item="TID" collection="array" open="(" separator="," close=")">
+            #{TID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Region">
+        insert into Region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="TID != null  ">tID,</if>
+			<if test="ID != null  ">ID,</if>
+			<if test="ParentID != null  ">ParentID,</if>
+			<if test="Name != null  and Name != ''  ">Name,</if>
+			<if test="MergerName != null  and MergerName != ''  ">MergerName,</if>
+			<if test="ShortName != null  and ShortName != ''  ">ShortName,</if>
+			<if test="MergerShortName != null  and MergerShortName != ''  ">MergerShortName,</if>
+			<if test="Level != null  and Level != ''  ">level,</if>
+			<if test="LevelType != null  ">LevelType,</if>
+			<if test="ParentPath != null  and ParentPath != ''  ">ParentPath,</if>
+			<if test="TelCode != null  and TelCode != ''  ">TelCode,</if>
+			<if test="ZipCode != null  and ZipCode != ''  ">ZipCode,</if>
+			<if test="Pinyin != null  and Pinyin != ''  ">Pinyin,</if>
+			<if test="Jianpin != null  and Jianpin != ''  ">Jianpin,</if>
+			<if test="FirstChar != null  and FirstChar != ''  ">FirstChar,</if>
+			<if test="Center != null  and Center != ''  ">Center,</if>
+			<if test="Longitude != null  and Longitude != ''  ">Longitude,</if>
+			<if test="Latitude != null  and Latitude != ''  ">Latitude,</if>
+			<if test="Status != null  ">Status,</if>
+			<if test="Version != null  and Version != ''  ">Version,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="TID != null  ">#{t.TID},</if>
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="ParentID != null  ">#{t.ParentID},</if>
+			<if test="Name != null  and Name != ''  ">#{t.Name},</if>
+			<if test="MergerName != null  and MergerName != ''  ">#{t.MergerName},</if>
+			<if test="ShortName != null  and ShortName != ''  ">#{t.ShortName},</if>
+			<if test="MergerShortName != null  and MergerShortName != ''  ">#{t.MergerShortName},</if>
+			<if test="Level != null  and Level != ''  ">#{t.Level},</if>
+			<if test="LevelType != null  ">#{t.LevelType},</if>
+			<if test="ParentPath != null  and ParentPath != ''  ">#{t.ParentPath},</if>
+			<if test="TelCode != null  and TelCode != ''  ">#{t.TelCode},</if>
+			<if test="ZipCode != null  and ZipCode != ''  ">#{t.ZipCode},</if>
+			<if test="Pinyin != null  and Pinyin != ''  ">#{t.Pinyin},</if>
+			<if test="Jianpin != null  and Jianpin != ''  ">#{t.Jianpin},</if>
+			<if test="FirstChar != null  and FirstChar != ''  ">#{t.FirstChar},</if>
+			<if test="Center != null  and Center != ''  ">#{t.Center},</if>
+			<if test="Longitude != null  and Longitude != ''  ">#{t.Longitude},</if>
+			<if test="Latitude != null  and Latitude != ''  ">#{t.Latitude},</if>
+			<if test="Status != null  ">#{t.Status},</if>
+			<if test="Version != null  and Version != ''  ">#{t.Version},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.LiftStatusMapper">
+    
+    <resultMap type="com.hta.elevator.domain.LiftStatus" id="LiftStatusResult">
+        <result property="Id"    column="Id"    />
+        <result property="LiftId"    column="LiftId"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="EMU"    column="EMU"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="DigitalData"    column="DigitalData"    />
+        <result property="AlarmData"    column="AlarmData"    />
+        <result property="AnalogData"    column="AnalogData"    />
+        <result property="LevNo"    column="LevNo"    />
+        <result property="Direction"    column="Direction"    />
+        <result property="Level"    column="Level"    />
+        <result property="DoorSw"    column="DoorSw"    />
+        <result property="CarDoorSw"    column="CarDoorSw"    />
+        <result property="DoorOpenLimite"    column="DoorOpenLimite"    />
+        <result property="DoorOpenBottom"    column="DoorOpenBottom"    />
+        <result property="FireSw"    column="FireSw"    />
+        <result property="EmuSw"    column="EmuSw"    />
+        <result property="PsEmu"    column="PsEmu"    />
+        <result property="Ps3P"    column="Ps3P"    />
+        <result property="Ps1P"    column="Ps1P"    />
+        <result property="PsCon"    column="PsCon"    />
+        <result property="Mainten"    column="Mainten"    />
+        <result property="Auto"    column="Auto"    />
+        <result property="Normal"    column="Normal"    />
+        <result property="Lock"    column="Lock"    />
+        <result property="CarCall"    column="CarCall"    />
+        <result property="AlarmBell"    column="AlarmBell"    />
+        <result property="OverLoad"    column="OverLoad"    />
+        <result property="Gprs"    column="Gprs"    />
+        <result property="Water"    column="Water"    />
+        <result property="Humity"    column="Humity"    />
+        <result property="Tempareture"    column="Tempareture"    />
+        <result property="EBV"    column="EBV"    />
+        <result property="EMUBV"    column="EMUBV"    />
+        <result property="FcNo"    column="FcNo"    />
+        <result property="MainCode"    column="MainCode"    />
+        <result property="SubCode"    column="SubCode"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="SourFC"    column="SourFC"    />
+        <result property="PassengeIn"    column="PassengeIn"    />
+        <result property="PassengeCnt"    column="PassengeCnt"    />
+        <result property="PassengeCallGgp"    column="PassengeCallGgp"    />
+        <result property="RideDis"    column="RideDis"    />
+        <result property="DoorswCnt"    column="DoorswCnt"    />
+        <result property="PassegerCnt"    column="PassegerCnt"    />
+        <result property="StartoverCnt"    column="StartoverCnt"    />
+        <result property="RunTime"    column="RunTime"    />
+        <result property="Vel"    column="Vel"    />
+    </resultMap>
+	
+	<sql id="selectLiftStatusVo">
+        select Id, LiftId, LiftBaseId, EMU, GroupId, DigitalData, AlarmData, AnalogData, LevNo, Direction, Level, DoorSw, CarDoorSw, DoorOpenLimite, DoorOpenBottom, FireSw, EmuSw, PsEmu, Ps3P, Ps1P, PsCon, Mainten, Auto, Normal, Lock, CarCall, AlarmBell, OverLoad, Gprs, Water, Humity, Tempareture, EBV, EMUBV, FcNo, MainCode, SubCode, CreateTime, SourFC, PassengeIn, PassengeCnt, PassengeCallGgp, RideDis, DoorswCnt, PassegerCnt, StartoverCnt, RunTime, Vel from LiftStatus
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.LiftStatus" resultMap="LiftStatusResult">
+        <include refid="selectLiftStatusVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="EMU != null "> and EMU = #{EMU}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="DigitalData != null "> and DigitalData = #{DigitalData}</if>
+             <if test="AlarmData != null "> and AlarmData = #{AlarmData}</if>
+             <if test="AnalogData != null "> and AnalogData = #{AnalogData}</if>
+             <if test="LevNo != null "> and LevNo = #{LevNo}</if>
+             <if test="Direction != null "> and Direction = #{Direction}</if>
+             <if test="Level != null "> and Level = #{Level}</if>
+             <if test="DoorSw != null "> and DoorSw = #{DoorSw}</if>
+             <if test="CarDoorSw != null "> and CarDoorSw = #{CarDoorSw}</if>
+             <if test="DoorOpenLimite != null "> and DoorOpenLimite = #{DoorOpenLimite}</if>
+             <if test="DoorOpenBottom != null "> and DoorOpenBottom = #{DoorOpenBottom}</if>
+             <if test="FireSw != null "> and FireSw = #{FireSw}</if>
+             <if test="EmuSw != null "> and EmuSw = #{EmuSw}</if>
+             <if test="PsEmu != null "> and PsEmu = #{PsEmu}</if>
+             <if test="Ps3P != null "> and Ps3P = #{Ps3P}</if>
+             <if test="Ps1P != null "> and Ps1P = #{Ps1P}</if>
+             <if test="PsCon != null "> and PsCon = #{PsCon}</if>
+             <if test="Mainten != null "> and Mainten = #{Mainten}</if>
+             <if test="Auto != null "> and Auto = #{Auto}</if>
+             <if test="Normal != null "> and Normal = #{Normal}</if>
+             <if test="Lock != null "> and Lock = #{Lock}</if>
+             <if test="CarCall != null "> and CarCall = #{CarCall}</if>
+             <if test="AlarmBell != null "> and AlarmBell = #{AlarmBell}</if>
+             <if test="OverLoad != null "> and OverLoad = #{OverLoad}</if>
+             <if test="Gprs != null "> and Gprs = #{Gprs}</if>
+             <if test="Water != null "> and Water = #{Water}</if>
+             <if test="Humity != null "> and Humity = #{Humity}</if>
+             <if test="Tempareture != null "> and Tempareture = #{Tempareture}</if>
+             <if test="EBV != null "> and EBV = #{EBV}</if>
+             <if test="EMUBV != null "> and EMUBV = #{EMUBV}</if>
+             <if test="FcNo != null "> and FcNo = #{FcNo}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="SourFC != null "> and SourFC = #{SourFC}</if>
+             <if test="PassengeIn != null "> and PassengeIn = #{PassengeIn}</if>
+             <if test="PassengeCnt != null "> and PassengeCnt = #{PassengeCnt}</if>
+             <if test="PassengeCallGgp != null "> and PassengeCallGgp = #{PassengeCallGgp}</if>
+             <if test="RideDis != null "> and RideDis = #{RideDis}</if>
+             <if test="DoorswCnt != null "> and DoorswCnt = #{DoorswCnt}</if>
+             <if test="PassegerCnt != null "> and PassegerCnt = #{PassegerCnt}</if>
+             <if test="StartoverCnt != null "> and StartoverCnt = #{StartoverCnt}</if>
+             <if test="RunTime != null "> and RunTime = #{RunTime}</if>
+             <if test="Vel != null "> and Vel = #{Vel}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.LiftStatus" resultType="Integer">
+        select count(*)  from LiftStatus
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftId != null "> and LiftId = #{LiftId}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="EMU != null "> and EMU = #{EMU}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="DigitalData != null "> and DigitalData = #{DigitalData}</if>
+             <if test="AlarmData != null "> and AlarmData = #{AlarmData}</if>
+             <if test="AnalogData != null "> and AnalogData = #{AnalogData}</if>
+             <if test="LevNo != null "> and LevNo = #{LevNo}</if>
+             <if test="Direction != null "> and Direction = #{Direction}</if>
+             <if test="Level != null "> and Level = #{Level}</if>
+             <if test="DoorSw != null "> and DoorSw = #{DoorSw}</if>
+             <if test="CarDoorSw != null "> and CarDoorSw = #{CarDoorSw}</if>
+             <if test="DoorOpenLimite != null "> and DoorOpenLimite = #{DoorOpenLimite}</if>
+             <if test="DoorOpenBottom != null "> and DoorOpenBottom = #{DoorOpenBottom}</if>
+             <if test="FireSw != null "> and FireSw = #{FireSw}</if>
+             <if test="EmuSw != null "> and EmuSw = #{EmuSw}</if>
+             <if test="PsEmu != null "> and PsEmu = #{PsEmu}</if>
+             <if test="Ps3P != null "> and Ps3P = #{Ps3P}</if>
+             <if test="Ps1P != null "> and Ps1P = #{Ps1P}</if>
+             <if test="PsCon != null "> and PsCon = #{PsCon}</if>
+             <if test="Mainten != null "> and Mainten = #{Mainten}</if>
+             <if test="Auto != null "> and Auto = #{Auto}</if>
+             <if test="Normal != null "> and Normal = #{Normal}</if>
+             <if test="Lock != null "> and Lock = #{Lock}</if>
+             <if test="CarCall != null "> and CarCall = #{CarCall}</if>
+             <if test="AlarmBell != null "> and AlarmBell = #{AlarmBell}</if>
+             <if test="OverLoad != null "> and OverLoad = #{OverLoad}</if>
+             <if test="Gprs != null "> and Gprs = #{Gprs}</if>
+             <if test="Water != null "> and Water = #{Water}</if>
+             <if test="Humity != null "> and Humity = #{Humity}</if>
+             <if test="Tempareture != null "> and Tempareture = #{Tempareture}</if>
+             <if test="EBV != null "> and EBV = #{EBV}</if>
+             <if test="EMUBV != null "> and EMUBV = #{EMUBV}</if>
+             <if test="FcNo != null "> and FcNo = #{FcNo}</if>
+             <if test="MainCode != null "> and MainCode = #{MainCode}</if>
+             <if test="SubCode != null "> and SubCode = #{SubCode}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="SourFC != null "> and SourFC = #{SourFC}</if>
+             <if test="PassengeIn != null "> and PassengeIn = #{PassengeIn}</if>
+             <if test="PassengeCnt != null "> and PassengeCnt = #{PassengeCnt}</if>
+             <if test="PassengeCallGgp != null "> and PassengeCallGgp = #{PassengeCallGgp}</if>
+             <if test="RideDis != null "> and RideDis = #{RideDis}</if>
+             <if test="DoorswCnt != null "> and DoorswCnt = #{DoorswCnt}</if>
+             <if test="PassegerCnt != null "> and PassegerCnt = #{PassegerCnt}</if>
+             <if test="StartoverCnt != null "> and StartoverCnt = #{StartoverCnt}</if>
+             <if test="RunTime != null "> and RunTime = #{RunTime}</if>
+             <if test="Vel != null "> and Vel = #{Vel}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="LiftStatusResult">
+        <include refid="selectLiftStatusVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.LiftStatus">
+        insert into LiftStatus
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="EMU != null  ">EMU,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="DigitalData != null  ">DigitalData,</if>
+			<if test="AlarmData != null  ">AlarmData,</if>
+			<if test="AnalogData != null  ">AnalogData,</if>
+			<if test="LevNo != null  ">LevNo,</if>
+			<if test="Direction != null  ">Direction,</if>
+			<if test="Level != null  ">Level,</if>
+			<if test="DoorSw != null  ">DoorSw,</if>
+			<if test="CarDoorSw != null  ">CarDoorSw,</if>
+			<if test="DoorOpenLimite != null  ">DoorOpenLimite,</if>
+			<if test="DoorOpenBottom != null  ">DoorOpenBottom,</if>
+			<if test="FireSw != null  ">FireSw,</if>
+			<if test="EmuSw != null  ">EmuSw,</if>
+			<if test="PsEmu != null  ">PsEmu,</if>
+			<if test="Ps3P != null  ">Ps3P,</if>
+			<if test="Ps1P != null  ">Ps1P,</if>
+			<if test="PsCon != null  ">PsCon,</if>
+			<if test="Mainten != null  ">Mainten,</if>
+			<if test="Auto != null  ">Auto,</if>
+			<if test="Normal != null  ">Normal,</if>
+			<if test="Lock != null  ">Lock,</if>
+			<if test="CarCall != null  ">CarCall,</if>
+			<if test="AlarmBell != null  ">AlarmBell,</if>
+			<if test="OverLoad != null  ">OverLoad,</if>
+			<if test="Gprs != null  ">Gprs,</if>
+			<if test="Water != null  ">Water,</if>
+			<if test="Humity != null  ">Humity,</if>
+			<if test="Tempareture != null  ">Tempareture,</if>
+			<if test="EBV != null  ">EBV,</if>
+			<if test="EMUBV != null  ">EMUBV,</if>
+			<if test="FcNo != null  ">FcNo,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="SourFC != null  ">SourFC,</if>
+			<if test="PassengeIn != null  ">PassengeIn,</if>
+			<if test="PassengeCnt != null  ">PassengeCnt,</if>
+			<if test="PassengeCallGgp != null  ">PassengeCallGgp,</if>
+			<if test="RideDis != null  ">RideDis,</if>
+			<if test="DoorswCnt != null  ">DoorswCnt,</if>
+			<if test="PassegerCnt != null  ">PassegerCnt,</if>
+			<if test="StartoverCnt != null  ">StartoverCnt,</if>
+			<if test="RunTime != null  ">RunTime,</if>
+			<if test="Vel != null  ">Vel,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="LiftId != null  ">#{LiftId},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="EMU != null  ">#{EMU},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="DigitalData != null  ">#{DigitalData},</if>
+			<if test="AlarmData != null  ">#{AlarmData},</if>
+			<if test="AnalogData != null  ">#{AnalogData},</if>
+			<if test="LevNo != null  ">#{LevNo},</if>
+			<if test="Direction != null  ">#{Direction},</if>
+			<if test="Level != null  ">#{Level},</if>
+			<if test="DoorSw != null  ">#{DoorSw},</if>
+			<if test="CarDoorSw != null  ">#{CarDoorSw},</if>
+			<if test="DoorOpenLimite != null  ">#{DoorOpenLimite},</if>
+			<if test="DoorOpenBottom != null  ">#{DoorOpenBottom},</if>
+			<if test="FireSw != null  ">#{FireSw},</if>
+			<if test="EmuSw != null  ">#{EmuSw},</if>
+			<if test="PsEmu != null  ">#{PsEmu},</if>
+			<if test="Ps3P != null  ">#{Ps3P},</if>
+			<if test="Ps1P != null  ">#{Ps1P},</if>
+			<if test="PsCon != null  ">#{PsCon},</if>
+			<if test="Mainten != null  ">#{Mainten},</if>
+			<if test="Auto != null  ">#{Auto},</if>
+			<if test="Normal != null  ">#{Normal},</if>
+			<if test="Lock != null  ">#{Lock},</if>
+			<if test="CarCall != null  ">#{CarCall},</if>
+			<if test="AlarmBell != null  ">#{AlarmBell},</if>
+			<if test="OverLoad != null  ">#{OverLoad},</if>
+			<if test="Gprs != null  ">#{Gprs},</if>
+			<if test="Water != null  ">#{Water},</if>
+			<if test="Humity != null  ">#{Humity},</if>
+			<if test="Tempareture != null  ">#{Tempareture},</if>
+			<if test="EBV != null  ">#{EBV},</if>
+			<if test="EMUBV != null  ">#{EMUBV},</if>
+			<if test="FcNo != null  ">#{FcNo},</if>
+			<if test="MainCode != null  ">#{MainCode},</if>
+			<if test="SubCode != null  ">#{SubCode},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="SourFC != null  ">#{SourFC},</if>
+			<if test="PassengeIn != null  ">#{PassengeIn},</if>
+			<if test="PassengeCnt != null  ">#{PassengeCnt},</if>
+			<if test="PassengeCallGgp != null  ">#{PassengeCallGgp},</if>
+			<if test="RideDis != null  ">#{RideDis},</if>
+			<if test="DoorswCnt != null  ">#{DoorswCnt},</if>
+			<if test="PassegerCnt != null  ">#{PassegerCnt},</if>
+			<if test="StartoverCnt != null  ">#{StartoverCnt},</if>
+			<if test="RunTime != null  ">#{RunTime},</if>
+			<if test="Vel != null  ">#{Vel},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.LiftStatus">
+        update LiftStatus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftId != null  ">LiftId = #{LiftId},</if>
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="EMU != null  ">EMU = #{EMU},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="DigitalData != null  ">DigitalData = #{DigitalData},</if>
+            <if test="AlarmData != null  ">AlarmData = #{AlarmData},</if>
+            <if test="AnalogData != null  ">AnalogData = #{AnalogData},</if>
+            <if test="LevNo != null  ">LevNo = #{LevNo},</if>
+            <if test="Direction != null  ">Direction = #{Direction},</if>
+            <if test="Level != null  ">Level = #{Level},</if>
+            <if test="DoorSw != null  ">DoorSw = #{DoorSw},</if>
+            <if test="CarDoorSw != null  ">CarDoorSw = #{CarDoorSw},</if>
+            <if test="DoorOpenLimite != null  ">DoorOpenLimite = #{DoorOpenLimite},</if>
+            <if test="DoorOpenBottom != null  ">DoorOpenBottom = #{DoorOpenBottom},</if>
+            <if test="FireSw != null  ">FireSw = #{FireSw},</if>
+            <if test="EmuSw != null  ">EmuSw = #{EmuSw},</if>
+            <if test="PsEmu != null  ">PsEmu = #{PsEmu},</if>
+            <if test="Ps3P != null  ">Ps3P = #{Ps3P},</if>
+            <if test="Ps1P != null  ">Ps1P = #{Ps1P},</if>
+            <if test="PsCon != null  ">PsCon = #{PsCon},</if>
+            <if test="Mainten != null  ">Mainten = #{Mainten},</if>
+            <if test="Auto != null  ">Auto = #{Auto},</if>
+            <if test="Normal != null  ">Normal = #{Normal},</if>
+            <if test="Lock != null  ">Lock = #{Lock},</if>
+            <if test="CarCall != null  ">CarCall = #{CarCall},</if>
+            <if test="AlarmBell != null  ">AlarmBell = #{AlarmBell},</if>
+            <if test="OverLoad != null  ">OverLoad = #{OverLoad},</if>
+            <if test="Gprs != null  ">Gprs = #{Gprs},</if>
+            <if test="Water != null  ">Water = #{Water},</if>
+            <if test="Humity != null  ">Humity = #{Humity},</if>
+            <if test="Tempareture != null  ">Tempareture = #{Tempareture},</if>
+            <if test="EBV != null  ">EBV = #{EBV},</if>
+            <if test="EMUBV != null  ">EMUBV = #{EMUBV},</if>
+            <if test="FcNo != null  ">FcNo = #{FcNo},</if>
+            <if test="MainCode != null  ">MainCode = #{MainCode},</if>
+            <if test="SubCode != null  ">SubCode = #{SubCode},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="SourFC != null  ">SourFC = #{SourFC},</if>
+            <if test="PassengeIn != null  ">PassengeIn = #{PassengeIn},</if>
+            <if test="PassengeCnt != null  ">PassengeCnt = #{PassengeCnt},</if>
+            <if test="PassengeCallGgp != null  ">PassengeCallGgp = #{PassengeCallGgp},</if>
+            <if test="RideDis != null  ">RideDis = #{RideDis},</if>
+            <if test="DoorswCnt != null  ">DoorswCnt = #{DoorswCnt},</if>
+            <if test="PassegerCnt != null  ">PassegerCnt = #{PassegerCnt},</if>
+            <if test="StartoverCnt != null  ">StartoverCnt = #{StartoverCnt},</if>
+            <if test="RunTime != null  ">RunTime = #{RunTime},</if>
+            <if test="Vel != null  ">Vel = #{Vel},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from LiftStatus where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from LiftStatus where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.LiftStatus">
+        insert into LiftStatus
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftId != null  ">LiftId,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="EMU != null  ">EMU,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="DigitalData != null  ">DigitalData,</if>
+			<if test="AlarmData != null  ">AlarmData,</if>
+			<if test="AnalogData != null  ">AnalogData,</if>
+			<if test="LevNo != null  ">LevNo,</if>
+			<if test="Direction != null  ">Direction,</if>
+			<if test="Level != null  ">Level,</if>
+			<if test="DoorSw != null  ">DoorSw,</if>
+			<if test="CarDoorSw != null  ">CarDoorSw,</if>
+			<if test="DoorOpenLimite != null  ">DoorOpenLimite,</if>
+			<if test="DoorOpenBottom != null  ">DoorOpenBottom,</if>
+			<if test="FireSw != null  ">FireSw,</if>
+			<if test="EmuSw != null  ">EmuSw,</if>
+			<if test="PsEmu != null  ">PsEmu,</if>
+			<if test="Ps3P != null  ">Ps3P,</if>
+			<if test="Ps1P != null  ">Ps1P,</if>
+			<if test="PsCon != null  ">PsCon,</if>
+			<if test="Mainten != null  ">Mainten,</if>
+			<if test="Auto != null  ">Auto,</if>
+			<if test="Normal != null  ">Normal,</if>
+			<if test="Lock != null  ">Lock,</if>
+			<if test="CarCall != null  ">CarCall,</if>
+			<if test="AlarmBell != null  ">AlarmBell,</if>
+			<if test="OverLoad != null  ">OverLoad,</if>
+			<if test="Gprs != null  ">Gprs,</if>
+			<if test="Water != null  ">Water,</if>
+			<if test="Humity != null  ">Humity,</if>
+			<if test="Tempareture != null  ">Tempareture,</if>
+			<if test="EBV != null  ">EBV,</if>
+			<if test="EMUBV != null  ">EMUBV,</if>
+			<if test="FcNo != null  ">FcNo,</if>
+			<if test="MainCode != null  ">MainCode,</if>
+			<if test="SubCode != null  ">SubCode,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="SourFC != null  ">SourFC,</if>
+			<if test="PassengeIn != null  ">PassengeIn,</if>
+			<if test="PassengeCnt != null  ">PassengeCnt,</if>
+			<if test="PassengeCallGgp != null  ">PassengeCallGgp,</if>
+			<if test="RideDis != null  ">RideDis,</if>
+			<if test="DoorswCnt != null  ">DoorswCnt,</if>
+			<if test="PassegerCnt != null  ">PassegerCnt,</if>
+			<if test="StartoverCnt != null  ">StartoverCnt,</if>
+			<if test="RunTime != null  ">RunTime,</if>
+			<if test="Vel != null  ">Vel,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="LiftId != null  ">#{t.LiftId},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="EMU != null  ">#{t.EMU},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="DigitalData != null  ">#{t.DigitalData},</if>
+			<if test="AlarmData != null  ">#{t.AlarmData},</if>
+			<if test="AnalogData != null  ">#{t.AnalogData},</if>
+			<if test="LevNo != null  ">#{t.LevNo},</if>
+			<if test="Direction != null  ">#{t.Direction},</if>
+			<if test="Level != null  ">#{t.Level},</if>
+			<if test="DoorSw != null  ">#{t.DoorSw},</if>
+			<if test="CarDoorSw != null  ">#{t.CarDoorSw},</if>
+			<if test="DoorOpenLimite != null  ">#{t.DoorOpenLimite},</if>
+			<if test="DoorOpenBottom != null  ">#{t.DoorOpenBottom},</if>
+			<if test="FireSw != null  ">#{t.FireSw},</if>
+			<if test="EmuSw != null  ">#{t.EmuSw},</if>
+			<if test="PsEmu != null  ">#{t.PsEmu},</if>
+			<if test="Ps3P != null  ">#{t.Ps3P},</if>
+			<if test="Ps1P != null  ">#{t.Ps1P},</if>
+			<if test="PsCon != null  ">#{t.PsCon},</if>
+			<if test="Mainten != null  ">#{t.Mainten},</if>
+			<if test="Auto != null  ">#{t.Auto},</if>
+			<if test="Normal != null  ">#{t.Normal},</if>
+			<if test="Lock != null  ">#{t.Lock},</if>
+			<if test="CarCall != null  ">#{t.CarCall},</if>
+			<if test="AlarmBell != null  ">#{t.AlarmBell},</if>
+			<if test="OverLoad != null  ">#{t.OverLoad},</if>
+			<if test="Gprs != null  ">#{t.Gprs},</if>
+			<if test="Water != null  ">#{t.Water},</if>
+			<if test="Humity != null  ">#{t.Humity},</if>
+			<if test="Tempareture != null  ">#{t.Tempareture},</if>
+			<if test="EBV != null  ">#{t.EBV},</if>
+			<if test="EMUBV != null  ">#{t.EMUBV},</if>
+			<if test="FcNo != null  ">#{t.FcNo},</if>
+			<if test="MainCode != null  ">#{t.MainCode},</if>
+			<if test="SubCode != null  ">#{t.SubCode},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="SourFC != null  ">#{t.SourFC},</if>
+			<if test="PassengeIn != null  ">#{t.PassengeIn},</if>
+			<if test="PassengeCnt != null  ">#{t.PassengeCnt},</if>
+			<if test="PassengeCallGgp != null  ">#{t.PassengeCallGgp},</if>
+			<if test="RideDis != null  ">#{t.RideDis},</if>
+			<if test="DoorswCnt != null  ">#{t.DoorswCnt},</if>
+			<if test="PassegerCnt != null  ">#{t.PassegerCnt},</if>
+			<if test="StartoverCnt != null  ">#{t.StartoverCnt},</if>
+			<if test="RunTime != null  ">#{t.RunTime},</if>
+			<if test="Vel != null  ">#{t.Vel},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

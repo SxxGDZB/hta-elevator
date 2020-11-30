@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.LiftFloorMapper">
+    
+    <resultMap type="com.hta.elevator.domain.LiftFloor" id="LiftFloorResult">
+        <result property="LiftID"    column="LiftID"    />
+        <result property="LevNo"    column="LevNo"    />
+        <result property="FloorView"    column="FloorView"    />
+        <result property="IsBaseStation"    column="IsBaseStation"    />
+    </resultMap>
+	
+	<sql id="selectLiftFloorVo">
+        select LiftID, LevNo, FloorView, IsBaseStation from LiftFloor
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.LiftFloor" resultMap="LiftFloorResult">
+        <include refid="selectLiftFloorVo"/>
+        <where>  
+            <if test="LiftID != null "> and LiftID = #{LiftID}</if>
+             <if test="LevNo != null "> and LevNo = #{LevNo}</if>
+             <if test="FloorView != null  and FloorView != '' "> and FloorView = #{FloorView}</if>
+             <if test="IsBaseStation != null "> and IsBaseStation = #{IsBaseStation}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.LiftFloor" resultType="Integer">
+        select count(*)  from LiftFloor
+        <where>  
+            <if test="LiftID != null "> and LiftID = #{LiftID}</if>
+             <if test="LevNo != null "> and LevNo = #{LevNo}</if>
+             <if test="FloorView != null  and FloorView != '' "> and FloorView = #{FloorView}</if>
+             <if test="IsBaseStation != null "> and IsBaseStation = #{IsBaseStation}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="LiftFloorResult">
+        <include refid="selectLiftFloorVo"/>
+        where LiftID = #{LiftID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.LiftFloor">
+        insert into LiftFloor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftID != null  ">LiftID,</if>
+			<if test="LevNo != null  ">LevNo,</if>
+			<if test="FloorView != null  and FloorView != ''  ">FloorView,</if>
+			<if test="IsBaseStation != null  ">IsBaseStation,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftID != null  ">#{LiftID},</if>
+			<if test="LevNo != null  ">#{LevNo},</if>
+			<if test="FloorView != null  and FloorView != ''  ">#{FloorView},</if>
+			<if test="IsBaseStation != null  ">#{IsBaseStation},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.LiftFloor">
+        update LiftFloor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LevNo != null  ">LevNo = #{LevNo},</if>
+            <if test="FloorView != null  and FloorView != ''  ">FloorView = #{FloorView},</if>
+            <if test="IsBaseStation != null  ">IsBaseStation = #{IsBaseStation},</if>
+        </trim>
+        where LiftID = #{LiftID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from LiftFloor where LiftID = #{LiftID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from LiftFloor where LiftID in 
+        <foreach item="LiftID" collection="array" open="(" separator="," close=")">
+            #{LiftID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.LiftFloor">
+        insert into LiftFloor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LiftID != null  ">LiftID,</if>
+			<if test="LevNo != null  ">LevNo,</if>
+			<if test="FloorView != null  and FloorView != ''  ">FloorView,</if>
+			<if test="IsBaseStation != null  ">IsBaseStation,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LiftID != null  ">#{t.LiftID},</if>
+			<if test="LevNo != null  ">#{t.LevNo},</if>
+			<if test="FloorView != null  and FloorView != ''  ">#{t.FloorView},</if>
+			<if test="IsBaseStation != null  ">#{t.IsBaseStation},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

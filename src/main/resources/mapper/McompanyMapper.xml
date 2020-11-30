@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.McompanyMapper">
+    
+    <resultMap type="com.hta.elevator.domain.Mcompany" id="McompanyResult">
+        <result property="Id"    column="Id"    />
+        <result property="McomName"    column="McomName"    />
+        <result property="CreditID"    column="CreditID"    />
+        <result property="Province"    column="Province"    />
+        <result property="City"    column="City"    />
+        <result property="Area"    column="Area"    />
+        <result property="OfficeAddr"    column="OfficeAddr"    />
+        <result property="OfficePhone"    column="OfficePhone"    />
+        <result property="Contacts1"    column="Contacts1"    />
+        <result property="Phone1"    column="Phone1"    />
+        <result property="Contacts2"    column="Contacts2"    />
+        <result property="Phone2"    column="Phone2"    />
+        <result property="GroupId"    column="GroupId"    />
+        <result property="CreateId"    column="CreateId"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateId"    column="UpdateId"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="IsDelete"    column="IsDelete"    />
+    </resultMap>
+	
+	<sql id="selectMcompanyVo">
+        select Id, McomName, CreditID, Province, City, Area, OfficeAddr, OfficePhone, Contacts1, Phone1, Contacts2, Phone2, GroupId, CreateId, CreateTime, UpdateId, UpdateTime, IsDelete from Mcompany
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.Mcompany" resultMap="McompanyResult">
+        <include refid="selectMcompanyVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="McomName != null  and McomName != '' "> and McomName = #{McomName}</if>
+             <if test="CreditID != null  and CreditID != '' "> and CreditID = #{CreditID}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="OfficeAddr != null  and OfficeAddr != '' "> and OfficeAddr = #{OfficeAddr}</if>
+             <if test="OfficePhone != null  and OfficePhone != '' "> and OfficePhone = #{OfficePhone}</if>
+             <if test="Contacts1 != null  and Contacts1 != '' "> and Contacts1 = #{Contacts1}</if>
+             <if test="Phone1 != null  and Phone1 != '' "> and Phone1 = #{Phone1}</if>
+             <if test="Contacts2 != null  and Contacts2 != '' "> and Contacts2 = #{Contacts2}</if>
+             <if test="Phone2 != null  and Phone2 != '' "> and Phone2 = #{Phone2}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.Mcompany" resultType="Integer">
+        select count(*)  from Mcompany
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="McomName != null  and McomName != '' "> and McomName = #{McomName}</if>
+             <if test="CreditID != null  and CreditID != '' "> and CreditID = #{CreditID}</if>
+             <if test="Province != null  and Province != '' "> and Province = #{Province}</if>
+             <if test="City != null  and City != '' "> and City = #{City}</if>
+             <if test="Area != null  and Area != '' "> and Area = #{Area}</if>
+             <if test="OfficeAddr != null  and OfficeAddr != '' "> and OfficeAddr = #{OfficeAddr}</if>
+             <if test="OfficePhone != null  and OfficePhone != '' "> and OfficePhone = #{OfficePhone}</if>
+             <if test="Contacts1 != null  and Contacts1 != '' "> and Contacts1 = #{Contacts1}</if>
+             <if test="Phone1 != null  and Phone1 != '' "> and Phone1 = #{Phone1}</if>
+             <if test="Contacts2 != null  and Contacts2 != '' "> and Contacts2 = #{Contacts2}</if>
+             <if test="Phone2 != null  and Phone2 != '' "> and Phone2 = #{Phone2}</if>
+             <if test="GroupId != null "> and GroupId = #{GroupId}</if>
+             <if test="CreateId != null "> and CreateId = #{CreateId}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateId != null "> and UpdateId = #{UpdateId}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="IsDelete != null "> and IsDelete = #{IsDelete}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="McompanyResult">
+        <include refid="selectMcompanyVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.Mcompany">
+        insert into Mcompany
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="McomName != null  and McomName != ''  ">McomName,</if>
+			<if test="CreditID != null  and CreditID != ''  ">CreditID,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="OfficeAddr != null  and OfficeAddr != ''  ">OfficeAddr,</if>
+			<if test="OfficePhone != null  and OfficePhone != ''  ">OfficePhone,</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1,</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">Phone1,</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2,</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">Phone2,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="McomName != null  and McomName != ''  ">#{McomName},</if>
+			<if test="CreditID != null  and CreditID != ''  ">#{CreditID},</if>
+			<if test="Province != null  and Province != ''  ">#{Province},</if>
+			<if test="City != null  and City != ''  ">#{City},</if>
+			<if test="Area != null  and Area != ''  ">#{Area},</if>
+			<if test="OfficeAddr != null  and OfficeAddr != ''  ">#{OfficeAddr},</if>
+			<if test="OfficePhone != null  and OfficePhone != ''  ">#{OfficePhone},</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">#{Contacts1},</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">#{Phone1},</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">#{Contacts2},</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">#{Phone2},</if>
+			<if test="GroupId != null  ">#{GroupId},</if>
+			<if test="CreateId != null  ">#{CreateId},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateId != null  ">#{UpdateId},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="IsDelete != null  ">#{IsDelete},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.Mcompany">
+        update Mcompany
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="McomName != null  and McomName != ''  ">McomName = #{McomName},</if>
+            <if test="CreditID != null  and CreditID != ''  ">CreditID = #{CreditID},</if>
+            <if test="Province != null  and Province != ''  ">Province = #{Province},</if>
+            <if test="City != null  and City != ''  ">City = #{City},</if>
+            <if test="Area != null  and Area != ''  ">Area = #{Area},</if>
+            <if test="OfficeAddr != null  and OfficeAddr != ''  ">OfficeAddr = #{OfficeAddr},</if>
+            <if test="OfficePhone != null  and OfficePhone != ''  ">OfficePhone = #{OfficePhone},</if>
+            <if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1 = #{Contacts1},</if>
+            <if test="Phone1 != null  and Phone1 != ''  ">Phone1 = #{Phone1},</if>
+            <if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2 = #{Contacts2},</if>
+            <if test="Phone2 != null  and Phone2 != ''  ">Phone2 = #{Phone2},</if>
+            <if test="GroupId != null  ">GroupId = #{GroupId},</if>
+            <if test="CreateId != null  ">CreateId = #{CreateId},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateId != null  ">UpdateId = #{UpdateId},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="IsDelete != null  ">IsDelete = #{IsDelete},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from Mcompany where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from Mcompany where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.Mcompany">
+        insert into Mcompany
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="McomName != null  and McomName != ''  ">McomName,</if>
+			<if test="CreditID != null  and CreditID != ''  ">CreditID,</if>
+			<if test="Province != null  and Province != ''  ">Province,</if>
+			<if test="City != null  and City != ''  ">City,</if>
+			<if test="Area != null  and Area != ''  ">Area,</if>
+			<if test="OfficeAddr != null  and OfficeAddr != ''  ">OfficeAddr,</if>
+			<if test="OfficePhone != null  and OfficePhone != ''  ">OfficePhone,</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">Contacts1,</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">Phone1,</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">Contacts2,</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">Phone2,</if>
+			<if test="GroupId != null  ">GroupId,</if>
+			<if test="CreateId != null  ">CreateId,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateId != null  ">UpdateId,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="IsDelete != null  ">IsDelete,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="McomName != null  and McomName != ''  ">#{t.McomName},</if>
+			<if test="CreditID != null  and CreditID != ''  ">#{t.CreditID},</if>
+			<if test="Province != null  and Province != ''  ">#{t.Province},</if>
+			<if test="City != null  and City != ''  ">#{t.City},</if>
+			<if test="Area != null  and Area != ''  ">#{t.Area},</if>
+			<if test="OfficeAddr != null  and OfficeAddr != ''  ">#{t.OfficeAddr},</if>
+			<if test="OfficePhone != null  and OfficePhone != ''  ">#{t.OfficePhone},</if>
+			<if test="Contacts1 != null  and Contacts1 != ''  ">#{t.Contacts1},</if>
+			<if test="Phone1 != null  and Phone1 != ''  ">#{t.Phone1},</if>
+			<if test="Contacts2 != null  and Contacts2 != ''  ">#{t.Contacts2},</if>
+			<if test="Phone2 != null  and Phone2 != ''  ">#{t.Phone2},</if>
+			<if test="GroupId != null  ">#{t.GroupId},</if>
+			<if test="CreateId != null  ">#{t.CreateId},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateId != null  ">#{t.UpdateId},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="IsDelete != null  ">#{t.IsDelete},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

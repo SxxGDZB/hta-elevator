@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.SubscribeLiftMapper">
+    
+    <resultMap type="com.hta.elevator.domain.SubscribeLift" id="SubscribeLiftResult">
+        <result property="UserID"    column="UserID"    />
+        <result property="LiftID"    column="LiftID"    />
+        <result property="CreateTime"    column="CreateTime"    />
+    </resultMap>
+	
+	<sql id="selectSubscribeLiftVo">
+        select UserID, LiftID, CreateTime from SubscribeLift
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.SubscribeLift" resultMap="SubscribeLiftResult">
+        <include refid="selectSubscribeLiftVo"/>
+        <where>  
+            <if test="UserID != null "> and UserID = #{UserID}</if>
+             <if test="LiftID != null "> and LiftID = #{LiftID}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.SubscribeLift" resultType="Integer">
+        select count(*)  from SubscribeLift
+        <where>  
+            <if test="UserID != null "> and UserID = #{UserID}</if>
+             <if test="LiftID != null "> and LiftID = #{LiftID}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="SubscribeLiftResult">
+        <include refid="selectSubscribeLiftVo"/>
+        where UserID = #{UserID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.SubscribeLift">
+        insert into SubscribeLift
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserID != null  ">UserID,</if>
+			<if test="LiftID != null  ">LiftID,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserID != null  ">#{UserID},</if>
+			<if test="LiftID != null  ">#{LiftID},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.SubscribeLift">
+        update SubscribeLift
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftID != null  ">LiftID = #{LiftID},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+        </trim>
+        where UserID = #{UserID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from SubscribeLift where UserID = #{UserID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from SubscribeLift where UserID in 
+        <foreach item="UserID" collection="array" open="(" separator="," close=")">
+            #{UserID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.SubscribeLift">
+        insert into SubscribeLift
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="UserID != null  ">UserID,</if>
+			<if test="LiftID != null  ">LiftID,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="UserID != null  ">#{t.UserID},</if>
+			<if test="LiftID != null  ">#{t.LiftID},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

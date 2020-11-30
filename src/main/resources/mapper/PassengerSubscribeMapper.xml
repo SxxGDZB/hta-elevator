@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.PassengerSubscribeMapper">
+    
+    <resultMap type="com.hta.elevator.domain.PassengerSubscribe" id="PassengerSubscribeResult">
+        <result property="Id"    column="Id"    />
+        <result property="LiftBaseId"    column="LiftBaseId"    />
+        <result property="Subscribe"    column="Subscribe"    />
+        <result property="SubscribeTime"    column="SubscribeTime"    />
+        <result property="UnsubscribeTime"    column="UnsubscribeTime"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+    </resultMap>
+	
+	<sql id="selectPassengerSubscribeVo">
+        select Id, LiftBaseId, Subscribe, SubscribeTime, UnsubscribeTime, CreateTime, UpdateTime from PassengerSubscribe
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.PassengerSubscribe" resultMap="PassengerSubscribeResult">
+        <include refid="selectPassengerSubscribeVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="Subscribe != null "> and Subscribe = #{Subscribe}</if>
+             <if test="SubscribeTime != null "> and SubscribeTime = #{SubscribeTime}</if>
+             <if test="UnsubscribeTime != null "> and UnsubscribeTime = #{UnsubscribeTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.PassengerSubscribe" resultType="Integer">
+        select count(*)  from PassengerSubscribe
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+             <if test="LiftBaseId != null "> and LiftBaseId = #{LiftBaseId}</if>
+             <if test="Subscribe != null "> and Subscribe = #{Subscribe}</if>
+             <if test="SubscribeTime != null "> and SubscribeTime = #{SubscribeTime}</if>
+             <if test="UnsubscribeTime != null "> and UnsubscribeTime = #{UnsubscribeTime}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="PassengerSubscribeResult">
+        <include refid="selectPassengerSubscribeVo"/>
+        where Id = #{Id}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.PassengerSubscribe">
+        insert into PassengerSubscribe
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="Subscribe != null  ">Subscribe,</if>
+			<if test="SubscribeTime != null  ">SubscribeTime,</if>
+			<if test="UnsubscribeTime != null  ">UnsubscribeTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{Id},</if>
+			<if test="LiftBaseId != null  ">#{LiftBaseId},</if>
+			<if test="Subscribe != null  ">#{Subscribe},</if>
+			<if test="SubscribeTime != null  ">#{SubscribeTime},</if>
+			<if test="UnsubscribeTime != null  ">#{UnsubscribeTime},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.PassengerSubscribe">
+        update PassengerSubscribe
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LiftBaseId != null  ">LiftBaseId = #{LiftBaseId},</if>
+            <if test="Subscribe != null  ">Subscribe = #{Subscribe},</if>
+            <if test="SubscribeTime != null  ">SubscribeTime = #{SubscribeTime},</if>
+            <if test="UnsubscribeTime != null  ">UnsubscribeTime = #{UnsubscribeTime},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from PassengerSubscribe where Id = #{Id}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from PassengerSubscribe where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.PassengerSubscribe">
+        insert into PassengerSubscribe
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">Id,</if>
+			<if test="LiftBaseId != null  ">LiftBaseId,</if>
+			<if test="Subscribe != null  ">Subscribe,</if>
+			<if test="SubscribeTime != null  ">SubscribeTime,</if>
+			<if test="UnsubscribeTime != null  ">UnsubscribeTime,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="Id != null  ">#{t.Id},</if>
+			<if test="LiftBaseId != null  ">#{t.LiftBaseId},</if>
+			<if test="Subscribe != null  ">#{t.Subscribe},</if>
+			<if test="SubscribeTime != null  ">#{t.SubscribeTime},</if>
+			<if test="UnsubscribeTime != null  ">#{t.UnsubscribeTime},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

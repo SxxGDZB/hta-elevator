@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MenuResourceModelMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MenuResourceModel" id="MenuResourceModelResult">
+        <result property="ID"    column="ID"    />
+        <result property="MenuId"    column="MenuId"    />
+        <result property="ResourceId"    column="ResourceId"    />
+    </resultMap>
+	
+	<sql id="selectMenuResourceModelVo">
+        select ID, MenuId, ResourceId from MenuResourceModel
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MenuResourceModel" resultMap="MenuResourceModelResult">
+        <include refid="selectMenuResourceModelVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="MenuId != null "> and MenuId = #{MenuId}</if>
+             <if test="ResourceId != null "> and ResourceId = #{ResourceId}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MenuResourceModel" resultType="Integer">
+        select count(*)  from MenuResourceModel
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="MenuId != null "> and MenuId = #{MenuId}</if>
+             <if test="ResourceId != null "> and ResourceId = #{ResourceId}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="MenuResourceModelResult">
+        <include refid="selectMenuResourceModelVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MenuResourceModel" useGeneratedKeys="true" keyProperty="ID">
+        insert into MenuResourceModel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="MenuId != null  ">MenuId,</if>
+			<if test="ResourceId != null  ">ResourceId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="MenuId != null  ">#{MenuId},</if>
+			<if test="ResourceId != null  ">#{ResourceId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MenuResourceModel">
+        update MenuResourceModel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="MenuId != null  ">MenuId = #{MenuId},</if>
+            <if test="ResourceId != null  ">ResourceId = #{ResourceId},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from MenuResourceModel where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from MenuResourceModel where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MenuResourceModel">
+        insert into MenuResourceModel
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="MenuId != null  ">MenuId,</if>
+			<if test="ResourceId != null  ">ResourceId,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="MenuId != null  ">#{t.MenuId},</if>
+			<if test="ResourceId != null  ">#{t.ResourceId},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

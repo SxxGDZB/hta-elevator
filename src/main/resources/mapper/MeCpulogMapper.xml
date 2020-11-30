@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MeCpulogMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MeCpulog" id="MeCpulogResult">
+        <result property="ID"    column="ID"    />
+        <result property="CpuID"    column="CpuID"    />
+        <result property="Event"    column="Event"    />
+        <result property="CreateDate"    column="CreateDate"    />
+    </resultMap>
+	
+	<sql id="selectMeCpulogVo">
+        select ID, CpuID, Event, CreateDate from ME_CpuLog
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MeCpulog" resultMap="MeCpulogResult">
+        <include refid="selectMeCpulogVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="CpuID != null  and CpuID != '' "> and CpuID = #{CpuID}</if>
+             <if test="Event != null  and Event != '' "> and Event = #{Event}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MeCpulog" resultType="Integer">
+        select count(*)  from ME_CpuLog
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="CpuID != null  and CpuID != '' "> and CpuID = #{CpuID}</if>
+             <if test="Event != null  and Event != '' "> and Event = #{Event}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="MeCpulogResult">
+        <include refid="selectMeCpulogVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MeCpulog">
+        insert into ME_CpuLog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="CpuID != null  and CpuID != ''  ">CpuID,</if>
+			<if test="Event != null  and Event != ''  ">Event,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="CpuID != null  and CpuID != ''  ">#{CpuID},</if>
+			<if test="Event != null  and Event != ''  ">#{Event},</if>
+			<if test="CreateDate != null  ">#{CreateDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MeCpulog">
+        update ME_CpuLog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CpuID != null  and CpuID != ''  ">CpuID = #{CpuID},</if>
+            <if test="Event != null  and Event != ''  ">Event = #{Event},</if>
+            <if test="CreateDate != null  ">CreateDate = #{CreateDate},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from ME_CpuLog where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from ME_CpuLog where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MeCpulog">
+        insert into ME_CpuLog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="CpuID != null  and CpuID != ''  ">CpuID,</if>
+			<if test="Event != null  and Event != ''  ">Event,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="CpuID != null  and CpuID != ''  ">#{t.CpuID},</if>
+			<if test="Event != null  and Event != ''  ">#{t.Event},</if>
+			<if test="CreateDate != null  ">#{t.CreateDate},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

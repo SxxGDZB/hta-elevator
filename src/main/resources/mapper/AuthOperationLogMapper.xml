@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.AuthOperationLogMapper">
+    
+    <resultMap type="com.hta.elevator.domain.AuthOperationLog" id="AuthOperationLogResult">
+        <result property="ID"    column="ID"    />
+        <result property="LogName"    column="LogName"    />
+        <result property="UserId"    column="UserId"    />
+        <result property="Api"    column="Api"    />
+        <result property="Method"    column="Method"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="Succeed"    column="Succeed"    />
+        <result property="Message"    column="Message"    />
+    </resultMap>
+	
+	<sql id="selectAuthOperationLogVo">
+        select ID, LogName, UserId, Api, Method, CreateTime, Succeed, Message from AuthOperationLog
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.AuthOperationLog" resultMap="AuthOperationLogResult">
+        <include refid="selectAuthOperationLogVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="LogName != null  and LogName != '' "> and LogName = #{LogName}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="Api != null  and Api != '' "> and Api = #{Api}</if>
+             <if test="Method != null  and Method != '' "> and Method = #{Method}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="Succeed != null "> and Succeed = #{Succeed}</if>
+             <if test="Message != null  and Message != '' "> and Message = #{Message}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.AuthOperationLog" resultType="Integer">
+        select count(*)  from AuthOperationLog
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="LogName != null  and LogName != '' "> and LogName = #{LogName}</if>
+             <if test="UserId != null "> and UserId = #{UserId}</if>
+             <if test="Api != null  and Api != '' "> and Api = #{Api}</if>
+             <if test="Method != null  and Method != '' "> and Method = #{Method}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="Succeed != null "> and Succeed = #{Succeed}</if>
+             <if test="Message != null  and Message != '' "> and Message = #{Message}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="AuthOperationLogResult">
+        <include refid="selectAuthOperationLogVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.AuthOperationLog" useGeneratedKeys="true" keyProperty="ID">
+        insert into AuthOperationLog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LogName != null  and LogName != ''  ">LogName,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="Api != null  and Api != ''  ">Api,</if>
+			<if test="Method != null  and Method != ''  ">Method,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="Succeed != null  ">Succeed,</if>
+			<if test="Message != null  and Message != ''  ">Message,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LogName != null  and LogName != ''  ">#{LogName},</if>
+			<if test="UserId != null  ">#{UserId},</if>
+			<if test="Api != null  and Api != ''  ">#{Api},</if>
+			<if test="Method != null  and Method != ''  ">#{Method},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="Succeed != null  ">#{Succeed},</if>
+			<if test="Message != null  and Message != ''  ">#{Message},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.AuthOperationLog">
+        update AuthOperationLog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="LogName != null  and LogName != ''  ">LogName = #{LogName},</if>
+            <if test="UserId != null  ">UserId = #{UserId},</if>
+            <if test="Api != null  and Api != ''  ">Api = #{Api},</if>
+            <if test="Method != null  and Method != ''  ">Method = #{Method},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="Succeed != null  ">Succeed = #{Succeed},</if>
+            <if test="Message != null  and Message != ''  ">Message = #{Message},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from AuthOperationLog where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from AuthOperationLog where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.AuthOperationLog">
+        insert into AuthOperationLog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LogName != null  and LogName != ''  ">LogName,</if>
+			<if test="UserId != null  ">UserId,</if>
+			<if test="Api != null  and Api != ''  ">Api,</if>
+			<if test="Method != null  and Method != ''  ">Method,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="Succeed != null  ">Succeed,</if>
+			<if test="Message != null  and Message != ''  ">Message,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LogName != null  and LogName != ''  ">#{t.LogName},</if>
+			<if test="UserId != null  ">#{t.UserId},</if>
+			<if test="Api != null  and Api != ''  ">#{t.Api},</if>
+			<if test="Method != null  and Method != ''  ">#{t.Method},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="Succeed != null  ">#{t.Succeed},</if>
+			<if test="Message != null  and Message != ''  ">#{t.Message},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

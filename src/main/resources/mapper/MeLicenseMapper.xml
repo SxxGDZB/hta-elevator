@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MeLicenseMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MeLicense" id="MeLicenseResult">
+        <result property="LicenseKey"    column="LicenseKey"    />
+        <result property="CustomerID"    column="CustomerID"    />
+        <result property="LicenseNum"    column="LicenseNum"    />
+        <result property="SN0"    column="SN0"    />
+        <result property="SN1"    column="SN1"    />
+        <result property="Licensed"    column="Licensed"    />
+        <result property="CreateDate"    column="CreateDate"    />
+        <result property="UpdateDate"    column="UpdateDate"    />
+        <result property="CreateBy"    column="CreateBy"    />
+        <result property="UpdateBy"    column="UpdateBy"    />
+    </resultMap>
+	
+	<sql id="selectMeLicenseVo">
+        select LicenseKey, CustomerID, LicenseNum, SN0, SN1, Licensed, CreateDate, UpdateDate, CreateBy, UpdateBy from ME_License
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MeLicense" resultMap="MeLicenseResult">
+        <include refid="selectMeLicenseVo"/>
+        <where>  
+            <if test="LicenseKey != null  and LicenseKey != '' "> and LicenseKey = #{LicenseKey}</if>
+             <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="LicenseNum != null "> and LicenseNum = #{LicenseNum}</if>
+             <if test="SN0 != null "> and SN0 = #{SN0}</if>
+             <if test="SN1 != null "> and SN1 = #{SN1}</if>
+             <if test="Licensed != null "> and Licensed = #{Licensed}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MeLicense" resultType="Integer">
+        select count(*)  from ME_License
+        <where>  
+            <if test="LicenseKey != null  and LicenseKey != '' "> and LicenseKey = #{LicenseKey}</if>
+             <if test="CustomerID != null  and CustomerID != '' "> and CustomerID = #{CustomerID}</if>
+             <if test="LicenseNum != null "> and LicenseNum = #{LicenseNum}</if>
+             <if test="SN0 != null "> and SN0 = #{SN0}</if>
+             <if test="SN1 != null "> and SN1 = #{SN1}</if>
+             <if test="Licensed != null "> and Licensed = #{Licensed}</if>
+             <if test="CreateDate != null "> and CreateDate = #{CreateDate}</if>
+             <if test="UpdateDate != null "> and UpdateDate = #{UpdateDate}</if>
+             <if test="CreateBy != null  and CreateBy != '' "> and CreateBy = #{CreateBy}</if>
+             <if test="UpdateBy != null  and UpdateBy != '' "> and UpdateBy = #{UpdateBy}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="String" resultMap="MeLicenseResult">
+        <include refid="selectMeLicenseVo"/>
+        where LicenseKey = #{LicenseKey}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MeLicense">
+        insert into ME_License
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LicenseKey != null  and LicenseKey != ''  ">LicenseKey,</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="LicenseNum != null  ">LicenseNum,</if>
+			<if test="SN0 != null  ">SN0,</if>
+			<if test="SN1 != null  ">SN1,</if>
+			<if test="Licensed != null  ">Licensed,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LicenseKey != null  and LicenseKey != ''  ">#{LicenseKey},</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">#{CustomerID},</if>
+			<if test="LicenseNum != null  ">#{LicenseNum},</if>
+			<if test="SN0 != null  ">#{SN0},</if>
+			<if test="SN1 != null  ">#{SN1},</if>
+			<if test="Licensed != null  ">#{Licensed},</if>
+			<if test="CreateDate != null  ">#{CreateDate},</if>
+			<if test="UpdateDate != null  ">#{UpdateDate},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{CreateBy},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{UpdateBy},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MeLicense">
+        update ME_License
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CustomerID != null  and CustomerID != ''  ">CustomerID = #{CustomerID},</if>
+            <if test="LicenseNum != null  ">LicenseNum = #{LicenseNum},</if>
+            <if test="SN0 != null  ">SN0 = #{SN0},</if>
+            <if test="SN1 != null  ">SN1 = #{SN1},</if>
+            <if test="Licensed != null  ">Licensed = #{Licensed},</if>
+            <if test="CreateDate != null  ">CreateDate = #{CreateDate},</if>
+            <if test="UpdateDate != null  ">UpdateDate = #{UpdateDate},</if>
+            <if test="CreateBy != null  and CreateBy != ''  ">CreateBy = #{CreateBy},</if>
+            <if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy = #{UpdateBy},</if>
+        </trim>
+        where LicenseKey = #{LicenseKey}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="String">
+        delete from ME_License where LicenseKey = #{LicenseKey}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from ME_License where LicenseKey in 
+        <foreach item="LicenseKey" collection="array" open="(" separator="," close=")">
+            #{LicenseKey}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MeLicense">
+        insert into ME_License
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="LicenseKey != null  and LicenseKey != ''  ">LicenseKey,</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">CustomerID,</if>
+			<if test="LicenseNum != null  ">LicenseNum,</if>
+			<if test="SN0 != null  ">SN0,</if>
+			<if test="SN1 != null  ">SN1,</if>
+			<if test="Licensed != null  ">Licensed,</if>
+			<if test="CreateDate != null  ">CreateDate,</if>
+			<if test="UpdateDate != null  ">UpdateDate,</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">CreateBy,</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">UpdateBy,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="LicenseKey != null  and LicenseKey != ''  ">#{t.LicenseKey},</if>
+			<if test="CustomerID != null  and CustomerID != ''  ">#{t.CustomerID},</if>
+			<if test="LicenseNum != null  ">#{t.LicenseNum},</if>
+			<if test="SN0 != null  ">#{t.SN0},</if>
+			<if test="SN1 != null  ">#{t.SN1},</if>
+			<if test="Licensed != null  ">#{t.Licensed},</if>
+			<if test="CreateDate != null  ">#{t.CreateDate},</if>
+			<if test="UpdateDate != null  ">#{t.UpdateDate},</if>
+			<if test="CreateBy != null  and CreateBy != ''  ">#{t.CreateBy},</if>
+			<if test="UpdateBy != null  and UpdateBy != ''  ">#{t.UpdateBy},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>

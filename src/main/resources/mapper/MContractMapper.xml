@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hta.elevator.mapper.MContractMapper">
+    
+    <resultMap type="com.hta.elevator.domain.MContract" id="MContractResult">
+        <result property="ID"    column="ID"    />
+        <result property="McomID"    column="McomID"    />
+        <result property="PcomID"    column="PcomID"    />
+        <result property="CreateTime"    column="CreateTime"    />
+        <result property="UpdateTime"    column="UpdateTime"    />
+        <result property="CreatePerson"    column="CreatePerson"    />
+        <result property="UpdatePerson"    column="UpdatePerson"    />
+    </resultMap>
+	
+	<sql id="selectMContractVo">
+        select ID, McomID, PcomID, CreateTime, UpdateTime, CreatePerson, UpdatePerson from MContract
+    </sql>
+	
+    <select id="selectListOrPage" parameterType="com.hta.elevator.domain.MContract" resultMap="MContractResult">
+        <include refid="selectMContractVo"/>
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="McomID != null  and McomID != '' "> and McomID = #{McomID}</if>
+             <if test="PcomID != null  and PcomID != '' "> and PcomID = #{PcomID}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreatePerson != null  and CreatePerson != '' "> and CreatePerson = #{CreatePerson}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+         </where>
+    </select>
+    <select id="selectListCount" parameterType="com.hta.elevator.domain.MContract" resultType="Integer">
+        select count(*)  from MContract
+        <where>  
+            <if test="ID != null "> and ID = #{ID}</if>
+             <if test="McomID != null  and McomID != '' "> and McomID = #{McomID}</if>
+             <if test="PcomID != null  and PcomID != '' "> and PcomID = #{PcomID}</if>
+             <if test="CreateTime != null "> and CreateTime = #{CreateTime}</if>
+             <if test="UpdateTime != null "> and UpdateTime = #{UpdateTime}</if>
+             <if test="CreatePerson != null  and CreatePerson != '' "> and CreatePerson = #{CreatePerson}</if>
+             <if test="UpdatePerson != null  and UpdatePerson != '' "> and UpdatePerson = #{UpdatePerson}</if>
+         </where>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Long" resultMap="MContractResult">
+        <include refid="selectMContractVo"/>
+        where ID = #{ID}
+    </select>
+    
+    <insert id="insertSelective" parameterType="com.hta.elevator.domain.MContract">
+        insert into MContract
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="McomID != null  and McomID != ''  ">McomID,</if>
+			<if test="PcomID != null  and PcomID != ''  ">PcomID,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{ID},</if>
+			<if test="McomID != null  and McomID != ''  ">#{McomID},</if>
+			<if test="PcomID != null  and PcomID != ''  ">#{PcomID},</if>
+			<if test="CreateTime != null  ">#{CreateTime},</if>
+			<if test="UpdateTime != null  ">#{UpdateTime},</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">#{CreatePerson},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{UpdatePerson},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateByPrimaryKeySelective" parameterType="com.hta.elevator.domain.MContract">
+        update MContract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="McomID != null  and McomID != ''  ">McomID = #{McomID},</if>
+            <if test="PcomID != null  and PcomID != ''  ">PcomID = #{PcomID},</if>
+            <if test="CreateTime != null  ">CreateTime = #{CreateTime},</if>
+            <if test="UpdateTime != null  ">UpdateTime = #{UpdateTime},</if>
+            <if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson = #{CreatePerson},</if>
+            <if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson = #{UpdatePerson},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from MContract where ID = #{ID}
+    </delete>
+	
+    <delete id="batchDeleteByIds" parameterType="String">
+        delete from MContract where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+    <insert id="batchInsert" parameterType="com.hta.elevator.domain.MContract">
+        insert into MContract
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">ID,</if>
+			<if test="McomID != null  and McomID != ''  ">McomID,</if>
+			<if test="PcomID != null  and PcomID != ''  ">PcomID,</if>
+			<if test="CreateTime != null  ">CreateTime,</if>
+			<if test="UpdateTime != null  ">UpdateTime,</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">CreatePerson,</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">UpdatePerson,</if>
+         </trim>
+         VALUES
+ <foreach item="t" collection="list" index="index"  separator="," >
+           <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null  ">#{t.ID},</if>
+			<if test="McomID != null  and McomID != ''  ">#{t.McomID},</if>
+			<if test="PcomID != null  and PcomID != ''  ">#{t.PcomID},</if>
+			<if test="CreateTime != null  ">#{t.CreateTime},</if>
+			<if test="UpdateTime != null  ">#{t.UpdateTime},</if>
+			<if test="CreatePerson != null  and CreatePerson != ''  ">#{t.CreatePerson},</if>
+			<if test="UpdatePerson != null  and UpdatePerson != ''  ">#{t.UpdatePerson},</if>
+         </trim>
+  </foreach>
+        
+    </insert>
+</mapper>
